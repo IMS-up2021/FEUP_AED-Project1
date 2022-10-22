@@ -12,11 +12,19 @@
 
 using namespace std;
 
+/**
+ * Checks if file exists
+ * @param name Name of file to test
+ * @return true if file exists, false otherwise
+ */
 bool exists_test0 (const std::string& name) {
     ifstream f(name.c_str());
     return f.good();
 }
 
+/**
+ * Loads values from classes_per_uc.csv into a vector of UCTurma objects
+ */
 void CSVReader::read_classes_per_uc() {
 /*    ifstream in("Input/classes_per_uc.csv");
     ofstream out;
@@ -48,6 +56,12 @@ void CSVReader::read_classes_per_uc() {
     in.close();
 }
 
+/**
+ * Searches a pair of strings <uc,turma> in a vector of UCTurma objects
+ * @param uc_turmas Vector of UCTurma objects to look in
+ * @param uc_turma Pair of strings to find
+ * @return Index of element with desired pair, -1 otherwise
+ */
 int binarySearch(const vector<UCTurma>& uc_turmas, pair<string, string> uc_turma) {
     int low = 0;
     int high = uc_turmas.size();
@@ -63,6 +77,9 @@ int binarySearch(const vector<UCTurma>& uc_turmas, pair<string, string> uc_turma
     return -1;
 }
 
+/**
+ * Loads values from classes.csv into the UCTurma vector belonging to the CSVReader object
+ */
 void CSVReader::read_classes() {
     ifstream in("Input/classes.csv");
     string line, type, turma, uc, s_start, s_duration, day;
@@ -87,6 +104,9 @@ void CSVReader::read_classes() {
     in.close();
 }
 
+/**
+ * Creates the set of students with the info on students_classes.csv
+ */
 void CSVReader::read_students_classes() {
     ifstream in("Input/students_classes.csv");
     string s_num, name, uc, turma, line;
@@ -122,21 +142,10 @@ void CSVReader::read_students_classes() {
     }
 }
 
-void CSVReader::delete_data() {
-    string turmas = "turmas.csv";
-    ifstream in(turmas);
-    string line;
-    while (getline(in,line)) {
-        line += ".csv";
-        remove(line.c_str());
-    }
-}
-
-void CSVReader::delete_classes() {
-    const char* name = "turmas.csv";
-    remove(name);
-}
-
+/**
+ * Populates the data structures with the info from classes.csv, classes_per_uc.csv and students_classes.csv
+ * @return 0 if success, 1 otherwise
+ */
 int CSVReader::populate() {
     read_classes_per_uc();
     sort(uc_turmas.begin(), uc_turmas.end());
@@ -144,5 +153,5 @@ int CSVReader::populate() {
     read_students_classes();
     int search = binarySearch(uc_turmas, {"L.EIC025","3LEIC12"});
     uc_turmas[search].add_slot(Slot(2.0, 1.0, "Tuesday", "T"));
-    return 1;
+    return 0;
 }

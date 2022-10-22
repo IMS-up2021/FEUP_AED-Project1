@@ -16,8 +16,6 @@ public:
     void read_classes();
     void read_students_classes();
     int populate();
-    void delete_data();
-    void delete_classes();
 private:
     vector<UCTurma> uc_turmas;
     set<Student> students;

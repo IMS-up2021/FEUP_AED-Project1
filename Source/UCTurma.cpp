@@ -13,6 +13,10 @@ bool UCTurma::operator<(UCTurma other) const {
 
 pair<string, string> UCTurma::get_uc_turma() const {return uc_turma;}
 
+/**
+ * Adds Slot object to slots belonging to UCTurma
+ * @param slot Slot to be added
+ */
 void UCTurma::add_slot(Slot slot) {
     slots.emplace_back(slot);
 }

@@ -8,6 +8,10 @@ Student::Student(string name, unsigned num): name(name), num(num) {}
 
 Student::Student() {}
 
+/**
+ * Adds UCTurma object to list of UCTurmas belonging to Student
+ * @param uc_turma UCTurma to be added
+ */
 void Student::add_uc_turma(UCTurma &uc_turma) {
     uc_turmas.emplace_back(&uc_turma);
 }
