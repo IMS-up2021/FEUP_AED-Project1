@@ -5,52 +5,56 @@
 #include "../Headers/ProcessingTool.h"
 #include <iostream>
 #include <set>
-/** Function used to add user requests to the queue of processes
- *
- * @param string process
- */
-void ProcessingTool::addProcess(string process) {
-    this->processes.push(process);
+
+bool ProcessingTool::is_in(std::string process, vector<std::string> v) const{
+    for (string p:v){
+        if(process==p){
+            return true;
+        }
+    }
+    return false;
 }
+
 /** Executes a process introduced by user input
  *
  * @param string process
- * @return 1 if sucessful 0 if not
+ * @return 0 if no quit, 1 if quit mid process
  */
-int ProcessingTool::executeProcess() {
-    string currentProcess = processes.front();
-    if(commands.find(currentProcess)==commands.end()){
+int ProcessingTool::executeProcess( string process) {
+
+    if(!is_in(process,commands)){
         cout<<"Syntaxe errada"<<endl;
-        processes.pop();
     }
-    if(currentProcess=="listagem"){
-        string subprocess,critério,modo;
-        int ano,escolhas;
-        set<string>availableSubprocesses={"listagem_das_turmas","listagem_das_unidades","listagen_dos_alunos"};
-        cout<<"Introduza o modo de listagem:\n  listagem_das_turmas\n  listagem_das_unidades_curriculares\n  listagem_dos_alunos"<<endl;
+    if(process=="listagem"){
+        string subprocess, critério,modo,ano,escolha;
+
+
+        vector<string>availableSubprocess={"1","2","3","0"};
+        cout<<"Introduza o numero do modo de listagem:\n  1-listagem das turmas\n  2-listagem das unidades curriculares\n  3-listagem dos alunos"<<endl;
         cin>>subprocess;
-        if(subprocess=="quit") return 1;
-        while(availableSubprocesses.find(subprocess)==availableSubprocesses.end()){
+        if(subprocess=="0") return 1;
+        while(!is_in(subprocess,availableSubprocess)){
             cout<<"syntaxe Errada"<<endl;
             cin>>subprocess;
         }
-        if(subprocess=="listagem_das_turmas"){
-            cout<<"Introduza modo de listagem:\n  parcial\n  total:"<<endl;
+        if(subprocess=="1"){
+            cout<<"Introduza modo de listagem:\n  1-parcial\n  2-total:"<<endl;
             cin>>modo;
-            while(!(modo=="parcial" || modo =="total")){
+            while(!(modo=="1" || modo =="2")){
                 cout<<"Sintaxe Errada"<<endl;
                 cin>>modo;
             }
-            if(modo=="parcial"){
+            if(modo=="1"){
                 cout<<"Do ano:"<<endl;
+
                 cin>>ano;
-                while(ano>5 || ano<1){
+                while(stoi(ano)>5 || stoi(ano)<1){
                     cout<<"sintase errada"<<endl;
                     cin>>ano;
                     }
                 }
-                if(ano==1){
-                    for(UCTurma turma:database_.getUcTurmas()){
+                if(stoi(ano)==1){
+                    for(UCTurma turma:database.getUcTurmas()){
                         cout<<turma.get_uc_turma().second<<endl;
                     }
                 }
@@ -63,9 +67,9 @@ int ProcessingTool::executeProcess() {
 
 }
 int ProcessingTool::initiate() {
-    if(!database_.populate()){
+    if(!database.populate()){
         return 0;
     }
-    this->database_.populate();
+    this->database.populate();
     return 1;
 }
