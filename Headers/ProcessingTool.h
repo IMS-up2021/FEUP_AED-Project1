@@ -6,13 +6,19 @@
 #define UNTITLED1_PROCESSINGTOOL_H
 #include <queue>
 #include <string>
+#include <set>
+#include"CSVReader.h"
+
 using namespace std;
 class ProcessingTool {
 private:
     queue<string> processes;
+    set<string> commands={"listagem"};
+    CSVReader database_;
 public:
     void addProcess(string process);//adds a process to the queue with the name p_name
-    void executeProcess(string process);//executes a process in the queue
+    int executeProcess();//executes processes in the queue
+    int initiate();
 
 };
 

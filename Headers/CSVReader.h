@@ -16,6 +16,10 @@ public:
     void read_classes();
     void read_students_classes();
     int populate();
+    const vector<UCTurma> &getUcTurmas() const;
+
+    const set<Student> &getStudents() const;
+
 private:
     vector<UCTurma> uc_turmas;
     set<Student> students;

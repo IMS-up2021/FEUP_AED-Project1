@@ -144,7 +144,7 @@ void CSVReader::read_students_classes() {
 
 /**
  * Populates the data structures with the info from classes.csv, classes_per_uc.csv and students_classes.csv
- * @return 0 if success, 1 otherwise
+ * @return 1 if success, 0 otherwise
  */
 int CSVReader::populate() {
     read_classes_per_uc();
@@ -153,5 +153,13 @@ int CSVReader::populate() {
     read_students_classes();
     int search = binarySearch(uc_turmas, {"L.EIC025","3LEIC12"});
     uc_turmas[search].add_slot(Slot(2.0, 1.0, "Tuesday", "T"));
-    return 0;
+    return 1;
+}
+
+const vector<UCTurma> &CSVReader::getUcTurmas() const {
+    return uc_turmas;
+}
+
+const set<Student> &CSVReader::getStudents() const {
+    return students;
 }
