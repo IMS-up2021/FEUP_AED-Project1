@@ -6,7 +6,7 @@ using namespace std;
 int main() {
     std::cout << "Hello, World!" << std::endl;
     CSVReader reader;
-    /*reader.populate();*/
+    reader.populate();
     int userInput;
     ProcessingTool interface;
     UCTurma ucturma= *(reader.getUcTurmas().begin());

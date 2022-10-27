@@ -65,9 +65,6 @@ int ProcessingTool::listShow(int choice) {
 
 
 
-
-
-}
 int ProcessingTool::initiate() {
     if(!database.populate()){
         return 0;
