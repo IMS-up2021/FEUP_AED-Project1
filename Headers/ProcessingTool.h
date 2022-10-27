@@ -13,12 +13,11 @@ using namespace std;
 class ProcessingTool {
 private:
     queue<string> processes;
-    vector<string> commands={"listagem"};
     CSVReader database;
-    bool is_in(string process,vector<string>v) const;
+    bool is_in(int choice,int lim_start,int lim_end) const;
 public:
     void addProcessToQueue(string process);//adds a process to the queue with the name p_name
-    int executeProcess(string process);//executes processes in the queue
+    int listShow(int choice);//executes the listing
     int initiate();
 
 };

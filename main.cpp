@@ -7,15 +7,17 @@ int main() {
     std::cout << "Hello, World!" << std::endl;
     CSVReader reader;
     /*reader.populate();*/
-    string userInput;
+    int userInput;
     ProcessingTool interface;
+    UCTurma ucturma= *(reader.getUcTurmas().begin());
+    cout<<ucturma.get_uc_turma().first<<endl;
     while(true){
-        cout<<"Introduza um comando"<<endl;
+        cout<<"Introduza o numero do comando:\n\t1.Listagem\n\t2.Alteracoes\n\t0.Sair do programa"<<endl;
         cin>>userInput;
-        if (userInput=="quit"){
+        if (userInput==0){
             break;
         }
-        interface.executeProcess(userInput);
+        interface.listShow(userInput);
 
     }
     return 0;

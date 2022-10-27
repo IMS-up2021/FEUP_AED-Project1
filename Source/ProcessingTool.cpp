@@ -5,13 +5,15 @@
 #include "../Headers/ProcessingTool.h"
 #include <iostream>
 #include <set>
-
-bool ProcessingTool::is_in(std::string process, vector<std::string> v) const{
-    for (string p:v){
-        if(process==p){
-            return true;
-        }
-    }
+/** Função que verifica se as opções estão dentro dos possíveis
+ *
+ * @param choice user's input
+ * @param lim_start where the range of possible values starts(inclusive)
+ * @param lim_end where the range of possible values ends(inclusive)
+ * @return boolean value true/false
+ */
+bool ProcessingTool::is_in(int choice, int lim_start, int lim_end) const{
+    if(choice>=lim_start && choice <=lim_end) return true;
     return false;
 }
 
@@ -20,43 +22,43 @@ bool ProcessingTool::is_in(std::string process, vector<std::string> v) const{
  * @param string process
  * @return 0 if no quit, 1 if quit mid process
  */
-int ProcessingTool::executeProcess( string process) {
+int ProcessingTool::listShow(int choice) {
 
-    if(!is_in(process,commands)){
-        cout<<"Syntaxe errada"<<endl;
+    if(!is_in(choice,1,2)){
+        cout<<"Sintaxe errada.\nPor favor, reintroduzir:"<<endl;
     }
-    if(process=="listagem"){
-        string subprocess, critério,modo,ano,escolha;
-
-
-        vector<string>availableSubprocess={"1","2","3","0"};
-        cout<<"Introduza o numero do modo de listagem:\n  1-listagem das turmas\n  2-listagem das unidades curriculares\n  3-listagem dos alunos"<<endl;
+    if(choice==1){
+        int subprocess,critério,modo,ano,escolha;
+        cout<<"Introduza o numero do modo de listagem:\n\t1.Listagem das turmas\n\t2.Listagem das unidades curriculares\n\t3.Listagem dos alunos"<<endl;
         cin>>subprocess;
-        if(subprocess=="0") return 1;
-        while(!is_in(subprocess,availableSubprocess)){
-            cout<<"syntaxe Errada"<<endl;
+        if(subprocess==0) return 1;
+        while(!is_in(subprocess,1,3)){
+            cout<<"Sintaxe errada.\nPor favor, reintroduzir:"<<endl;
             cin>>subprocess;
         }
-        if(subprocess=="1"){
-            cout<<"Introduza modo de listagem:\n  1-parcial\n  2-total:"<<endl;
+        if(subprocess==1){
+            cout<<"Introduza modo de listagem:\n  1-Parcial\n  2-Total:"<<endl;
             cin>>modo;
-            while(!(modo=="1" || modo =="2")){
-                cout<<"Sintaxe Errada"<<endl;
+            if (modo==0) return 1;
+            while(!(is_in(modo,1,2))){
+                cout<<"Sintaxe errada.\nPor favor, reintroduzir:"<<endl;
                 cin>>modo;
             }
-            if(modo=="1"){
+            if(modo==1){
                 cout<<"Do ano:"<<endl;
-
                 cin>>ano;
-                while(stoi(ano)>5 || stoi(ano)<1){
-                    cout<<"sintase errada"<<endl;
+                if (ano=0) return 1;
+                while( !is_in(ano,1,3)){
+                    cout<<"Sintase errada.\nPor favor, reintroduzir:"<<endl;
                     cin>>ano;
                     }
                 }
-                if(stoi(ano)==1){
-                    for(UCTurma turma:database.getUcTurmas()){
-                        cout<<turma.get_uc_turma().second<<endl;
+                if(ano==1){
+                    cout<<"ainda a ser implementado"<<endl;
                     }
+                }
+                if (ano==2) {
+                    cout<<"ainda a ser implementada"<<endl;
                 }
             }
         }
