@@ -19,6 +19,7 @@ public:
     bool operator<(UCTurma other) const;
     pair<string,string> get_uc_turma() const;
     void add_slot(Slot slot);
+    list<Slot> get_slots() const;
 };
 
 #endif //UNTITLED1_UCTURMA_H

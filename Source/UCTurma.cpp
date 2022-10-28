@@ -20,3 +20,7 @@ pair<string, string> UCTurma::get_uc_turma() const {return uc_turma;}
 void UCTurma::add_slot(Slot slot) {
     slots.emplace_back(slot);
 }
+
+list<Slot> UCTurma::get_slots() const {
+    return slots;
+}
