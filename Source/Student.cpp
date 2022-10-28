@@ -15,6 +15,7 @@ Student::Student(unsigned num): num(num) {}
  */
 void Student::add_uc_turma(UCTurma &uc_turma) {
     uc_turmas.emplace_back(&uc_turma);
+    uc_turma.add_student();
 }
 
 bool Student::operator<(Student other) const {

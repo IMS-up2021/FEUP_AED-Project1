@@ -5,6 +5,7 @@
 
 UCTurma::UCTurma(string uc, string turma) {
     uc_turma = {uc,turma};
+    student_num = 0;
 }
 
 bool UCTurma::operator<(UCTurma other) const {
@@ -23,4 +24,16 @@ void UCTurma::add_slot(Slot slot) {
 
 list<Slot> UCTurma::get_slots() const {
     return slots;
+}
+
+void UCTurma::add_student() {
+    student_num++;
+}
+
+void UCTurma::remove_student() {
+    student_num--;
+}
+
+int UCTurma::get_student_num() const {
+    return student_num;
 }
