@@ -17,7 +17,7 @@ private:
     bool is_in(string choice,int lim_start,int lim_end) const;
 public:
     void addProcessToQueue(string process);//adds a process to the queue with the name p_name
-    int listShow(string choice);//executes the listing
+    int listShow();//executes the listing
     int initiate();
 
 };
