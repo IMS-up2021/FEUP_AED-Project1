@@ -10,14 +10,14 @@
 #include"CSVReader.h"
 
 using namespace std;
-class ProcessingTool {
+class Interface {
 private:
     queue<string> processes;
     CSVReader database;
-    bool is_in(int choice,int lim_start,int lim_end) const;
+    bool is_in(string choice,int lim_start,int lim_end) const;
 public:
     void addProcessToQueue(string process);//adds a process to the queue with the name p_name
-    int listShow(int choice);//executes the listing
+    int listShow(string choice);//executes the listing
     int initiate();
 
 };
