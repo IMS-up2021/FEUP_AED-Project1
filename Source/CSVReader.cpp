@@ -172,3 +172,14 @@ const vector<UCTurma> &CSVReader::getUcTurmas() const {
 const set<Student> &CSVReader::getStudents() const {
     return students;
 }
+
+vector<pair<string, Slot>> CSVReader::get_uc_timetable(string uc) const {
+    UCTurma target = UCTurma(uc, "");
+    auto it = lower_bound(uc_turmas.begin(), uc_turmas.end(), target);
+    vector<pair<string, Slot>> ret;
+    while ((*it).get_uc_turma().first == uc) {
+        for (const Slot& slot : (*it).get_slots()) ret.emplace_back((*it).get_uc_turma().second,slot);
+        it++;
+    }
+    return ret;
+}
