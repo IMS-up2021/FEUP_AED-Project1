@@ -19,7 +19,6 @@ public:
     list<Slot> get_student_timetable(unsigned num) const;
     vector<pair<string,Slot>> get_uc_timetable(string uc) const;
     const vector<UCTurma> &getUcTurmas() const;
-
     const set<Student> &getStudents() const;
 
 private:
