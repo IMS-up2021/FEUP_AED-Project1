@@ -12,10 +12,10 @@
 
 class CSVReader {
 public:
-    void read_classes_per_uc();
-    void read_classes();
-    void read_students_classes();
-    int populate();
+    int read_classes_per_uc();
+    int read_classes();
+    int read_students_classes();
+    bool populate();
     list<UCTurma*> get_student_timetable(unsigned num) const;
     vector<pair<string,Slot>> get_uc_timetable(string uc) const;
     vector<pair<string,Slot>> get_turma_timetable(string turma) const;

@@ -25,7 +25,7 @@ bool exists_test0 (const std::string& name) {
 /**
  * Loads values from classes_per_uc.csv into a vector of UCTurma objects
  */
-void CSVReader::read_classes_per_uc() {
+int CSVReader::read_classes_per_uc() {
 /*    ifstream in("Input/classes_per_uc.csv");
     ofstream out;
     out.open("turmas.csv", ios_base::app);
@@ -47,6 +47,7 @@ void CSVReader::read_classes_per_uc() {
     ifstream in("Input/classes_per_uc.csv");
     string line, uc, turma;
     getline(in, line);
+    if (line != "UcCode,ClassCode") return 1;
     while (getline(in, line)) {
         istringstream iss(line);
         getline(iss, uc, ',');
@@ -54,6 +55,7 @@ void CSVReader::read_classes_per_uc() {
         uc_turmas.emplace_back(uc, turma);
     }
     in.close();
+    return 0;
 }
 
 /**
@@ -80,13 +82,14 @@ int binarySearch(const vector<UCTurma>& uc_turmas, pair<string, string> uc_turma
 /**
  * Loads values from classes.csv into the UCTurma vector belonging to the CSVReader object
  */
-void CSVReader::read_classes() {
+int CSVReader::read_classes() {
     ifstream in("Input/classes.csv");
     string line, type, turma, uc, s_start, s_duration, day;
     float start, duration;
     pair<string, string> uc_turma;
     int search;
     getline(in, line);
+    if (line != "ClassCode,UcCode,Weekday,StartHour,Duration,Type") return 1;
     while (getline(in,line)) {
         istringstream iss(line);
         getline(iss, turma, ',');
@@ -102,12 +105,13 @@ void CSVReader::read_classes() {
         uc_turmas[search].add_slot(Slot(start,duration,day,type));
     }
     in.close();
+    return 0;
 }
 
 /**
  * Creates the set of students with the info on students_classes.csv
  */
-void CSVReader::read_students_classes() {
+int CSVReader::read_students_classes() {
     ifstream in("Input/students_classes.csv");
     string s_num, name, uc, turma, line;
     pair<string,string> uc_turma;
@@ -115,6 +119,7 @@ void CSVReader::read_students_classes() {
     unsigned curr = 0;
     Student curr_student;
     getline(in, line);
+    if (line != "﻿StudentCode,StudentName,UcCode,ClassCode") return 1;
     while (getline(in, line)) {
         istringstream iss(line);
         getline(iss, s_num, ',');
@@ -140,20 +145,21 @@ void CSVReader::read_students_classes() {
             curr_student.add_uc_turma(uc_turmas[search]);
         }
     }
+    return 0;
 }
 
 /**
  * Populates the data structures with the info from classes.csv, classes_per_uc.csv and students_classes.csv
- * @return 1 if success, 0 otherwise
+ * @return 0 if success, 1 otherwise
  */
-int CSVReader::populate() {
-    read_classes_per_uc();
+bool CSVReader::populate() {
+    int read1 = read_classes_per_uc();
     sort(uc_turmas.begin(), uc_turmas.end());
-    read_classes();
-    read_students_classes();
-    int search = binarySearch(uc_turmas, {"L.EIC025","3LEIC12"});
+    int read2 = read_classes();
+    int read3 = read_students_classes();
+    int search = binarySearch(uc_turmas, {"L.EIC025", "3LEIC12"});
     uc_turmas[search].add_slot(Slot(2.0, 1.0, "Tuesday", "T"));
-    return 1;
+    return (read1 == 0 && read2 == 0 && read3 == 0);
 }
 
 list<UCTurma*> CSVReader::get_student_timetable(unsigned num) const {
