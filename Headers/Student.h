@@ -15,6 +15,8 @@ public:
     void add_uc_turma(UCTurma &uc_turma);
     bool operator<(Student other) const;
     list<UCTurma*> get_timetable() const;
+
+
 private:
     mutable list<UCTurma*> uc_turmas;
     string name;

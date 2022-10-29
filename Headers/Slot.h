@@ -16,6 +16,16 @@ private:
     string type;
 public:
     Slot(float start, float duration, string day, string type);
+
+    float getStart() const;
+
+    float getDuration() const;
+
+    const string &getDay() const;
+
+    const string &getType() const;
+    bool operator< (Slot aula) const;
+
 };
 
 #endif //UNTITLED1_SLOT_H

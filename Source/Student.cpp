@@ -25,3 +25,4 @@ bool Student::operator<(Student other) const {
 list<UCTurma*> Student::get_timetable() const {
     return uc_turmas;
 }
+

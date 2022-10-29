@@ -5,7 +5,9 @@
 #include "../Headers/Interface.h"
 #include <iostream>
 #include <set>
-/** Função que verifica se as opções estão dentro dos possíveis
+#include <algorithm>
+
+/** Function that makes sure the input is within range
  *
  * @param choice user's input
  * @param lim_start where the range of possible values starts(inclusive)
@@ -15,6 +17,19 @@
 bool Interface::is_in(string choice, int lim_start, int lim_end) const{
     set<string> availableChoices={"0","1","2","3","4","5","6","7","8","9"};
     if(availableChoices.find(choice)!= availableChoices.end()&&stoi(choice)>=lim_start && stoi(choice) <=lim_end ) return true;
+    return false;
+}
+
+/** Function that compares 2 classes in a vector of pair<className,schedule>
+ *
+ * @param aula1
+ * @param aula2
+ * @return Boolean value t/f
+ */
+bool Interface::slotsLessthan(const pair<std::string, Slot> &aula1, const pair<std::string, Slot> &aula2) {
+    if(aula1.second<aula2.second){
+        return true;
+    }
     return false;
 }
 
@@ -352,6 +367,7 @@ int Interface::listShow() {
 
                 //caso o modo de listagem for por unidade curricular
                 if (mode == "2") {
+                    CSVReader processingTool;
                     cout << "Introduzir o codigo da unidade curricular:\n\t0.Para voltar" << endl;
                     cin >> uc;
                     if (uc == "0") goto menuAnterior3_Students;
@@ -361,12 +377,14 @@ int Interface::listShow() {
                         cin>>uc;
                     }
                     */
+
                     cout << "Criterio de ordenacao:\n\t1.Crescente\n\t2.Decrescente" << endl;
                     cin >> order;
                     while (!is_in(order, 1, 2)) {
                         cout << "Sintase errada.\nPor favor reintroduzir:" << endl;
                         cin >> order;
                     }
+                    cout<<"No total esta unidade curricular\ tem: "<<database.get_studentnum_per_uc(uc)<<" alunos"<<endl;
                     //ainda a ser implementada por falta de funcoes
                     if (order == "1") {
                         //ainda a ser implementada de acordo com ordenacao crescente
@@ -374,6 +392,8 @@ int Interface::listShow() {
                     if (order == "2") {
                         //ainda a ser implementada de acordo com ordenacao decrescente
                     }
+
+                    return 0;
                 }
 
 
@@ -436,21 +456,44 @@ int Interface::listShow() {
 
         //listagem do horario
         else if (criteria == "4") {
-            cout << "Introduza o numero do estudante(ex:202201001):\n\t0.Para voltar"<< endl;
-            cin >> student;
-            /*
-            while(se nao houver item correspondente/ null){
-                cout<<"Numero do estudante invalido, reintroduzir:"<<endl;
-                cin>>student;
+            menuAnterior1_horario:cout<< "Introduza o numero modo de listagem:\n\t1.Por aluno\n\t2.Por turma\n\t3.Por unidade curricular\n\t0.Voltar"<<endl;
+            cin >> mode;
+            while (!is_in(criteria, 0, 4)) {
+                cout << "Sintaxe errada.\nPor favor, reintroduzir:" << endl;
+                cin >> mode;
             }
-            */
-            if (type == "0") goto menuListagem;
+            if (mode == "0") goto MenuPrincipal;
 
-            //caso o tipo de listagem for parcial
-            if(type=="1"){
 
+            if(mode=="1") {
+                cout << "Introduza o numero do estudante(ex:202201001):\n\t0.Para voltar" << endl;
+                cin >> student;
+                /*
+                while(se nao houver item correspondente/ null){
+                    cout<<"Numero do estudante invalido, reintroduzir:"<<endl;
+                    cin>>student;
+                }
+                */
+                if (student == "0") goto menuListagem;
             }
 
+            if(mode=="2"){
+                cout << "Introduza o numero da turma(ex:1LEIC01):\n\t0.Para voltar" << endl;
+                cin>>turma;
+                /*
+               while(se nao houver item correspondente/ null){
+                   cout<<"Numero do estudante invalido, reintroduzir:"<<endl;
+                   cin>>student;
+               }
+               */
+                if(turma=="0") goto menuAnterior1_horario;
+                vector<pair<string,Slot>> timeTable=database.get_turma_timetable(turma);
+                std::sort(timeTable.begin(), timeTable.end(), slotsLessthan);
+                for(pair<string,Slot> aula: timeTable){
+                    cout<<aula.second.getDay()<<"\n"<<"Aula: "<<aula.first<<"\t"<<"Comeco: "<<aula.second.getStart()<<"h\t"<<"Duracao: "<<aula.second.getDuration()<<"h\t"<<"Tipo: "<<aula.second.getType()<<endl;
+                }
+                return 0;
+            }
         }
     }
     else if(userInput=="2"){
@@ -459,12 +502,6 @@ int Interface::listShow() {
     }
 
 }
-
-
-
-
-
-
 
 int Interface::initiate() {
     if(!database.populate()){
