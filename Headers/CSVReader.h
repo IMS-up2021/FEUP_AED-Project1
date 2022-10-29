@@ -16,7 +16,7 @@ public:
     void read_classes();
     void read_students_classes();
     int populate();
-    list<Slot> get_student_timetable(unsigned num) const;
+    list<UCTurma*> get_student_timetable(unsigned num) const;
     vector<pair<string,Slot>> get_uc_timetable(string uc) const;
     vector<pair<string,Slot>> get_turma_timetable(string turma) const;
     int get_studentnum_per_uc(string uc) const;

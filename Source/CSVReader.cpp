@@ -156,14 +156,11 @@ int CSVReader::populate() {
     return 1;
 }
 
-list<Slot> CSVReader::get_student_timetable(unsigned num) const {
+list<UCTurma*> CSVReader::get_student_timetable(unsigned num) const {
     Student target = Student(num);
     auto it = students.find(target);
-    set<Student> s=this->getStudents();
     list<UCTurma*> timetable = (*it).get_timetable();
-    list<Slot> ret;
-    for (UCTurma* uc_turma : timetable) ret.splice(ret.end(),uc_turma->get_slots());
-    return ret;
+    return timetable;
 }
 
 const vector<UCTurma> &CSVReader::getUcTurmas() const {
