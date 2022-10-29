@@ -183,3 +183,24 @@ vector<pair<string, Slot>> CSVReader::get_uc_timetable(string uc) const {
     }
     return ret;
 }
+
+int CSVReader::get_studentnum_per_uc(string uc) const {
+    UCTurma target = UCTurma(uc, "");
+    int ret = 0;
+    auto it = lower_bound(uc_turmas.begin(), uc_turmas.end(), target);
+    while ((*it).get_uc_turma().first == uc) {
+        ret += (*it).get_student_num();
+        it++;
+    }
+    return ret;
+}
+
+vector<pair<string, Slot>> CSVReader::get_turma_timetable(string turma) const {
+    vector<pair<string, Slot>> ret;
+    for (const UCTurma& uc_turma : uc_turmas) {
+        if (uc_turma.get_uc_turma().second == turma) {
+            for (const Slot& slot : uc_turma.get_slots()) ret.emplace_back(uc_turma.get_uc_turma().first, slot);
+        }
+    }
+    return ret;
+}

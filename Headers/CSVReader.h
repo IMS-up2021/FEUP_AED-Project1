@@ -18,6 +18,8 @@ public:
     int populate();
     list<Slot> get_student_timetable(unsigned num) const;
     vector<pair<string,Slot>> get_uc_timetable(string uc) const;
+    vector<pair<string,Slot>> get_turma_timetable(string turma) const;
+    int get_studentnum_per_uc(string uc) const;
     const vector<UCTurma> &getUcTurmas() const;
     const set<Student> &getStudents() const;
 
@@ -27,3 +29,4 @@ private:
 };
 
 #endif //UNTITLED1_CSVREADER_H
+
