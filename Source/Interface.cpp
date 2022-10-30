@@ -26,7 +26,7 @@ bool Interface::is_in(string choice, int lim_start, int lim_end) const{
  * @param class2
  * @return Boolean value t/f
  */
-bool Interface::slotsLessthan(const pair<pair<string,string>, Slot> &aula1, const pair<pair<string,string>, Slot> &aula2) {
+bool Interface::slotsLessthan(const pair<string , Slot> &aula1, const pair<string , Slot> &aula2) {
     if(aula1.second<aula2.second){
         return true;
     }
@@ -55,7 +55,7 @@ bool Interface::is_number(std::string n) const {
  * @param class2
  * @return Boolean value t/f
  */
-bool Interface::slotsGreaterthan(const pair<pair<string,string>, Slot> &aula1, const pair<pair<string,string>, Slot> &aula2) {
+bool Interface::slotsGreaterthan(const pair<string , Slot> &aula1, const pair<string , Slot> &aula2) {
     if(aula1.second>aula2.second){
         return true;
     }
@@ -520,7 +520,7 @@ int Interface::listShow() {
                 }
                 cout<<"Introduzir criterio de ordenacao:\n\t1.Crescente\n\t2.Decrescente"<<endl;
                 cin >> order;
-                while (!is_in(order, 1, 2)){
+                /*while (!is_in(order, 1, 2)){
                     cout << "Sintase errada.\nPor favor reintroduzir:" << endl;
                     cin >> order;
                 }
@@ -535,7 +535,7 @@ int Interface::listShow() {
                 for(pair<pair<string,string>,Slot> aula:timetable){
                     //test output
                     cout<<aula.first.first<<endl;
-                }
+                }*/
                 return 0;
             }
 
@@ -544,21 +544,26 @@ int Interface::listShow() {
             if(mode=="2"){
                 cout << "Introduza o numero da turma(ex:1LEIC01):\n\t0.Para voltar" << endl;
                 cin>>turma;
-                UCTurma target = UCTurma("", turma);
-                auto it = lower_bound(database.getUcTurmas().begin(), database.getUcTurmas().end(), target);
-                /*while(it==database.getUcTurmas().end()){
-                    cout<<"Codigo de estudante invalido, reintroduzir:"<<endl;
-                    cin>>student;
-                    target=UCTurma(uc,"");
-                    it=lower_bound(database.getUcTurmas().begin(), database.getUcTurmas().end(), target);
-                }*/
+                bool not_found=true;
+                vector<UCTurma> target_list = database.getUcTurmas();
+                //finds if turma is in database
+                for(UCTurma target:target_list){
+                    if(target.get_uc_turma().second==turma) not_found=false;
+                }
+                while(not_found){
+                    cout<<"numero de turma nao existente,reintroduzir:"<<endl;
+                    cin>>turma;
+                    for(UCTurma target:target_list){
+                        if(target.get_uc_turma().second==turma) not_found=false;
+                    }
+                }
 
-               /* if(turma=="0") goto menuAnterior1_horario;
-                vector<pair<UCTurma,Slot>> timeTable=database.get_turma_timetable(turma);
+               if(turma=="0") goto menuAnterior1_horario;
+                vector<pair<string,Slot>> timeTable=database.get_turma_timetable(turma);
                 std::sort(timeTable.begin(), timeTable.end(), slotsLessthan);
                 for(pair<string,Slot> aula: timeTable){
                     cout<<aula.second.getDay()<<"\n"<<"Aula: "<<aula.first<<"\t"<<"Comeco: "<<aula.second.getStart()<<"h\t"<<"Duracao: "<<aula.second.getDuration()<<"h\t"<<"Tipo: "<<aula.second.getType()<<endl;
-                }*/
+                }
                 return 0;
             }
         }
