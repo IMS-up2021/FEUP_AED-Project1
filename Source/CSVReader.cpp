@@ -208,3 +208,18 @@ vector<pair<string, Slot>> CSVReader::get_turma_timetable(string turma) const {
     }
     return ret;
 }
+
+bool CSVReader::is_balanced(string uc) const {
+    UCTurma target = UCTurma(uc, "");
+    int min = INT32_MAX;
+    int max = INT32_MIN;
+    int curr;
+    auto it = lower_bound(uc_turmas.begin(), uc_turmas.end(), target);
+    while ((*it).get_uc_turma().first == uc) {
+        curr = (*it).get_student_num();
+        if (curr > max) max = curr;
+        if (curr < min) min = curr;
+        it++;
+    }
+    return (max-min) < 4;
+}
