@@ -22,12 +22,24 @@ bool Interface::is_in(string choice, int lim_start, int lim_end) const{
 
 /** Function that compares 2 classes in a vector of pair<className,schedule>
  *
- * @param aula1
- * @param aula2
+ * @param class1
+ * @param class2
  * @return Boolean value t/f
  */
 bool Interface::slotsLessthan(const pair<std::string, Slot> &aula1, const pair<std::string, Slot> &aula2) {
     if(aula1.second<aula2.second){
+        return true;
+    }
+    return false;
+}
+/** Function that compares 2 classes in a vector of pair<classname,schedule>
+ *
+ * @param class1
+ * @param class2
+ * @return Boolean value t/f
+ */
+bool Interface::slotsGreaterthan(const pair<std::string, Slot> &aula1, const pair<std::string, Slot> &aula2) {
+    if(aula1.second>aula2.second){
         return true;
     }
     return false;
@@ -468,13 +480,39 @@ int Interface::listShow() {
             if(mode=="1") {
                 cout << "Introduza o numero do estudante(ex:202201001):\n\t0.Para voltar" << endl;
                 cin >> student;
-                /*
-                while(se nao houver item correspondente/ null){
+
+                /*while(database.get_student_timetable((stoi(student))).empty()){
                     cout<<"Numero do estudante invalido, reintroduzir:"<<endl;
                     cin>>student;
+                }*/
+
+                if (student == "0") goto menuAnterior1_horario;
+                vector<pair<string,Slot>> timetable;
+                list<UCTurma* > ucturmas=database.get_student_timetable(stoi(student));
+                for(UCTurma* ucturma:ucturmas){
+                    for(Slot aula:(*ucturma).get_slots()){
+                        pair<string ,Slot> namedSlot={ucturma->get_uc_turma().first,aula};
+                        timetable.push_back(namedSlot);
+                    }
                 }
-                */
-                if (student == "0") goto menuListagem;
+                cout<<"Introduzir criterio de ordenacao:\n\t1.Crescente\n\t2.Decrescente"<<endl;
+                cin >> order;
+                while (!is_in(order, 1, 2)){
+                    cout << "Sintase errada.\nPor favor reintroduzir:" << endl;
+                    cin >> order;
+                }
+                if (order == "1") {
+                    std::sort(timetable.begin(), timetable.end(), slotsLessthan);
+
+                }
+                if (order == "2") {
+                    //ainda a ser implementada de acordo com ordenacao decrescente
+                    std::sort(timetable.begin(), timetable.end(), slotsGreaterthan);
+                }
+                for(pair<string,Slot> aula:timetable){
+                    cout<<aula.second.getDay();
+                }
+                return 0;
             }
 
             if(mode=="2"){
