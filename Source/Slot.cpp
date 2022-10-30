@@ -38,6 +38,14 @@ bool Slot::operator<(Slot other) const {
         return get_day_num() < other.get_day_num();
     }
 }
+bool Slot::operator>(Slot other ) const {
+    if (day == other.day) {
+        return start > other.start;
+    }
+    else {
+        return get_day_num() > other.get_day_num();
+    }
+}
 
 int Slot::get_day_num() const {
     if (day == "Monday") return 0;
