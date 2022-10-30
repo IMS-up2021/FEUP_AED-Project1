@@ -17,6 +17,8 @@ private:
     bool is_in(string choice,int lim_start,int lim_end) const;
     static bool slotsLessthan(const pair<string,Slot> &aula1,const pair<string ,Slot> &aula2);
     static bool slotsGreaterthan(const pair<string ,Slot> &aula1,const pair<string ,Slot> &aula2);
+    static bool slotsLessthan1(const pair<pair<string,string>,Slot> &aula1, const pair<pair<string,string>,Slot> &aula2);
+    static bool slotsGreaterthan1(const pair<pair<string,string>,Slot> &aula1,const pair<pair<string,string>,Slot> &aula2);
     bool is_number(string n) const;
 
 
