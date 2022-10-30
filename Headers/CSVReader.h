@@ -22,6 +22,7 @@ public:
     int get_studentnum_per_uc(string uc) const;
     const vector<UCTurma> &getUcTurmas() const;
     const set<Student> &getStudents() const;
+    bool is_balanced(string uc) const;
 
 private:
     vector<UCTurma> uc_turmas;

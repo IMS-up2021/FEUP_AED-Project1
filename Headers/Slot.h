@@ -25,6 +25,8 @@ public:
 
     const string &getType() const;
     bool operator< (Slot aula) const;
+    int get_day_num() const;
+    float get_end() const;
 
 };
 

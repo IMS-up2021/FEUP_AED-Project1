@@ -157,8 +157,6 @@ bool CSVReader::populate() {
     sort(uc_turmas.begin(), uc_turmas.end());
     int read2 = read_classes();
     int read3 = read_students_classes();
-    int search = binarySearch(uc_turmas, {"L.EIC025", "3LEIC12"});
-    uc_turmas[search].add_slot(Slot(2.0, 1.0, "Tuesday", "T"));
     return (read1 == 0 && read2 == 0 && read3 == 0);
 }
 
@@ -207,4 +205,19 @@ vector<pair<string, Slot>> CSVReader::get_turma_timetable(string turma) const {
         }
     }
     return ret;
+}
+
+bool CSVReader::is_balanced(string uc) const {
+    UCTurma target = UCTurma(uc, "");
+    int min = INT32_MAX;
+    int max = INT32_MIN;
+    int curr;
+    auto it = lower_bound(uc_turmas.begin(), uc_turmas.end(), target);
+    while ((*it).get_uc_turma().first == uc) {
+        curr = (*it).get_student_num();
+        if (curr > max) max = curr;
+        if (curr < min) min = curr;
+        it++;
+    }
+    return (max-min) < 4;
 }
