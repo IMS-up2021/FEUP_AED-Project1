@@ -32,10 +32,29 @@ bool Interface::slotsLessthan(const pair<string , Slot> &aula1, const pair<strin
     }
     return false;
 }
+/**Function that compares 2 classes by time(used for pair<pair<string,string>,class>
+ *
+ * @param aula1
+ * @param aula2
+ * @return t/f
+ */
 bool Interface::slotsLessthan1(const pair<pair<std::string, std::string>, Slot> &aula1,
                               const pair<pair<std::string, std::string>, Slot> &aula2) {
     if(aula1.second<aula2.second){
         return true;
+    }
+    return false;
+}
+/** Function that compares 2 classes by time and classCode
+ *
+ * @param aula1
+ * @param aula2
+ * @return t/f
+ */
+bool Interface::slotsLessthan2(const pair<string ,Slot> &aula1,const pair<string ,Slot> &aula2){
+    if(aula1.second<aula2.second){
+        //if(aula1.first<aula2.first)
+            return true;
     }
     return false;
 }
@@ -593,6 +612,7 @@ int Interface::listShow() {
                     cout<<aula.second.getDay()<<"\n"<<"Turma: "<<aula.first<<"\t"<<"Comeco: "<<aula.second.getStart()<<"h\t"<<"Duracao: "<<aula.second.getDuration()<<"h\t"<<"Tipo: "<<aula.second.getType()<<endl;
                     cout<<"\n";
                 }
+                return 0;
 
             }
         }
