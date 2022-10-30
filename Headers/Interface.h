@@ -16,10 +16,13 @@ private:
     CSVReader* database;
     bool is_in(string choice,int lim_start,int lim_end) const;
     static bool slotsLessthan(const pair<string,Slot> &aula1,const pair<string ,Slot> &aula2);
-    static bool slotsGreaterthan(const pair<string ,Slot> &aula1,const pair<string ,Slot> &aula2);
+    static bool turmasLessthan(const UCTurma ucturma1, const UCTurma ucturma2);
+    static bool turmasGreaterthan(const UCTurma ucturma1, const UCTurma ucturma2);
     static bool slotsLessthan1(const pair<pair<string,string>,Slot> &aula1, const pair<pair<string,string>,Slot> &aula2);
-    static bool slotsGreaterthan1(const pair<pair<string,string>,Slot> &aula1,const pair<pair<string,string>,Slot> &aula2);
+    static bool ucLessthan(const UCTurma ucturma1, const UCTurma ucturma2);
+    static bool ucGreaterthan(const UCTurma ucturma1, const UCTurma ucturma2);
     static bool slotsLessthan2(const pair<string ,Slot> &aula1,const pair<string ,Slot> &aula2);
+
     bool is_number(string n) const;
 
 

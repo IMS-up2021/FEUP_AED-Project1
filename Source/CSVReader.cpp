@@ -226,4 +226,5 @@ unsigned CSVReader::find_student_num_by_name(string name) const {
     for (const Student& student : students) {
         if (student.get_name() == name) return student.get_num();
     }
+    return 1;
 }
