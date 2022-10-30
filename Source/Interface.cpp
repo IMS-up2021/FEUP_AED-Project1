@@ -413,7 +413,7 @@ int Interface::listShow() {
                         cout << "Sintase errada.\nPor favor reintroduzir:" << endl;
                         cin >> order;
                     }
-                    cout<<"No total esta unidade curricular tem: "<<database.get_studentnum_per_uc(uc)<<" alunos"<<endl;
+                    cout<<"No total esta unidade curricular tem: "<<database->get_studentnum_per_uc(uc)<<" alunos"<<endl;
                     //ainda a ser implementada por falta de funcoes
                     if (order == "1") {
                         //ainda a ser implementada de acordo com ordenacao crescente
@@ -501,18 +501,18 @@ int Interface::listShow() {
                 while(!is_number(student)) cin>>student;
                 //verificar se existe o aluno na base de dados;
                 Student target = Student(stoi(student));
-                auto it = database.getStudents().find(target);
-                while(it==database.getStudents().end()){
+                auto it = database->getStudents().find(target);
+                while(it==database->getStudents().end()){
                     cout<<"Codigo de estudante invalido, reintroduzir:"<<endl;
                     cin>>student;
                     target=Student(stoi(student));
-                    it=database.getStudents().find(target);
+                    it=database->getStudents().find(target);
                 }
                 if (student == "0") goto menuAnterior1_horario;
 
                 //problema !!!!!
                 vector< pair<pair<string, string>, Slot>> timetable;
-                list<UCTurma*> ucturmas=database.get_student_timetable(stoi(student));
+                list<UCTurma*> ucturmas=database->get_student_timetable(stoi(student));
                 for(UCTurma* ucturma:ucturmas){
                     for(Slot aula:ucturma->get_slots()){
                         timetable.push_back({ucturma->get_uc_turma(),aula});
@@ -545,7 +545,7 @@ int Interface::listShow() {
                 cout << "Introduza o numero da turma(ex:1LEIC01):\n\t0.Para voltar" << endl;
                 cin>>turma;
                 UCTurma target = UCTurma("", turma);
-                auto it = lower_bound(database.getUcTurmas().begin(), database.getUcTurmas().end(), target);
+                auto it = lower_bound(database->getUcTurmas().begin(), database->getUcTurmas().end(), target);
                 /*while(it==database.getUcTurmas().end()){
                     cout<<"Codigo de estudante invalido, reintroduzir:"<<endl;
                     cin>>student;
@@ -570,10 +570,11 @@ int Interface::listShow() {
 
 }
 
-int Interface::initiate() {
-    if(!database.populate()){
+/*int Interface::initiate() {
+    if(!database->populate()){
         return 0;
     }
-    this->database.populate();
     return 1;
-}
+}*/
+
+Interface::Interface(CSVReader &reader): database(&reader) {}
