@@ -221,3 +221,9 @@ bool CSVReader::is_balanced(string uc) const {
     }
     return (max-min) < 4;
 }
+
+unsigned CSVReader::find_student_num_by_name(string name) const {
+    for (const Student& student : students) {
+        if (student.get_name() == name) return student.get_num();
+    }
+}
