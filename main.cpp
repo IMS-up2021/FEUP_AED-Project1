@@ -6,8 +6,8 @@ using namespace std;
 int main() {
     std::cout << "Hello, World!" << std::endl;
     CSVReader reader;
-    Interface interface;
-    interface.initiate();
+    reader.populate();
+    Interface interface = Interface(reader);
 
     while(true){
         bool terminated;

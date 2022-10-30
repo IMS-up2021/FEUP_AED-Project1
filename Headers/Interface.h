@@ -13,7 +13,7 @@ using namespace std;
 class Interface {
 private:
     queue<string> processes;
-    CSVReader database;
+    CSVReader* database;
     bool is_in(string choice,int lim_start,int lim_end) const;
     static bool slotsLessthan(const pair<string,Slot> &aula1,const pair<string ,Slot> &aula2);
     static bool slotsGreaterthan(const pair<string ,Slot> &aula1,const pair<string ,Slot> &aula2);
@@ -24,6 +24,7 @@ public:
     void addProcessToQueue(string process);//adds a process to the queue with the name p_name
     int listShow();//executes the listing
     int initiate();
+    Interface(CSVReader& reader);
 
 };
 
