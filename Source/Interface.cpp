@@ -119,10 +119,10 @@ bool Interface::ucGreaterthan(const UCTurma ucturma1, const UCTurma ucturma2) {
 }
 /** Lists according to input introduced by user
  *
- * @param choice users input/choice
+ * @param
  * @return 0 if no quit, 1 if quit mid process
  */
-int Interface::listShow() {
+int Interface::initiate() {
     MenuPrincipal:string userInput;
     cout<<"Introduza o numero do comando:\n\t1.Listagem\n\t2.Alteracoes\n\t0.Sair do programa"<<endl;
     cin>>userInput;
@@ -169,7 +169,7 @@ int Interface::listShow() {
                 if (mode == "0") goto menuAnterior2;
 
 
-                //caso o modo de listagem for por ano
+                //caso o modo de listagem for por ano de turmas
                 if (mode == "1") {
                     cout << "Do ano:\n0.Para voltar" << endl;
                     cin >> year;
@@ -215,7 +215,7 @@ int Interface::listShow() {
                 }
 
 
-                //caso o modo de listagem for por unidade curricular
+                //caso o modo de listagem for por unidade curricular de turmas
                 if (mode == "2") {
                     cout << "Introduzir o numero da unidade curricular(ex:L.EIC001):\n\t0.Para voltar" << endl;
                     cin >> uc;
@@ -245,7 +245,7 @@ int Interface::listShow() {
 
             //se o tipo de listagem das turmas for total
             if (type == "2") {
-                cout << "Todas as turmas sao listadas\n\t1.Para Continuar\n\t0.Para voltar" << endl;
+                cout << "Todas as turmas serao listadas:\n\t1.Para Continuar\n\t0.Para voltar" << endl;
                 cin >> mode;
                 int class_count=0;
                 vector<UCTurma> turmas=database->getUcTurmas();
@@ -299,7 +299,7 @@ int Interface::listShow() {
                 if (mode == "0") goto menuAnterior2_UC;
 
 
-                //caso o modo de listagem da UC for por ano
+                //caso o modo de listagem das UCs for por ano
                 if(mode=="1"){
                     cout << "Do ano:\n0.Para voltar" << endl;
                     cin >> year;
@@ -399,6 +399,7 @@ int Interface::listShow() {
                 }
                 cout<<"\n";
                 cout<<"No total existem "<<uc_count<<" unidades curriculares."<<endl;
+                return 0;
             }
         }
 
@@ -425,7 +426,7 @@ int Interface::listShow() {
                 if (mode == "0") goto menuAnterior2_Students;
 
 
-                //caso o modo de listagem for por ano
+                //caso o modo de listagem for por ano de alunos
                 if (mode == "1") {
                     cout << "Do ano:\n0.Para sair" << endl;
                     cin >> year;
@@ -471,7 +472,7 @@ int Interface::listShow() {
                 }
 
 
-                //caso o modo de listagem for por unidade curricular
+                //caso o modo de listagem for por unidade curricular de alunos
                 if (mode == "2") {
                     CSVReader processingTool;
                     cout << "Introduzir o codigo da unidade curricular:\n\t0.Para voltar" << endl;
@@ -659,6 +660,8 @@ int Interface::listShow() {
             }
         }
     }
+
+    //ainda por implementar!!!!
     else if(userInput=="2"){
         //alteracoes do horario
 

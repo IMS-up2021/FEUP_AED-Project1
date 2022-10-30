@@ -28,8 +28,7 @@ private:
 
 public:
     void addProcessToQueue(string process);//adds a process to the queue with the name p_name
-    int listShow();//executes the listing
-    int initiate();
+    int initiate();//executes the listing
     Interface(CSVReader& reader);
 
 };
