@@ -23,6 +23,7 @@ public:
     const vector<UCTurma> &getUcTurmas() const;
     const set<Student> &getStudents() const;
     bool is_balanced(string uc) const;
+    unsigned find_student_num_by_name(string name) const;
 
 private:
     vector<UCTurma> uc_turmas;

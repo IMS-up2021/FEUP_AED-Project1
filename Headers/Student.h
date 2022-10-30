@@ -16,6 +16,8 @@ public:
     bool operator<(Student other) const;
     list<UCTurma*> get_timetable() const;
     bool timetable_has_conflict() const;
+    string get_name() const;
+    unsigned get_num() const;
 
 private:
     mutable list<UCTurma*> uc_turmas;

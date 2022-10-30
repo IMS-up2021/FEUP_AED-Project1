@@ -68,3 +68,11 @@ bool Student::timetable_has_conflict() const {
     return false;
 }
 
+string Student::get_name() const {
+    return name;
+}
+
+unsigned Student::get_num() const {
+    return num;
+}
+
