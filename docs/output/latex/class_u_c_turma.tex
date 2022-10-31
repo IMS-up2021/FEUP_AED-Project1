@@ -1,0 +1,90 @@
+\hypertarget{class_u_c_turma}{}\doxysection{UCTurma Class Reference}
+\label{class_u_c_turma}\index{UCTurma@{UCTurma}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_u_c_turma_a1654e438aa558e4d48a19400a606549f}\label{class_u_c_turma_a1654e438aa558e4d48a19400a606549f}} 
+{\bfseries UCTurma} (string uc, string turma)
+\item 
+\mbox{\Hypertarget{class_u_c_turma_a01bbebf60576d25bc104307eca1185e7}\label{class_u_c_turma_a01bbebf60576d25bc104307eca1185e7}} 
+{\bfseries UCTurma} (pair$<$ string, string $>$ uc\+\_\+turma)
+\item 
+\mbox{\Hypertarget{class_u_c_turma_aa9a862ea9bdf888180b3f3e67b81f5aa}\label{class_u_c_turma_aa9a862ea9bdf888180b3f3e67b81f5aa}} 
+bool {\bfseries operator$<$} (\mbox{\hyperlink{class_u_c_turma}{UCTurma}} other) const
+\item 
+\mbox{\Hypertarget{class_u_c_turma_ad7655112512a6eeeb6ae3b9b45acb823}\label{class_u_c_turma_ad7655112512a6eeeb6ae3b9b45acb823}} 
+pair$<$ string, string $>$ {\bfseries get\+\_\+uc\+\_\+turma} () const
+\item 
+void \mbox{\hyperlink{class_u_c_turma_ae39903956a2bbddd1157ad26f6d09a2d}{add\+\_\+slot}} (\mbox{\hyperlink{class_slot}{Slot}} slot)
+\item 
+\mbox{\Hypertarget{class_u_c_turma_a091bfb0984f09eb46b3afbc2db729c2c}\label{class_u_c_turma_a091bfb0984f09eb46b3afbc2db729c2c}} 
+list$<$ \mbox{\hyperlink{class_slot}{Slot}} $>$ {\bfseries get\+\_\+slots} () const
+\item 
+int \mbox{\hyperlink{class_u_c_turma_a39d58b50442fbd7676845548b4806837}{add\+\_\+remove\+\_\+student}} (bool b)
+\item 
+\mbox{\Hypertarget{class_u_c_turma_a98fd76988fd7d23013c2e54f4e624e4a}\label{class_u_c_turma_a98fd76988fd7d23013c2e54f4e624e4a}} 
+int {\bfseries get\+\_\+student\+\_\+num} () const
+\item 
+void \mbox{\hyperlink{class_u_c_turma_a52b010a78804506eecff8dda3521c463}{create\+\_\+temp\+\_\+num}} ()
+\item 
+void \mbox{\hyperlink{class_u_c_turma_aff2ba0451d58557a2359d2ce86e7552c}{load\+\_\+temp\+\_\+num}} ()
+\item 
+void \mbox{\hyperlink{class_u_c_turma_a287711fc5c95994eb33c169d8107872c}{reset\+\_\+temp\+\_\+num}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_u_c_turma_a39d58b50442fbd7676845548b4806837}\label{class_u_c_turma_a39d58b50442fbd7676845548b4806837}} 
+\index{UCTurma@{UCTurma}!add\_remove\_student@{add\_remove\_student}}
+\index{add\_remove\_student@{add\_remove\_student}!UCTurma@{UCTurma}}
+\doxysubsubsection{\texorpdfstring{add\_remove\_student()}{add\_remove\_student()}}
+{\footnotesize\ttfamily int UCTurma\+::add\+\_\+remove\+\_\+student (\begin{DoxyParamCaption}\item[{bool}]{b }\end{DoxyParamCaption})}
+
+Increments or decrements the \mbox{\hyperlink{class_u_c_turma}{UCTurma}}\textquotesingle{}s student number ~\newline
+Complexity\+: O(1) 
+\begin{DoxyParams}{Parameters}
+{\em b} & true if increment, false if decrement \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if failure (decrement when student\+\_\+num is 0, increment when student\+\_\+num is TURMA\+\_\+\+CAP), 0 otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_u_c_turma_ae39903956a2bbddd1157ad26f6d09a2d}\label{class_u_c_turma_ae39903956a2bbddd1157ad26f6d09a2d}} 
+\index{UCTurma@{UCTurma}!add\_slot@{add\_slot}}
+\index{add\_slot@{add\_slot}!UCTurma@{UCTurma}}
+\doxysubsubsection{\texorpdfstring{add\_slot()}{add\_slot()}}
+{\footnotesize\ttfamily void UCTurma\+::add\+\_\+slot (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_slot}{Slot}}}]{slot }\end{DoxyParamCaption})}
+
+Adds \mbox{\hyperlink{class_slot}{Slot}} object to slots belonging to \mbox{\hyperlink{class_u_c_turma}{UCTurma}} ~\newline
+Complexity\+: O(1) 
+\begin{DoxyParams}{Parameters}
+{\em slot} & \mbox{\hyperlink{class_slot}{Slot}} to be added \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_u_c_turma_a52b010a78804506eecff8dda3521c463}\label{class_u_c_turma_a52b010a78804506eecff8dda3521c463}} 
+\index{UCTurma@{UCTurma}!create\_temp\_num@{create\_temp\_num}}
+\index{create\_temp\_num@{create\_temp\_num}!UCTurma@{UCTurma}}
+\doxysubsubsection{\texorpdfstring{create\_temp\_num()}{create\_temp\_num()}}
+{\footnotesize\ttfamily void UCTurma\+::create\+\_\+temp\+\_\+num (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Saves current student\+\_\+num for request processing ~\newline
+Complexity\+: O(1) \mbox{\Hypertarget{class_u_c_turma_aff2ba0451d58557a2359d2ce86e7552c}\label{class_u_c_turma_aff2ba0451d58557a2359d2ce86e7552c}} 
+\index{UCTurma@{UCTurma}!load\_temp\_num@{load\_temp\_num}}
+\index{load\_temp\_num@{load\_temp\_num}!UCTurma@{UCTurma}}
+\doxysubsubsection{\texorpdfstring{load\_temp\_num()}{load\_temp\_num()}}
+{\footnotesize\ttfamily void UCTurma\+::load\+\_\+temp\+\_\+num (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Loads old student\+\_\+num back in for when request block is invalid ~\newline
+Complexity\+: O(1) \mbox{\Hypertarget{class_u_c_turma_a287711fc5c95994eb33c169d8107872c}\label{class_u_c_turma_a287711fc5c95994eb33c169d8107872c}} 
+\index{UCTurma@{UCTurma}!reset\_temp\_num@{reset\_temp\_num}}
+\index{reset\_temp\_num@{reset\_temp\_num}!UCTurma@{UCTurma}}
+\doxysubsubsection{\texorpdfstring{reset\_temp\_num()}{reset\_temp\_num()}}
+{\footnotesize\ttfamily void UCTurma\+::reset\+\_\+temp\+\_\+num (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Resets temp\+\_\+num for when request block is valid ~\newline
+Complexity\+: O(1) 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Headers/UCTurma.\+h\item 
+Source/UCTurma.\+cpp\end{DoxyCompactItemize}

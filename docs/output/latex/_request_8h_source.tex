@@ -1,0 +1,31 @@
+\hypertarget{_request_8h_source}{}\doxysection{Request.\+h}
+\label{_request_8h_source}\index{Headers/Request.h@{Headers/Request.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{//}}
+\DoxyCodeLine{2 \textcolor{comment}{// Created by Afonso on 30/10/2022.}}
+\DoxyCodeLine{3 \textcolor{comment}{//}}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#ifndef AEDOUTRO\_REQUEST\_H}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#define AEDOUTRO\_REQUEST\_H}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{keyword}{using namespace }std;}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{keyword}{class }\mbox{\hyperlink{class_request}{Request}} \{}
+\DoxyCodeLine{13 \textcolor{keyword}{private}:}
+\DoxyCodeLine{14     \textcolor{keywordtype}{string} type;}
+\DoxyCodeLine{15     \textcolor{keywordtype}{unsigned} target\_student;}
+\DoxyCodeLine{16     pair<string, string> uc\_turma;}
+\DoxyCodeLine{17 \textcolor{keyword}{public}:}
+\DoxyCodeLine{18     \mbox{\hyperlink{class_request}{Request}}(\textcolor{keywordtype}{string} type, \textcolor{keywordtype}{unsigned} target\_student, \textcolor{keywordtype}{string} uc, \textcolor{keywordtype}{string} turma);}
+\DoxyCodeLine{19     \textcolor{keywordtype}{string} get\_type() \textcolor{keyword}{const};}
+\DoxyCodeLine{20     \textcolor{keywordtype}{unsigned} get\_target\_student() \textcolor{keyword}{const};}
+\DoxyCodeLine{21     pair<string, string> get\_uc\_turma() \textcolor{keyword}{const};}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23 \};}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25 \textcolor{preprocessor}{\#endif }\textcolor{comment}{//AEDOUTRO\_REQUEST\_H}}
+
+\end{DoxyCode}

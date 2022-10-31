@@ -1,0 +1,44 @@
+\hypertarget{_c_s_v_reader_8h_source}{}\doxysection{CSVReader.\+h}
+\label{_c_s_v_reader_8h_source}\index{Headers/CSVReader.h@{Headers/CSVReader.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{//}}
+\DoxyCodeLine{2 \textcolor{comment}{// Created by Afonso on 16/10/2022.}}
+\DoxyCodeLine{3 \textcolor{comment}{//}}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#ifndef UNTITLED1\_CSVREADER\_H}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#define UNTITLED1\_CSVREADER\_H}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include "{}UCTurma.h"{}}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include "{}Student.h"{}}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include <set>}}
+\DoxyCodeLine{12 }
+\DoxyCodeLine{13 \textcolor{keyword}{class }\mbox{\hyperlink{class_c_s_v_reader}{CSVReader}} \{}
+\DoxyCodeLine{14 \textcolor{keyword}{public}:}
+\DoxyCodeLine{15     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_c_s_v_reader_a6c52a77c1711559036c267e935431ef6}{read\_classes\_per\_uc}}();}
+\DoxyCodeLine{16     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_c_s_v_reader_acadd08a00c5dd7e6dc090ed5f8a16d16}{read\_classes}}();}
+\DoxyCodeLine{17     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_c_s_v_reader_a53d0250ed4d6d8126c13390d841adf73}{read\_students\_classes}}();}
+\DoxyCodeLine{18     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_c_s_v_reader_aff4c4689b5978566da865c5b6fe07c0d}{populate}}();}
+\DoxyCodeLine{19     list<UCTurma*> \mbox{\hyperlink{class_c_s_v_reader_a6828bb6be790a8ebbddb4ea66770a3a8}{get\_student\_timetable}}(\textcolor{keywordtype}{unsigned} num) \textcolor{keyword}{const};}
+\DoxyCodeLine{20     vector<pair<string,Slot>> \mbox{\hyperlink{class_c_s_v_reader_aecde9144d7eb2f7c981050e5f42735fb}{get\_uc\_timetable}}(\textcolor{keywordtype}{string} uc) \textcolor{keyword}{const};}
+\DoxyCodeLine{21     vector<pair<string,Slot>> \mbox{\hyperlink{class_c_s_v_reader_ae68758438c5e2376bdddc6724b0b65ee}{get\_turma\_timetable}}(\textcolor{keywordtype}{string} turma) \textcolor{keyword}{const};}
+\DoxyCodeLine{22     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_c_s_v_reader_a5e5a34b6acc7f301a451c9da465f0ad5}{get\_studentnum\_per\_uc}}(\textcolor{keywordtype}{string} uc) \textcolor{keyword}{const};}
+\DoxyCodeLine{23     \textcolor{keyword}{const} vector<UCTurma> \&getUcTurmas() \textcolor{keyword}{const};}
+\DoxyCodeLine{24     \mbox{\hyperlink{class_u_c_turma}{UCTurma}}* \mbox{\hyperlink{class_c_s_v_reader_a99cdb9043d04c51e469d470df5e4e064}{get\_pointer\_to\_uc\_turma}}(pair<string, string> uc\_turma);}
+\DoxyCodeLine{25     \textcolor{keyword}{const} set<Student> \&getStudents() \textcolor{keyword}{const};}
+\DoxyCodeLine{26     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_s_v_reader_acedc5f1a22863467e12a80389bb09b7d}{save\_uc\_changes}}(\textcolor{keywordtype}{string} uc);}
+\DoxyCodeLine{27     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_s_v_reader_a14d11cd16aed99e910c25bccdf8cf42f}{discard\_uc\_changes}}(\textcolor{keywordtype}{string} uc);}
+\DoxyCodeLine{28     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_c_s_v_reader_adb002f30af057d2e5bf417c99fb90443}{is\_balanced}}(\textcolor{keywordtype}{string} uc) \textcolor{keyword}{const};}
+\DoxyCodeLine{29     \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{class_c_s_v_reader_a84dce6c7383d5b115c723616c4258300}{find\_student\_num\_by\_name}}(\textcolor{keywordtype}{string} name) \textcolor{keyword}{const};}
+\DoxyCodeLine{30     \textcolor{keywordtype}{void} set\_students(set<Student> s);}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32 \textcolor{keyword}{private}:}
+\DoxyCodeLine{33     vector<UCTurma> uc\_turmas;}
+\DoxyCodeLine{34     set<Student> students;}
+\DoxyCodeLine{35 \};}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37 \textcolor{preprocessor}{\#endif }\textcolor{comment}{//UNTITLED1\_CSVREADER\_H}}
+\DoxyCodeLine{38 }
+
+\end{DoxyCode}

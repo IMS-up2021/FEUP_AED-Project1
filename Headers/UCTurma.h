@@ -8,6 +8,8 @@
 #include <list>
 #include "Slot.h"
 
+#define TURMA_CAP 30
+
 using namespace std;
 
 class UCTurma {

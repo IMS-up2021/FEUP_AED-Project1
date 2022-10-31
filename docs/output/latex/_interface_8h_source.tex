@@ -1,0 +1,43 @@
+\hypertarget{_interface_8h_source}{}\doxysection{Interface.\+h}
+\label{_interface_8h_source}\index{Headers/Interface.h@{Headers/Interface.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{//}}
+\DoxyCodeLine{2 \textcolor{comment}{// Created by not\_real\_fu on 22-\/10-\/2022.}}
+\DoxyCodeLine{3 \textcolor{comment}{//}}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#ifndef UNTITLED1\_PROCESSINGTOOL\_H}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#define UNTITLED1\_PROCESSINGTOOL\_H}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include <queue>}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include <list>}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include"{}CSVReader.h"{}}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{keyword}{using namespace }std;}
+\DoxyCodeLine{13 \textcolor{keyword}{class }\mbox{\hyperlink{class_interface}{Interface}} \{}
+\DoxyCodeLine{14 \textcolor{keyword}{private}:}
+\DoxyCodeLine{15     queue<string> processes;}
+\DoxyCodeLine{16     \mbox{\hyperlink{class_c_s_v_reader}{CSVReader}}* database;}
+\DoxyCodeLine{17     \textcolor{keywordtype}{bool} is\_in(\textcolor{keywordtype}{string} choice,\textcolor{keywordtype}{int} lim\_start,\textcolor{keywordtype}{int} lim\_end) \textcolor{keyword}{const};}
+\DoxyCodeLine{18     \textcolor{keyword}{static} \textcolor{keywordtype}{bool} slotsLessthan(\textcolor{keyword}{const} pair<string,Slot> \&aula1,\textcolor{keyword}{const} pair<string ,Slot> \&aula2);}
+\DoxyCodeLine{19     \textcolor{keyword}{static} \textcolor{keywordtype}{bool} turmasLessthan(\textcolor{keyword}{const} \mbox{\hyperlink{class_u_c_turma}{UCTurma}} ucturma1, \textcolor{keyword}{const} \mbox{\hyperlink{class_u_c_turma}{UCTurma}} ucturma2);}
+\DoxyCodeLine{20     \textcolor{keyword}{static} \textcolor{keywordtype}{bool} turmasGreaterthan(\textcolor{keyword}{const} \mbox{\hyperlink{class_u_c_turma}{UCTurma}} ucturma1, \textcolor{keyword}{const} \mbox{\hyperlink{class_u_c_turma}{UCTurma}} ucturma2);}
+\DoxyCodeLine{21     \textcolor{keyword}{static} \textcolor{keywordtype}{bool} slotsLessthan1(\textcolor{keyword}{const} pair<pair<string,string>,\mbox{\hyperlink{class_slot}{Slot}}> \&aula1, \textcolor{keyword}{const} pair<pair<string,string>,\mbox{\hyperlink{class_slot}{Slot}}> \&aula2);}
+\DoxyCodeLine{22     \textcolor{keyword}{static} \textcolor{keywordtype}{bool} ucLessthan(\textcolor{keyword}{const} \mbox{\hyperlink{class_u_c_turma}{UCTurma}} ucturma1, \textcolor{keyword}{const} \mbox{\hyperlink{class_u_c_turma}{UCTurma}} ucturma2);}
+\DoxyCodeLine{23     \textcolor{keyword}{static} \textcolor{keywordtype}{bool} ucGreaterthan(\textcolor{keyword}{const} \mbox{\hyperlink{class_u_c_turma}{UCTurma}} ucturma1, \textcolor{keyword}{const} \mbox{\hyperlink{class_u_c_turma}{UCTurma}} ucturma2);}
+\DoxyCodeLine{24     \textcolor{keyword}{static} \textcolor{keywordtype}{bool} slotsLessthan2(\textcolor{keyword}{const} pair<string ,Slot> \&aula1,\textcolor{keyword}{const} pair<string ,Slot> \&aula2);}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26     \textcolor{keywordtype}{bool} is\_number(\textcolor{keywordtype}{string} n) \textcolor{keyword}{const};}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29 \textcolor{keyword}{public}:}
+\DoxyCodeLine{30     \textcolor{keywordtype}{void} addProcessToQueue(\textcolor{keywordtype}{string} process);\textcolor{comment}{//adds a process to the queue with the name p\_name}}
+\DoxyCodeLine{31     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_interface_afdadb302e2dc62f4c0c8cac85ad48f3c}{initiate}}();\textcolor{comment}{//executes the listing}}
+\DoxyCodeLine{32     \mbox{\hyperlink{class_interface}{Interface}}(\mbox{\hyperlink{class_c_s_v_reader}{CSVReader}}\& reader);}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34 \};}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37 \textcolor{preprocessor}{\#endif }\textcolor{comment}{//UNTITLED1\_PROCESSINGTOOL\_H}}
+
+\end{DoxyCode}

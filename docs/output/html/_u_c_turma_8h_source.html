@@ -86,31 +86,33 @@ $(function() {
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;list&gt;</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;Slot.h&quot;</span></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">using namespace </span>std;</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#define TURMA_CAP 30</span></div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="class_u_c_turma.html">   13</a></span><span class="keyword">class </span><a class="code hl_class" href="class_u_c_turma.html">UCTurma</a> {</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    pair&lt;string, string&gt; uc_turma;</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    list&lt;Slot&gt; slots;</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keywordtype">int</span> student_num;</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="keywordtype">int</span> temp_num;</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <a class="code hl_class" href="class_u_c_turma.html">UCTurma</a>(<span class="keywordtype">string</span> uc, <span class="keywordtype">string</span> turma);</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <a class="code hl_class" href="class_u_c_turma.html">UCTurma</a>(pair&lt;string, string&gt; uc_turma);</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="keywordtype">bool</span> operator&lt;(<a class="code hl_class" href="class_u_c_turma.html">UCTurma</a> other) <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    pair&lt;string,string&gt; get_uc_turma() <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_u_c_turma.html#ae39903956a2bbddd1157ad26f6d09a2d">add_slot</a>(<a class="code hl_class" href="class_slot.html">Slot</a> slot);</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    list&lt;Slot&gt; get_slots() <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keywordtype">int</span> <a class="code hl_function" href="class_u_c_turma.html#a39d58b50442fbd7676845548b4806837">add_remove_student</a>(<span class="keywordtype">bool</span> b);</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keywordtype">int</span> get_student_num() <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_u_c_turma.html#a52b010a78804506eecff8dda3521c463">create_temp_num</a>();</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_u_c_turma.html#aff2ba0451d58557a2359d2ce86e7552c">load_temp_num</a>();</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_u_c_turma.html#a287711fc5c95994eb33c169d8107872c">reset_temp_num</a>();</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>};</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">#endif </span><span class="comment">//UNTITLED1_UCTURMA_H</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">using namespace </span>std;</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="class_u_c_turma.html">   15</a></span><span class="keyword">class </span><a class="code hl_class" href="class_u_c_turma.html">UCTurma</a> {</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    pair&lt;string, string&gt; uc_turma;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    list&lt;Slot&gt; slots;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <span class="keywordtype">int</span> student_num;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keywordtype">int</span> temp_num;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <a class="code hl_class" href="class_u_c_turma.html">UCTurma</a>(<span class="keywordtype">string</span> uc, <span class="keywordtype">string</span> turma);</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <a class="code hl_class" href="class_u_c_turma.html">UCTurma</a>(pair&lt;string, string&gt; uc_turma);</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keywordtype">bool</span> operator&lt;(<a class="code hl_class" href="class_u_c_turma.html">UCTurma</a> other) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    pair&lt;string,string&gt; get_uc_turma() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_u_c_turma.html#ae39903956a2bbddd1157ad26f6d09a2d">add_slot</a>(<a class="code hl_class" href="class_slot.html">Slot</a> slot);</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    list&lt;Slot&gt; get_slots() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="keywordtype">int</span> <a class="code hl_function" href="class_u_c_turma.html#a39d58b50442fbd7676845548b4806837">add_remove_student</a>(<span class="keywordtype">bool</span> b);</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keywordtype">int</span> get_student_num() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_u_c_turma.html#a52b010a78804506eecff8dda3521c463">create_temp_num</a>();</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_u_c_turma.html#aff2ba0451d58557a2359d2ce86e7552c">load_temp_num</a>();</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_u_c_turma.html#a287711fc5c95994eb33c169d8107872c">reset_temp_num</a>();</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>};</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="preprocessor">#endif </span><span class="comment">//UNTITLED1_UCTURMA_H</span></div>
 <div class="ttc" id="aclass_slot_html"><div class="ttname"><a href="class_slot.html">Slot</a></div><div class="ttdef"><b>Definition:</b> Slot.h:11</div></div>
-<div class="ttc" id="aclass_u_c_turma_html"><div class="ttname"><a href="class_u_c_turma.html">UCTurma</a></div><div class="ttdef"><b>Definition:</b> UCTurma.h:13</div></div>
+<div class="ttc" id="aclass_u_c_turma_html"><div class="ttname"><a href="class_u_c_turma.html">UCTurma</a></div><div class="ttdef"><b>Definition:</b> UCTurma.h:15</div></div>
 <div class="ttc" id="aclass_u_c_turma_html_a287711fc5c95994eb33c169d8107872c"><div class="ttname"><a href="class_u_c_turma.html#a287711fc5c95994eb33c169d8107872c">UCTurma::reset_temp_num</a></div><div class="ttdeci">void reset_temp_num()</div><div class="ttdef"><b>Definition:</b> UCTurma.cpp:76</div></div>
 <div class="ttc" id="aclass_u_c_turma_html_a39d58b50442fbd7676845548b4806837"><div class="ttname"><a href="class_u_c_turma.html#a39d58b50442fbd7676845548b4806837">UCTurma::add_remove_student</a></div><div class="ttdeci">int add_remove_student(bool b)</div><div class="ttdef"><b>Definition:</b> UCTurma.cpp:37</div></div>
 <div class="ttc" id="aclass_u_c_turma_html_a52b010a78804506eecff8dda3521c463"><div class="ttname"><a href="class_u_c_turma.html#a52b010a78804506eecff8dda3521c463">UCTurma::create_temp_num</a></div><div class="ttdeci">void create_temp_num()</div><div class="ttdef"><b>Definition:</b> UCTurma.cpp:59</div></div>

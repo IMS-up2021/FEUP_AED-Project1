@@ -1,0 +1,209 @@
+\hypertarget{class_c_s_v_reader}{}\doxysection{CSVReader Class Reference}
+\label{class_c_s_v_reader}\index{CSVReader@{CSVReader}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{class_c_s_v_reader_a6c52a77c1711559036c267e935431ef6}{read\+\_\+classes\+\_\+per\+\_\+uc}} ()
+\item 
+int \mbox{\hyperlink{class_c_s_v_reader_acadd08a00c5dd7e6dc090ed5f8a16d16}{read\+\_\+classes}} ()
+\item 
+int \mbox{\hyperlink{class_c_s_v_reader_a53d0250ed4d6d8126c13390d841adf73}{read\+\_\+students\+\_\+classes}} ()
+\item 
+bool \mbox{\hyperlink{class_c_s_v_reader_aff4c4689b5978566da865c5b6fe07c0d}{populate}} ()
+\item 
+list$<$ \mbox{\hyperlink{class_u_c_turma}{UCTurma}} $\ast$ $>$ \mbox{\hyperlink{class_c_s_v_reader_a6828bb6be790a8ebbddb4ea66770a3a8}{get\+\_\+student\+\_\+timetable}} (unsigned num) const
+\item 
+vector$<$ pair$<$ string, \mbox{\hyperlink{class_slot}{Slot}} $>$ $>$ \mbox{\hyperlink{class_c_s_v_reader_aecde9144d7eb2f7c981050e5f42735fb}{get\+\_\+uc\+\_\+timetable}} (string uc) const
+\item 
+vector$<$ pair$<$ string, \mbox{\hyperlink{class_slot}{Slot}} $>$ $>$ \mbox{\hyperlink{class_c_s_v_reader_ae68758438c5e2376bdddc6724b0b65ee}{get\+\_\+turma\+\_\+timetable}} (string turma) const
+\item 
+int \mbox{\hyperlink{class_c_s_v_reader_a5e5a34b6acc7f301a451c9da465f0ad5}{get\+\_\+studentnum\+\_\+per\+\_\+uc}} (string uc) const
+\item 
+\mbox{\Hypertarget{class_c_s_v_reader_a5f54d75948a8b3c5901e73070c7d8b66}\label{class_c_s_v_reader_a5f54d75948a8b3c5901e73070c7d8b66}} 
+const vector$<$ \mbox{\hyperlink{class_u_c_turma}{UCTurma}} $>$ \& {\bfseries get\+Uc\+Turmas} () const
+\item 
+\mbox{\hyperlink{class_u_c_turma}{UCTurma}} $\ast$ \mbox{\hyperlink{class_c_s_v_reader_a99cdb9043d04c51e469d470df5e4e064}{get\+\_\+pointer\+\_\+to\+\_\+uc\+\_\+turma}} (pair$<$ string, string $>$ uc\+\_\+turma)
+\item 
+\mbox{\Hypertarget{class_c_s_v_reader_ad5282145f8ad24bba75519bfbf974d83}\label{class_c_s_v_reader_ad5282145f8ad24bba75519bfbf974d83}} 
+const set$<$ \mbox{\hyperlink{class_student}{Student}} $>$ \& {\bfseries get\+Students} () const
+\item 
+void \mbox{\hyperlink{class_c_s_v_reader_acedc5f1a22863467e12a80389bb09b7d}{save\+\_\+uc\+\_\+changes}} (string uc)
+\item 
+void \mbox{\hyperlink{class_c_s_v_reader_a14d11cd16aed99e910c25bccdf8cf42f}{discard\+\_\+uc\+\_\+changes}} (string uc)
+\item 
+bool \mbox{\hyperlink{class_c_s_v_reader_adb002f30af057d2e5bf417c99fb90443}{is\+\_\+balanced}} (string uc) const
+\item 
+unsigned \mbox{\hyperlink{class_c_s_v_reader_a84dce6c7383d5b115c723616c4258300}{find\+\_\+student\+\_\+num\+\_\+by\+\_\+name}} (string name) const
+\item 
+\mbox{\Hypertarget{class_c_s_v_reader_a2d4aea2929ff8c93680684f6c6a35f81}\label{class_c_s_v_reader_a2d4aea2929ff8c93680684f6c6a35f81}} 
+void {\bfseries set\+\_\+students} (set$<$ \mbox{\hyperlink{class_student}{Student}} $>$ s)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_c_s_v_reader_a14d11cd16aed99e910c25bccdf8cf42f}\label{class_c_s_v_reader_a14d11cd16aed99e910c25bccdf8cf42f}} 
+\index{CSVReader@{CSVReader}!discard\_uc\_changes@{discard\_uc\_changes}}
+\index{discard\_uc\_changes@{discard\_uc\_changes}!CSVReader@{CSVReader}}
+\doxysubsubsection{\texorpdfstring{discard\_uc\_changes()}{discard\_uc\_changes()}}
+{\footnotesize\ttfamily void CSVReader\+::discard\+\_\+uc\+\_\+changes (\begin{DoxyParamCaption}\item[{string}]{uc }\end{DoxyParamCaption})}
+
+Discard changes made to uc in processed requests ~\newline
+Complexity\+: O(log(n) + k) (n = size of uc\+\_\+turmas vector, k = number of turmas in UC) 
+\begin{DoxyParams}{Parameters}
+{\em uc} & uc to restore \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_c_s_v_reader_a84dce6c7383d5b115c723616c4258300}\label{class_c_s_v_reader_a84dce6c7383d5b115c723616c4258300}} 
+\index{CSVReader@{CSVReader}!find\_student\_num\_by\_name@{find\_student\_num\_by\_name}}
+\index{find\_student\_num\_by\_name@{find\_student\_num\_by\_name}!CSVReader@{CSVReader}}
+\doxysubsubsection{\texorpdfstring{find\_student\_num\_by\_name()}{find\_student\_num\_by\_name()}}
+{\footnotesize\ttfamily unsigned CSVReader\+::find\+\_\+student\+\_\+num\+\_\+by\+\_\+name (\begin{DoxyParamCaption}\item[{string}]{name }\end{DoxyParamCaption}) const}
+
+Finds number of student by their name ~\newline
+Complexity\+: O(n) (n = size of students BST) 
+\begin{DoxyParams}{Parameters}
+{\em name} & name of student to find \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+number of student 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_c_s_v_reader_a99cdb9043d04c51e469d470df5e4e064}\label{class_c_s_v_reader_a99cdb9043d04c51e469d470df5e4e064}} 
+\index{CSVReader@{CSVReader}!get\_pointer\_to\_uc\_turma@{get\_pointer\_to\_uc\_turma}}
+\index{get\_pointer\_to\_uc\_turma@{get\_pointer\_to\_uc\_turma}!CSVReader@{CSVReader}}
+\doxysubsubsection{\texorpdfstring{get\_pointer\_to\_uc\_turma()}{get\_pointer\_to\_uc\_turma()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_u_c_turma}{UCTurma}} $\ast$ CSVReader\+::get\+\_\+pointer\+\_\+to\+\_\+uc\+\_\+turma (\begin{DoxyParamCaption}\item[{pair$<$ string, string $>$}]{uc\+\_\+turma }\end{DoxyParamCaption})}
+
+Obtain pointer to desired \mbox{\hyperlink{class_u_c_turma}{UCTurma}} ~\newline
+Complexity\+: O(log(n)) (n = size of uc\+\_\+turmas vector) 
+\begin{DoxyParams}{Parameters}
+{\em uc\+\_\+turma} & name of \mbox{\hyperlink{class_u_c_turma}{UCTurma}} to look for \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pointer to uc\+\_\+turma 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_c_s_v_reader_a6828bb6be790a8ebbddb4ea66770a3a8}\label{class_c_s_v_reader_a6828bb6be790a8ebbddb4ea66770a3a8}} 
+\index{CSVReader@{CSVReader}!get\_student\_timetable@{get\_student\_timetable}}
+\index{get\_student\_timetable@{get\_student\_timetable}!CSVReader@{CSVReader}}
+\doxysubsubsection{\texorpdfstring{get\_student\_timetable()}{get\_student\_timetable()}}
+{\footnotesize\ttfamily list$<$ \mbox{\hyperlink{class_u_c_turma}{UCTurma}} $\ast$ $>$ CSVReader\+::get\+\_\+student\+\_\+timetable (\begin{DoxyParamCaption}\item[{unsigned}]{num }\end{DoxyParamCaption}) const}
+
+Get student\textquotesingle{}s timetable ~\newline
+Complexity\+: O(log(n)) (n = size of students BST) 
+\begin{DoxyParams}{Parameters}
+{\em num} & number of student \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+UCTurmas student is in 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_c_s_v_reader_a5e5a34b6acc7f301a451c9da465f0ad5}\label{class_c_s_v_reader_a5e5a34b6acc7f301a451c9da465f0ad5}} 
+\index{CSVReader@{CSVReader}!get\_studentnum\_per\_uc@{get\_studentnum\_per\_uc}}
+\index{get\_studentnum\_per\_uc@{get\_studentnum\_per\_uc}!CSVReader@{CSVReader}}
+\doxysubsubsection{\texorpdfstring{get\_studentnum\_per\_uc()}{get\_studentnum\_per\_uc()}}
+{\footnotesize\ttfamily int CSVReader\+::get\+\_\+studentnum\+\_\+per\+\_\+uc (\begin{DoxyParamCaption}\item[{string}]{uc }\end{DoxyParamCaption}) const}
+
+Obtain number of students enrolled in a given UC ~\newline
+Complexity\+: O(log(n) + k) (n = size of uc\+\_\+turmas vector, k = number of turmas in UC) 
+\begin{DoxyParams}{Parameters}
+{\em uc} & UC to check \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+number of students in UC 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_c_s_v_reader_ae68758438c5e2376bdddc6724b0b65ee}\label{class_c_s_v_reader_ae68758438c5e2376bdddc6724b0b65ee}} 
+\index{CSVReader@{CSVReader}!get\_turma\_timetable@{get\_turma\_timetable}}
+\index{get\_turma\_timetable@{get\_turma\_timetable}!CSVReader@{CSVReader}}
+\doxysubsubsection{\texorpdfstring{get\_turma\_timetable()}{get\_turma\_timetable()}}
+{\footnotesize\ttfamily vector$<$ pair$<$ string, \mbox{\hyperlink{class_slot}{Slot}} $>$ $>$ CSVReader\+::get\+\_\+turma\+\_\+timetable (\begin{DoxyParamCaption}\item[{string}]{turma }\end{DoxyParamCaption}) const}
+
+Obtain timetable for a given turma ~\newline
+Complexity\+: O(nk) (n = size of uc\+\_\+turmas vector, k = number of slots in \mbox{\hyperlink{class_u_c_turma}{UCTurma}}) 
+\begin{DoxyParams}{Parameters}
+{\em turma} & turma whose timetable to get \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+vector of pairs containing the slot\textquotesingle{}s UC and the slot itself 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_c_s_v_reader_aecde9144d7eb2f7c981050e5f42735fb}\label{class_c_s_v_reader_aecde9144d7eb2f7c981050e5f42735fb}} 
+\index{CSVReader@{CSVReader}!get\_uc\_timetable@{get\_uc\_timetable}}
+\index{get\_uc\_timetable@{get\_uc\_timetable}!CSVReader@{CSVReader}}
+\doxysubsubsection{\texorpdfstring{get\_uc\_timetable()}{get\_uc\_timetable()}}
+{\footnotesize\ttfamily vector$<$ pair$<$ string, \mbox{\hyperlink{class_slot}{Slot}} $>$ $>$ CSVReader\+::get\+\_\+uc\+\_\+timetable (\begin{DoxyParamCaption}\item[{string}]{uc }\end{DoxyParamCaption}) const}
+
+Obtain timetable for a given UC ~\newline
+Complexity\+: O(log(n) + km) (n = size of uc\+\_\+turmas vector, k = number of turmas in UC, m = number of slots in \mbox{\hyperlink{class_u_c_turma}{UCTurma}}) 
+\begin{DoxyParams}{Parameters}
+{\em uc} & UC to check \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+vector of pairs containing the slot\textquotesingle{}s turma and the slot itself 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_c_s_v_reader_adb002f30af057d2e5bf417c99fb90443}\label{class_c_s_v_reader_adb002f30af057d2e5bf417c99fb90443}} 
+\index{CSVReader@{CSVReader}!is\_balanced@{is\_balanced}}
+\index{is\_balanced@{is\_balanced}!CSVReader@{CSVReader}}
+\doxysubsubsection{\texorpdfstring{is\_balanced()}{is\_balanced()}}
+{\footnotesize\ttfamily bool CSVReader\+::is\+\_\+balanced (\begin{DoxyParamCaption}\item[{string}]{uc }\end{DoxyParamCaption}) const}
+
+Checks if a given UC is balanced ~\newline
+Complexity\+: O(log(n) + k) (n = size of uc\+\_\+turmas vector, k = number of turmas in UC) 
+\begin{DoxyParams}{Parameters}
+{\em uc} & UC to check \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if balanced, false otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_c_s_v_reader_aff4c4689b5978566da865c5b6fe07c0d}\label{class_c_s_v_reader_aff4c4689b5978566da865c5b6fe07c0d}} 
+\index{CSVReader@{CSVReader}!populate@{populate}}
+\index{populate@{populate}!CSVReader@{CSVReader}}
+\doxysubsubsection{\texorpdfstring{populate()}{populate()}}
+{\footnotesize\ttfamily bool CSVReader\+::populate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Populates the data structures with the info from classes.\+csv, classes\+\_\+per\+\_\+uc.\+csv and students\+\_\+classes.\+csv ~\newline
+Complexity\+: O(nlog(n)) (n = size of uc\+\_\+turmas vector) plus one call to \mbox{\hyperlink{class_c_s_v_reader_a6c52a77c1711559036c267e935431ef6}{read\+\_\+classes\+\_\+per\+\_\+uc()}}, \mbox{\hyperlink{class_c_s_v_reader_acadd08a00c5dd7e6dc090ed5f8a16d16}{read\+\_\+classes()}} and \mbox{\hyperlink{class_c_s_v_reader_a53d0250ed4d6d8126c13390d841adf73}{read\+\_\+students\+\_\+classes()}} each \begin{DoxyReturn}{Returns}
+0 if success, 1 otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_c_s_v_reader_acadd08a00c5dd7e6dc090ed5f8a16d16}\label{class_c_s_v_reader_acadd08a00c5dd7e6dc090ed5f8a16d16}} 
+\index{CSVReader@{CSVReader}!read\_classes@{read\_classes}}
+\index{read\_classes@{read\_classes}!CSVReader@{CSVReader}}
+\doxysubsubsection{\texorpdfstring{read\_classes()}{read\_classes()}}
+{\footnotesize\ttfamily int CSVReader\+::read\+\_\+classes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Loads values from classes.\+csv into the \mbox{\hyperlink{class_u_c_turma}{UCTurma}} vector belonging to the \mbox{\hyperlink{class_c_s_v_reader}{CSVReader}} object ~\newline
+Complexity\+: O(nlog(m)) (n = number of lines, m = size of uc\+\_\+turmas vector) \mbox{\Hypertarget{class_c_s_v_reader_a6c52a77c1711559036c267e935431ef6}\label{class_c_s_v_reader_a6c52a77c1711559036c267e935431ef6}} 
+\index{CSVReader@{CSVReader}!read\_classes\_per\_uc@{read\_classes\_per\_uc}}
+\index{read\_classes\_per\_uc@{read\_classes\_per\_uc}!CSVReader@{CSVReader}}
+\doxysubsubsection{\texorpdfstring{read\_classes\_per\_uc()}{read\_classes\_per\_uc()}}
+{\footnotesize\ttfamily int CSVReader\+::read\+\_\+classes\+\_\+per\+\_\+uc (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Loads values from classes\+\_\+per\+\_\+uc.\+csv into a vector of \mbox{\hyperlink{class_u_c_turma}{UCTurma}} objects ~\newline
+Complexity\+: O(n) (n = number of lines) \mbox{\Hypertarget{class_c_s_v_reader_a53d0250ed4d6d8126c13390d841adf73}\label{class_c_s_v_reader_a53d0250ed4d6d8126c13390d841adf73}} 
+\index{CSVReader@{CSVReader}!read\_students\_classes@{read\_students\_classes}}
+\index{read\_students\_classes@{read\_students\_classes}!CSVReader@{CSVReader}}
+\doxysubsubsection{\texorpdfstring{read\_students\_classes()}{read\_students\_classes()}}
+{\footnotesize\ttfamily int CSVReader\+::read\+\_\+students\+\_\+classes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Creates the set of students with the info on students\+\_\+classes.\+csv ~\newline
+Complexity\+: O(nlog(m)log(k)) (n = number of lines, m = size of uc\+\_\+turmas vector, k = size of student BST) \mbox{\Hypertarget{class_c_s_v_reader_acedc5f1a22863467e12a80389bb09b7d}\label{class_c_s_v_reader_acedc5f1a22863467e12a80389bb09b7d}} 
+\index{CSVReader@{CSVReader}!save\_uc\_changes@{save\_uc\_changes}}
+\index{save\_uc\_changes@{save\_uc\_changes}!CSVReader@{CSVReader}}
+\doxysubsubsection{\texorpdfstring{save\_uc\_changes()}{save\_uc\_changes()}}
+{\footnotesize\ttfamily void CSVReader\+::save\+\_\+uc\+\_\+changes (\begin{DoxyParamCaption}\item[{string}]{uc }\end{DoxyParamCaption})}
+
+Save changes made to uc in processed requests ~\newline
+Complexity\+: O(log(n) + k) (n = size of uc\+\_\+turmas vector, k = number of turmas in UC) 
+\begin{DoxyParams}{Parameters}
+{\em uc} & uc to alter \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Headers/CSVReader.\+h\item 
+Source/CSVReader.\+cpp\end{DoxyCompactItemize}
