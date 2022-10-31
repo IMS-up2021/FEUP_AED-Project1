@@ -70,7 +70,7 @@ void UCTurma::load_temp_num() {
 }
 
 /**
- * Resets temo_num for when request block is valid \n 
+ * Resets temp_num for when request block is valid \n
  * Complexity: O(1)
  */
 void UCTurma::reset_temp_num() {
