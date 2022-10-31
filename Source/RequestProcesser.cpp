@@ -5,10 +5,18 @@
 #include "../Headers/RequestProcesser.h"
 #include <algorithm>
 
+/**
+ * Adds list of requests to queue
+ * @param requests list of requests to add
+ */
 void RequestProcesser::add_request_list(list<Request> requests) {
     request_blocks.push(requests);
 }
 
+/**
+ * Processes next list of requests in queue
+ * @return 0 if success, 1 otherwise
+ */
 int RequestProcesser::process_next_request_block() {
     new_students = database->getStudents();
     list<Request> block = request_blocks.front();
@@ -80,6 +88,10 @@ int RequestProcesser::process_next_request_block() {
 
 RequestProcesser::RequestProcesser(CSVReader &reader): database(&reader) {}
 
+/**
+ * Checks for conflicts. To be called after processing a request block
+ * @return 0 if no conflicts, 1 if student timetable superposition, 2 if UC imbalance
+ */
 int RequestProcesser::check_for_problems() {
     for (unsigned num : affected_students) {
         auto it = new_students.find(Student(num));
