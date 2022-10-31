@@ -14,10 +14,14 @@ class RequestProcesser {
 private:
     queue<list<Request>> request_blocks;
     CSVReader* database;
+    set<string> affected_uc;
+    set<unsigned> affected_students;
+    set<Student> new_students;
 public:
     RequestProcesser(CSVReader& reader);
     void add_request_list(list<Request> requests);
     int process_next_request_block();
+    int check_for_problems();
     void save_changes() const;
 };
 

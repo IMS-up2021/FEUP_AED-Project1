@@ -6,6 +6,7 @@
 UCTurma::UCTurma(string uc, string turma) {
     uc_turma = {uc,turma};
     student_num = 0;
+    temp_num = -1;
 }
 
 bool UCTurma::operator<(UCTurma other) const {
@@ -41,4 +42,14 @@ int UCTurma::get_student_num() const {
 
 UCTurma::UCTurma(pair<string, string> uc_turma): uc_turma(uc_turma) {
     student_num = 0;
+    temp_num = -1;
+}
+
+void UCTurma::create_temp_num() {
+    if (temp_num == -1) temp_num = student_num;
+}
+
+void UCTurma::load_temp_num() {
+    student_num = temp_num;
+    temp_num = -1;
 }
