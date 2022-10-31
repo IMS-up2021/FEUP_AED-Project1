@@ -17,6 +17,7 @@ pair<string, string> UCTurma::get_uc_turma() const {return uc_turma;}
 
 /**
  * Adds Slot object to slots belonging to UCTurma
+ * Complexity: O(1)
  * @param slot Slot to be added
  */
 void UCTurma::add_slot(Slot slot) {
@@ -29,6 +30,7 @@ list<Slot> UCTurma::get_slots() const {
 
 /**
  * Increments or decrements the UCTurma's student number
+ * Complexity: O(1)
  * @param b true if increment, false if decrement
  * @return 1 if failure (decrement when student_num is 0), 0 otherwise
  */
@@ -52,6 +54,7 @@ UCTurma::UCTurma(pair<string, string> uc_turma): uc_turma(uc_turma) {
 
 /**
  * Saves current student_num for request processing
+ * Complexity: O(1)
  */
 void UCTurma::create_temp_num() {
     if (temp_num == -1) temp_num = student_num;
@@ -59,6 +62,7 @@ void UCTurma::create_temp_num() {
 
 /**
  * Loads old student_num back in for when request block is invalid
+ * Complexity: O(1)
  */
 void UCTurma::load_temp_num() {
     if (temp_num != -1) student_num = temp_num;
@@ -67,6 +71,7 @@ void UCTurma::load_temp_num() {
 
 /**
  * Resets temo_num for when request block is valid
+ * Complexity: O(1)
  */
 void UCTurma::reset_temp_num() {
     temp_num = -1;

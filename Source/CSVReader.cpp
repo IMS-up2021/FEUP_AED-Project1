@@ -24,6 +24,7 @@ bool exists_test0 (const std::string& name) {
 
 /**
  * Loads values from classes_per_uc.csv into a vector of UCTurma objects
+ * Complexity: O(n) (n = number of lines)
  */
 int CSVReader::read_classes_per_uc() {
 /*    ifstream in("Input/classes_per_uc.csv");
@@ -60,6 +61,7 @@ int CSVReader::read_classes_per_uc() {
 
 /**
  * Searches a pair of strings <uc,turma> in a vector of UCTurma objects
+ * Complexity: O(log(n)) (n = size of vector)
  * @param uc_turmas Vector of UCTurma objects to look in
  * @param uc_turma Pair of strings to find
  * @return Index of element with desired pair, -1 otherwise
@@ -81,6 +83,7 @@ int binarySearch(const vector<UCTurma>& uc_turmas, pair<string, string> uc_turma
 
 /**
  * Loads values from classes.csv into the UCTurma vector belonging to the CSVReader object
+ * Complexity: O(nlog(m)) (n = number of lines, m = size of uc_turmas vector)
  */
 int CSVReader::read_classes() {
     ifstream in("Input/classes.csv");
@@ -110,6 +113,7 @@ int CSVReader::read_classes() {
 
 /**
  * Creates the set of students with the info on students_classes.csv
+ * Complexity: O(nlog(m)log(k)) (n = number of lines, m = size of uc_turmas vector, k = size of student BST)
  */
 int CSVReader::read_students_classes() {
     ifstream in("Input/students_classes.csv");
@@ -150,6 +154,7 @@ int CSVReader::read_students_classes() {
 
 /**
  * Populates the data structures with the info from classes.csv, classes_per_uc.csv and students_classes.csv
+ * Complexity: O(nlog(n)) (n = size of uc_turmas vector) plus one call to read_classes_per_uc(), read_classes() and read_students_classes() each
  * @return 0 if success, 1 otherwise
  */
 bool CSVReader::populate() {
@@ -162,6 +167,7 @@ bool CSVReader::populate() {
 
 /**
  * Get student's timetable
+ * Complexity: O(log(n)) (n = size of students BST)
  * @param num number of student
  * @return UCTurmas student is in
  */
@@ -182,6 +188,7 @@ const set<Student> &CSVReader::getStudents() const {
 
 /**
  * Obtain timetable for a given UC
+ * Complexity: O(log(n) + km) (n = size of uc_turmas vector, k = number of turmas in UC, m = number of slots in UCTurma)
  * @param uc UC to check
  * @return vector of pairs containing the slot's turma and the slot itself
  */
@@ -198,6 +205,7 @@ vector<pair<string, Slot>> CSVReader::get_uc_timetable(string uc) const {
 
 /**
  * Obtain number of students enrolled in a given UC
+ * Complexity: O(log(n) + k) (n = size of uc_turmas vector, k = number of turmas in UC)
  * @param uc UC to check
  * @return number of students in UC
  */
@@ -214,6 +222,7 @@ int CSVReader::get_studentnum_per_uc(string uc) const {
 
 /**
  * Obtain timetable for a given turma
+ * Complexity: O(nk) (n = size of uc_turmas vector, k = number of slots in UCTurma)
  * @param turma turma whose timetable to get
  * @return vector of pairs containing the slot's UC and the slot itself
  */
@@ -229,6 +238,7 @@ vector<pair<string, Slot>> CSVReader::get_turma_timetable(string turma) const {
 
 /**
  * Checks if a given UC is balanced
+ * Complexity: O(log(n) + k) (n = size of uc_turmas vector, k = number of turmas in UC)
  * @param uc UC to check
  * @return true if balanced, false otherwise
  */
@@ -249,6 +259,7 @@ bool CSVReader::is_balanced(string uc) const {
 
 /**
  * Finds number of student by their name
+ * Complexity: O(n) (n = size of students BST)
  * @param name name of student to find
  * @return number of student
  */
@@ -261,6 +272,7 @@ unsigned CSVReader::find_student_num_by_name(string name) const {
 
 /**
  * Obtain pointer to desired UCTurma
+ * Complexity: O(log(n)) (n = size of uc_turmas vector)
  * @param uc_turma name of UCTurma to look for
  * @return pointer to uc_turma
  */
@@ -276,6 +288,7 @@ void CSVReader::set_students(set<Student> s) {
 
 /**
  * Save changes made to uc in processed requests
+ * Complexity: O(log(n) + k) (n = size of uc_turmas vector, k = number of turmas in UC)
  * @param uc uc to alter
  */
 void CSVReader::save_uc_changes(string uc) {
@@ -287,6 +300,7 @@ void CSVReader::save_uc_changes(string uc) {
 
 /**
  * Discard changes made to uc in processed requests
+ * Complexity: O(log(n) + k) (n = size of uc_turmas vector, k = number of turmas in UC)
  * @param uc uc to restore
  */
 void CSVReader::discard_uc_changes(string uc) {
