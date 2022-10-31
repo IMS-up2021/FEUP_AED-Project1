@@ -314,6 +314,7 @@ void CSVReader::discard_uc_changes(string uc) {
 
 /**
  * Get Student by their number
+ * Complexity: O(log(n)) (n = size of students BST)
  * @param num number to find
  * @return empty student if not found, desired Student otherwise
  */
