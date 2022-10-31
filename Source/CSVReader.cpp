@@ -311,3 +311,14 @@ void CSVReader::discard_uc_changes(string uc) {
         it++;
     }
 }
+
+/**
+ * Get Student by their number
+ * @param num number to find
+ * @return empty student if not found, desired Student otherwise
+ */
+Student CSVReader::get_student_by_num(unsigned int num) const {
+    auto it = students.find(Student(num));
+    if (it == students.end()) return Student();
+    else return (*it);
+}
