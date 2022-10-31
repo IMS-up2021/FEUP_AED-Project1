@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.5"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>AEDOutro: CSVReader Class Reference</title>
+<title>My Project: CSVReader Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,7 +21,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">AEDOutro
+   <div id="projectname">My Project
    </div>
   </td>
  </tr>
@@ -110,6 +110,8 @@ const set&lt; <a class="el" href="class_student.html">Student</a> &gt; &amp;&#16
 <tr class="separator:adb002f30af057d2e5bf417c99fb90443"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a84dce6c7383d5b115c723616c4258300"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_s_v_reader.html#a84dce6c7383d5b115c723616c4258300">find_student_num_by_name</a> (string name) const</td></tr>
 <tr class="separator:a84dce6c7383d5b115c723616c4258300"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30f545e2a60e416954251ce797b3e92b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_student.html">Student</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_s_v_reader.html#a30f545e2a60e416954251ce797b3e92b">get_student_by_num</a> (unsigned num) const</td></tr>
+<tr class="separator:a30f545e2a60e416954251ce797b3e92b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2d4aea2929ff8c93680684f6c6a35f81"><td class="memItemLeft" align="right" valign="top"><a id="a2d4aea2929ff8c93680684f6c6a35f81" name="a2d4aea2929ff8c93680684f6c6a35f81"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>set_students</b> (set&lt; <a class="el" href="class_student.html">Student</a> &gt; s)</td></tr>
 <tr class="separator:a2d4aea2929ff8c93680684f6c6a35f81"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -130,7 +132,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>set_students</b> (set
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Discard changes made to uc in processed requests </p><dl class="params"><dt>Parameters</dt><dd>
+<p >Discard changes made to uc in processed requests <br  />
+Complexity: O(log(n) + k) (n = size of uc_turmas vector, k = number of turmas in UC) </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">uc</td><td>uc to restore </td></tr>
   </table>
@@ -154,7 +157,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>set_students</b> (set
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Finds number of student by their name </p><dl class="params"><dt>Parameters</dt><dd>
+<p >Finds number of student by their name <br  />
+Complexity: O(n) (n = size of students BST) </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">name</td><td>name of student to find </td></tr>
   </table>
@@ -179,13 +183,39 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>set_students</b> (set
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Obtain pointer to desired <a class="el" href="class_u_c_turma.html">UCTurma</a> </p><dl class="params"><dt>Parameters</dt><dd>
+<p >Obtain pointer to desired <a class="el" href="class_u_c_turma.html">UCTurma</a> <br  />
+Complexity: O(log(n)) (n = size of uc_turmas vector) </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">uc_turma</td><td>name of <a class="el" href="class_u_c_turma.html">UCTurma</a> to look for </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>pointer to uc_turma </dd></dl>
+
+</div>
+</div>
+<a id="a30f545e2a60e416954251ce797b3e92b" name="a30f545e2a60e416954251ce797b3e92b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a30f545e2a60e416954251ce797b3e92b">&#9670;&#160;</a></span>get_student_by_num()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_student.html">Student</a> CSVReader::get_student_by_num </td>
+          <td>(</td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>num</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Get <a class="el" href="class_student.html">Student</a> by their number </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">num</td><td>number to find </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>empty student if not found, desired <a class="el" href="class_student.html">Student</a> otherwise </dd></dl>
 
 </div>
 </div>
@@ -204,7 +234,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>set_students</b> (set
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Get student's timetable </p><dl class="params"><dt>Parameters</dt><dd>
+<p >Get student's timetable <br  />
+Complexity: O(log(n)) (n = size of students BST) </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">num</td><td>number of student </td></tr>
   </table>
@@ -229,7 +260,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>set_students</b> (set
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Obtain number of students enrolled in a given UC </p><dl class="params"><dt>Parameters</dt><dd>
+<p >Obtain number of students enrolled in a given UC <br  />
+Complexity: O(log(n) + k) (n = size of uc_turmas vector, k = number of turmas in UC) </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">uc</td><td>UC to check </td></tr>
   </table>
@@ -254,7 +286,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>set_students</b> (set
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Obtain timetable for a given turma </p><dl class="params"><dt>Parameters</dt><dd>
+<p >Obtain timetable for a given turma <br  />
+Complexity: O(nk) (n = size of uc_turmas vector, k = number of slots in <a class="el" href="class_u_c_turma.html">UCTurma</a>) </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">turma</td><td>turma whose timetable to get </td></tr>
   </table>
@@ -279,7 +312,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>set_students</b> (set
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Obtain timetable for a given UC </p><dl class="params"><dt>Parameters</dt><dd>
+<p >Obtain timetable for a given UC <br  />
+Complexity: O(log(n) + km) (n = size of uc_turmas vector, k = number of turmas in UC, m = number of slots in <a class="el" href="class_u_c_turma.html">UCTurma</a>) </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">uc</td><td>UC to check </td></tr>
   </table>
@@ -304,7 +338,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>set_students</b> (set
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Checks if a given UC is balanced </p><dl class="params"><dt>Parameters</dt><dd>
+<p >Checks if a given UC is balanced <br  />
+Complexity: O(log(n) + k) (n = size of uc_turmas vector, k = number of turmas in UC) </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">uc</td><td>UC to check </td></tr>
   </table>
@@ -328,7 +363,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>set_students</b> (set
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Populates the data structures with the info from classes.csv, classes_per_uc.csv and students_classes.csv </p><dl class="section return"><dt>Returns</dt><dd>0 if success, 1 otherwise </dd></dl>
+<p >Populates the data structures with the info from classes.csv, classes_per_uc.csv and students_classes.csv <br  />
+Complexity: O(nlog(n)) (n = size of uc_turmas vector) plus one call to <a class="el" href="class_c_s_v_reader.html#a6c52a77c1711559036c267e935431ef6">read_classes_per_uc()</a>, <a class="el" href="class_c_s_v_reader.html#acadd08a00c5dd7e6dc090ed5f8a16d16">read_classes()</a> and <a class="el" href="class_c_s_v_reader.html#a53d0250ed4d6d8126c13390d841adf73">read_students_classes()</a> each </p><dl class="section return"><dt>Returns</dt><dd>0 if success, 1 otherwise </dd></dl>
 
 </div>
 </div>
@@ -346,7 +382,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>set_students</b> (set
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Loads values from classes.csv into the <a class="el" href="class_u_c_turma.html">UCTurma</a> vector belonging to the <a class="el" href="class_c_s_v_reader.html">CSVReader</a> object </p>
+<p >Loads values from classes.csv into the <a class="el" href="class_u_c_turma.html">UCTurma</a> vector belonging to the <a class="el" href="class_c_s_v_reader.html">CSVReader</a> object <br  />
+Complexity: O(nlog(m)) (n = number of lines, m = size of uc_turmas vector) </p>
 
 </div>
 </div>
@@ -364,7 +401,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>set_students</b> (set
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Loads values from classes_per_uc.csv into a vector of <a class="el" href="class_u_c_turma.html">UCTurma</a> objects </p>
+<p >Loads values from classes_per_uc.csv into a vector of <a class="el" href="class_u_c_turma.html">UCTurma</a> objects <br  />
+Complexity: O(n) (n = number of lines) </p>
 
 </div>
 </div>
@@ -382,7 +420,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>set_students</b> (set
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Creates the set of students with the info on students_classes.csv </p>
+<p >Creates the set of students with the info on students_classes.csv <br  />
+Complexity: O(nlog(m)log(k)) (n = number of lines, m = size of uc_turmas vector, k = size of student BST) </p>
 
 </div>
 </div>
@@ -401,7 +440,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>set_students</b> (set
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Save changes made to uc in processed requests </p><dl class="params"><dt>Parameters</dt><dd>
+<p >Save changes made to uc in processed requests <br  />
+Complexity: O(log(n) + k) (n = size of uc_turmas vector, k = number of turmas in UC) </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">uc</td><td>uc to alter </td></tr>
   </table>

@@ -12,7 +12,7 @@ Student::Student() {}
 
 Student::Student(unsigned num): num(num) {}
 /**
- * Adds UCTurma to Student via reference
+ * Adds UCTurma to Student via reference \n
  * Complexity: O(1)
  * @param uc_turma UCTurma to be added
  */
@@ -30,7 +30,7 @@ list<UCTurma*> Student::get_timetable() const {
 }
 
 /**
- * Check if the Student has an invalid superposition (TP with PL, TP with TP, PL with PL)
+ * Check if the Student has an invalid superposition (TP with PL, TP with TP, PL with PL) \n
  * Complexity: O(nklog(nk)) (n = number of UCTurmas in student, k = number of slots per UCTurma)
  * @return true if conflict, false otherwise
  */
@@ -43,7 +43,7 @@ bool Student::timetable_has_conflict() const {
             slots.push_back(slot);
         }
     }
-    if (slots.size() == 0) return true;
+    if (slots.size() == 0) return false;
     sort(slots.begin(), slots.end());
     float end = (slots[0].get_end());
     string day = slots[0].getDay();
@@ -87,12 +87,11 @@ void Student::set_timetable(list<UCTurma *> l) const{
 }
 
 /**
- * Adds UCTurma to Student via pointer
+ * Adds UCTurma to Student via pointer, doesn't increment UCTurma's student_num \n
  * Complexity: O(1)
  * @param uc_turma pointer to add
  */
 void Student::add_uc_turma_pointer(UCTurma *uc_turma) const {
     uc_turmas.push_back(uc_turma);
-    (*uc_turma).add_remove_student(true);
 }
 

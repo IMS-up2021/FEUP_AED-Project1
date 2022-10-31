@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.5"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>AEDOutro: Student Class Reference</title>
+<title>My Project: Student Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,7 +21,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">AEDOutro
+   <div id="projectname">My Project
    </div>
   </td>
  </tr>
@@ -122,7 +122,8 @@ unsigned&#160;</td><td class="memItemRight" valign="bottom"><b>get_num</b> () co
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Adds <a class="el" href="class_u_c_turma.html">UCTurma</a> to <a class="el" href="class_student.html">Student</a> via reference </p><dl class="params"><dt>Parameters</dt><dd>
+<p >Adds <a class="el" href="class_u_c_turma.html">UCTurma</a> to <a class="el" href="class_student.html">Student</a> via reference <br  />
+Complexity: O(1) </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">uc_turma</td><td><a class="el" href="class_u_c_turma.html">UCTurma</a> to be added </td></tr>
   </table>
@@ -146,7 +147,8 @@ unsigned&#160;</td><td class="memItemRight" valign="bottom"><b>get_num</b> () co
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Adds <a class="el" href="class_u_c_turma.html">UCTurma</a> to <a class="el" href="class_student.html">Student</a> via pointer </p><dl class="params"><dt>Parameters</dt><dd>
+<p >Adds <a class="el" href="class_u_c_turma.html">UCTurma</a> to <a class="el" href="class_student.html">Student</a> via pointer, doesn't increment <a class="el" href="class_u_c_turma.html">UCTurma</a>'s student_num <br  />
+Complexity: O(1) </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">uc_turma</td><td>pointer to add </td></tr>
   </table>
@@ -169,7 +171,8 @@ unsigned&#160;</td><td class="memItemRight" valign="bottom"><b>get_num</b> () co
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Check if the <a class="el" href="class_student.html">Student</a> has an invalid superposition (TP with PL, TP with TP, PL with PL) </p><dl class="section return"><dt>Returns</dt><dd>true if conflict, false otherwise </dd></dl>
+<p >Check if the <a class="el" href="class_student.html">Student</a> has an invalid superposition (TP with PL, TP with TP, PL with PL) <br  />
+Complexity: O(nklog(nk)) (n = number of UCTurmas in student, k = number of slots per <a class="el" href="class_u_c_turma.html">UCTurma</a>) </p><dl class="section return"><dt>Returns</dt><dd>true if conflict, false otherwise </dd></dl>
 
 </div>
 </div>
