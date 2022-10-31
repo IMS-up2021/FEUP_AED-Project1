@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.5"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>AEDOutro: RequestProcesser Class Reference</title>
+<title>My Project: RequestProcesser Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,7 +21,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">AEDOutro
+   <div id="projectname">My Project
    </div>
   </td>
  </tr>
@@ -108,7 +108,8 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Adds list of requests to queue </p><dl class="params"><dt>Parameters</dt><dd>
+<p >Adds list of requests to queue <br  />
+Complexity: O(1) </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">requests</td><td>list of requests to add </td></tr>
   </table>
@@ -131,7 +132,8 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Checks for conflicts. To be called after processing a request block </p><dl class="section return"><dt>Returns</dt><dd>0 if no conflicts, 1 if student timetable superposition, 2 if UC imbalance (1 has priority over 2) </dd></dl>
+<p >Checks for conflicts. To be called after processing a request block <br  />
+Complexity: O(mnklog(nk)) (m = size of affected_students, n = number of UCTurmas in student, k = number of slots per <a class="el" href="class_u_c_turma.html">UCTurma</a>) </p><dl class="section return"><dt>Returns</dt><dd>0 if no conflicts, 1 if student timetable superposition, 2 if UC imbalance (1 has priority over 2) </dd></dl>
 
 </div>
 </div>
@@ -149,7 +151,8 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Discards changes made in requests processed since last call to <a class="el" href="class_request_processer.html#a130e7812ea0d3d02201c7d6d1901dd56">save_changes()</a> or <a class="el" href="class_request_processer.html#a12465643573a97b7b7d00173d3926c4a">discard_changes()</a> </p>
+<p >Discards changes made in requests processed since last call to <a class="el" href="class_request_processer.html#a130e7812ea0d3d02201c7d6d1901dd56">save_changes()</a> or <a class="el" href="class_request_processer.html#a12465643573a97b7b7d00173d3926c4a">discard_changes()</a> <br  />
+Complexity: O(nk) (n = size of affected_uc, k = number of turmas per UC) </p>
 
 </div>
 </div>
@@ -167,7 +170,8 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Processes next list of requests in queue </p><dl class="section return"><dt>Returns</dt><dd>0 if success, 1 otherwise </dd></dl>
+<p >Processes next list of requests in queue <br  />
+Complexity: O(nlog(m)qlog(p)) (n = numner of requests, m = size of student BST, q = number of UCTurmas in student, p = size of affected_uc) </p><dl class="section return"><dt>Returns</dt><dd>0 if success, 1 otherwise </dd></dl>
 
 </div>
 </div>
@@ -185,7 +189,8 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Saves changes made in requests processed since last call to <a class="el" href="class_request_processer.html#a130e7812ea0d3d02201c7d6d1901dd56">save_changes()</a> or <a class="el" href="class_request_processer.html#a12465643573a97b7b7d00173d3926c4a">discard_changes()</a> </p>
+<p >Saves changes made in requests processed since last call to <a class="el" href="class_request_processer.html#a130e7812ea0d3d02201c7d6d1901dd56">save_changes()</a> or <a class="el" href="class_request_processer.html#a12465643573a97b7b7d00173d3926c4a">discard_changes()</a> <br  />
+Complexity: O(nk) (n = size of affected_uc, k = number of turmas per UC) </p>
 
 </div>
 </div>

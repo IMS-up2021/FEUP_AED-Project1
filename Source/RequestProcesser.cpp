@@ -6,7 +6,7 @@
 #include <algorithm>
 
 /**
- * Adds list of requests to queue
+ * Adds list of requests to queue \n
  * Complexity: O(1)
  * @param requests list of requests to add
  */
@@ -15,9 +15,9 @@ void RequestProcesser::add_request_list(list<Request> requests) {
 }
 
 /**
- * Processes next list of requests in queue
- * @return 0 if success, 1 otherwise
+ * Processes next list of requests in queue \n
  * Complexity: O(nlog(m)qlog(p)) (n = numner of requests, m = size of student BST, q = number of UCTurmas in student, p = size of affected_uc)
+ * @return 0 if success, 1 otherwise
  */
 int RequestProcesser::process_next_request_block() {
     new_students = database->getStudents();
@@ -91,7 +91,7 @@ int RequestProcesser::process_next_request_block() {
 RequestProcesser::RequestProcesser(CSVReader &reader): database(&reader) {}
 
 /**
- * Checks for conflicts. To be called after processing a request block
+ * Checks for conflicts. To be called after processing a request block \n
  * Complexity: O(mnklog(nk)) (m = size of affected_students, n = number of UCTurmas in student, k = number of slots per UCTurma)
  * @return 0 if no conflicts, 1 if student timetable superposition, 2 if UC imbalance (1 has priority over 2)
  */
@@ -107,7 +107,7 @@ int RequestProcesser::check_for_problems() {
 }
 
 /**
- * Saves changes made in requests processed since last call to save_changes() or discard_changes()
+ * Saves changes made in requests processed since last call to save_changes() or discard_changes() \n
  * Complexity: O(nk) (n = size of affected_uc, k = number of turmas per UC)
  */
 void RequestProcesser::save_changes() {
@@ -121,7 +121,7 @@ void RequestProcesser::save_changes() {
 }
 
 /**
- * Discards changes made in requests processed since last call to save_changes() or discard_changes()
+ * Discards changes made in requests processed since last call to save_changes() or discard_changes() \n
  * Complexity: O(nk) (n = size of affected_uc, k = number of turmas per UC)
  */
 void RequestProcesser::discard_changes() {
