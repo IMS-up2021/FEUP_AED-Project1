@@ -35,7 +35,8 @@ list<Slot> UCTurma::get_slots() const {
  * @return 1 if failure (decrement when student_num is 0, increment when student_num is TURMA_CAP), 0 otherwise
  */
 int UCTurma::add_remove_student(bool b) {
-    if (student_num == 0 || student_num == TURMA_CAP) return 1;
+    if (student_num == 0 && !b) return 1;
+    else if (student_num == TURMA_CAP && b) return 1;
     else if (b) {student_num++; return 0;}
     else {
         student_num--;

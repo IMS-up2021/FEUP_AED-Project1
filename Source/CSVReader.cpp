@@ -295,6 +295,7 @@ void CSVReader::save_uc_changes(string uc) {
     auto it = lower_bound(uc_turmas.begin(), uc_turmas.end(), UCTurma(uc,""));
     while ((*it).get_uc_turma().first == uc) {
         (*it).reset_temp_num();
+        it++;
     }
 }
 
@@ -307,5 +308,6 @@ void CSVReader::discard_uc_changes(string uc) {
     auto it = lower_bound(uc_turmas.begin(), uc_turmas.end(), UCTurma(uc,""));
     while ((*it).get_uc_turma().first == uc) {
         (*it).load_temp_num();
+        it++;
     }
 }

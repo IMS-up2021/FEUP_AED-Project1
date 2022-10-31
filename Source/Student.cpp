@@ -43,7 +43,7 @@ bool Student::timetable_has_conflict() const {
             slots.push_back(slot);
         }
     }
-    if (slots.size() == 0) return true;
+    if (slots.size() == 0) return false;
     sort(slots.begin(), slots.end());
     float end = (slots[0].get_end());
     string day = slots[0].getDay();
