@@ -15,8 +15,9 @@ private:
     queue<list<Request>> request_blocks;
     CSVReader* database;
 public:
+    RequestProcesser(CSVReader& reader);
     void add_request_list(list<Request> requests);
-    void process_next_request_block();
+    int process_next_request_block();
     void save_changes() const;
 };
 

@@ -17,12 +17,12 @@ private:
     int student_num;
 public:
     UCTurma(string uc, string turma);
+    UCTurma(pair<string, string> uc_turma);
     bool operator<(UCTurma other) const;
     pair<string,string> get_uc_turma() const;
     void add_slot(Slot slot);
     list<Slot> get_slots() const;
-    void add_student();
-    void remove_student();
+    int add_remove_student(bool b);
     int get_student_num() const;
 };
 

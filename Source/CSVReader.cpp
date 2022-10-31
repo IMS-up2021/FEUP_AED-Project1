@@ -228,3 +228,17 @@ unsigned CSVReader::find_student_num_by_name(string name) const {
     }
     return 1;
 }
+
+vector<UCTurma *> CSVReader::get_uc_turma_pointers() const {
+    vector<UCTurma*> ret;
+    for (UCTurma uc_turma : uc_turmas) {
+        ret.push_back(&uc_turma);
+    }
+    return ret;
+}
+
+UCTurma *CSVReader::get_pointer_to_uc_turma(pair<string, string> uc_turma) {
+    int search = binarySearch(uc_turmas, uc_turma);
+    if (search == -1) return nullptr;
+    else return &uc_turmas[search];
+}

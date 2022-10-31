@@ -16,6 +16,10 @@ private:
     pair<string, string> uc_turma;
 public:
     Request(string type, unsigned target_student, string uc, string turma);
+    string get_type() const;
+    unsigned get_target_student() const;
+    pair<string, string> get_uc_turma() const;
+
 };
 
 #endif //AEDOUTRO_REQUEST_H

@@ -21,6 +21,7 @@ public:
     vector<pair<string,Slot>> get_turma_timetable(string turma) const;
     int get_studentnum_per_uc(string uc) const;
     const vector<UCTurma> &getUcTurmas() const;
+    UCTurma* get_pointer_to_uc_turma(pair<string, string> uc_turma);
     const set<Student> &getStudents() const;
     bool is_balanced(string uc) const;
     unsigned find_student_num_by_name(string name) const;

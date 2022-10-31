@@ -55,6 +55,7 @@ int Slot::get_day_num() const {
     else if (day == "Friday") return 4;
     else if (day == "Saturday") return 5;
     else if (day == "Sunday") return 6;
+    else return -1;
 }
 
 float Slot::get_end() const {

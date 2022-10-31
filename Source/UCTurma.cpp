@@ -26,14 +26,19 @@ list<Slot> UCTurma::get_slots() const {
     return slots;
 }
 
-void UCTurma::add_student() {
-    student_num++;
-}
-
-void UCTurma::remove_student() {
-    student_num--;
+int UCTurma::add_remove_student(bool b) {
+    if (b) {student_num++; return 0;}
+    else if (student_num == 0) return 1;
+    else {
+        student_num--;
+        return 0;
+    }
 }
 
 int UCTurma::get_student_num() const {
     return student_num;
+}
+
+UCTurma::UCTurma(pair<string, string> uc_turma): uc_turma(uc_turma) {
+    student_num = 0;
 }

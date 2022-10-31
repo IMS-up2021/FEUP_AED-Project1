@@ -15,9 +15,9 @@ Student::Student(unsigned num): num(num) {}
  * Adds UCTurma object to list of UCTurmas belonging to Student
  * @param uc_turma UCTurma to be added
  */
-void Student::add_uc_turma(UCTurma &uc_turma) {
+void Student::add_uc_turma(UCTurma &uc_turma) const{
     uc_turmas.emplace_back(&uc_turma);
-    uc_turma.add_student();
+    uc_turma.add_remove_student(true);
 }
 
 bool Student::operator<(Student other) const {
@@ -74,5 +74,14 @@ string Student::get_name() const {
 
 unsigned Student::get_num() const {
     return num;
+}
+
+void Student::set_timetable(list<UCTurma *> l) const{
+    uc_turmas = l;
+}
+
+void Student::add_uc_turma_pointer(UCTurma *uc_turma) const {
+    uc_turmas.push_back(uc_turma);
+    (*uc_turma).add_remove_student(true);
 }
 
