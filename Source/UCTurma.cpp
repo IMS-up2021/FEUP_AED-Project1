@@ -27,6 +27,11 @@ list<Slot> UCTurma::get_slots() const {
     return slots;
 }
 
+/**
+ * Increments or decrements the UCTurma's student number
+ * @param b true if increment, false if decrement
+ * @return 1 if failure (decrement when student_num is 0), 0 otherwise
+ */
 int UCTurma::add_remove_student(bool b) {
     if (b) {student_num++; return 0;}
     else if (student_num == 0) return 1;
@@ -45,10 +50,16 @@ UCTurma::UCTurma(pair<string, string> uc_turma): uc_turma(uc_turma) {
     temp_num = -1;
 }
 
+/**
+ * Saves current student_num for request processing
+ */
 void UCTurma::create_temp_num() {
     if (temp_num == -1) temp_num = student_num;
 }
 
+/**
+ * Loads old student_num back in for when request block is invalid
+ */
 void UCTurma::load_temp_num() {
     student_num = temp_num;
     temp_num = -1;
