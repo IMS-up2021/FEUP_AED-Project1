@@ -47,6 +47,10 @@ bool Slot::operator>(Slot other ) const {
     }
 }
 
+/**
+ * Turns the slot's week day into a number (0 for Monday, 1 for Tuesday, etc)
+ * @return day number
+ */
 int Slot::get_day_num() const {
     if (day == "Monday") return 0;
     else if (day == "Tuesday") return 1;
@@ -55,6 +59,7 @@ int Slot::get_day_num() const {
     else if (day == "Friday") return 4;
     else if (day == "Saturday") return 5;
     else if (day == "Sunday") return 6;
+    else return -1;
 }
 
 float Slot::get_end() const {

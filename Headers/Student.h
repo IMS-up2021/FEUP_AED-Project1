@@ -12,9 +12,11 @@ public:
     Student(string name, unsigned num);
     Student(unsigned num);
     Student();
-    void add_uc_turma(UCTurma &uc_turma);
+    void add_uc_turma(UCTurma &uc_turma) const;
+    void add_uc_turma_pointer(UCTurma* uc_turma) const;
     bool operator<(Student other) const;
     list<UCTurma*> get_timetable() const;
+    void set_timetable(list<UCTurma*> l) const;
     bool timetable_has_conflict() const;
     string get_name() const;
     unsigned get_num() const;

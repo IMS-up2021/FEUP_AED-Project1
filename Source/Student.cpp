@@ -12,12 +12,12 @@ Student::Student() {}
 
 Student::Student(unsigned num): num(num) {}
 /**
- * Adds UCTurma object to list of UCTurmas belonging to Student
+ * Adds UCTurma to Student via reference
  * @param uc_turma UCTurma to be added
  */
-void Student::add_uc_turma(UCTurma &uc_turma) {
+void Student::add_uc_turma(UCTurma &uc_turma) const{
     uc_turmas.emplace_back(&uc_turma);
-    uc_turma.add_student();
+    uc_turma.add_remove_student(true);
 }
 
 bool Student::operator<(Student other) const {
@@ -28,6 +28,10 @@ list<UCTurma*> Student::get_timetable() const {
     return uc_turmas;
 }
 
+/**
+ * Check if the Student has an invalid superposition (TP with PL, TP with TP, PL with PL)
+ * @return true if conflict, false otherwise
+ */
 bool Student::timetable_has_conflict() const {
     vector<Slot> slots;
     bool has_tp = false;
@@ -74,5 +78,18 @@ string Student::get_name() const {
 
 unsigned Student::get_num() const {
     return num;
+}
+
+void Student::set_timetable(list<UCTurma *> l) const{
+    uc_turmas = l;
+}
+
+/**
+ * Adds UCTurma to Student via pointer
+ * @param uc_turma pointer to add
+ */
+void Student::add_uc_turma_pointer(UCTurma *uc_turma) const {
+    uc_turmas.push_back(uc_turma);
+    (*uc_turma).add_remove_student(true);
 }
 

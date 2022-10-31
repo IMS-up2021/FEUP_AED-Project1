@@ -160,6 +160,11 @@ bool CSVReader::populate() {
     return (read1 == 0 && read2 == 0 && read3 == 0);
 }
 
+/**
+ * Get student's timetable
+ * @param num number of student
+ * @return UCTurmas student is in
+ */
 list<UCTurma*> CSVReader::get_student_timetable(unsigned num) const {
     Student target = Student(num);
     auto it = students.find(target);
@@ -175,6 +180,11 @@ const set<Student> &CSVReader::getStudents() const {
     return students;
 }
 
+/**
+ * Obtain timetable for a given UC
+ * @param uc UC to check
+ * @return vector of pairs containing the slot's turma and the slot itself
+ */
 vector<pair<string, Slot>> CSVReader::get_uc_timetable(string uc) const {
     UCTurma target = UCTurma(uc, "");
     auto it = lower_bound(uc_turmas.begin(), uc_turmas.end(), target);
@@ -186,6 +196,11 @@ vector<pair<string, Slot>> CSVReader::get_uc_timetable(string uc) const {
     return ret;
 }
 
+/**
+ * Obtain number of students enrolled in a given UC
+ * @param uc UC to check
+ * @return number of students in UC
+ */
 int CSVReader::get_studentnum_per_uc(string uc) const {
     UCTurma target = UCTurma(uc, "");
     int ret = 0;
@@ -197,6 +212,11 @@ int CSVReader::get_studentnum_per_uc(string uc) const {
     return ret;
 }
 
+/**
+ * Obtain timetable for a given turma
+ * @param turma turma whose timetable to get
+ * @return vector of pairs containing the slot's UC and the slot itself
+ */
 vector<pair<string, Slot>> CSVReader::get_turma_timetable(string turma) const {
     vector<pair<string, Slot>> ret;
     for (const UCTurma& uc_turma : uc_turmas) {
@@ -207,6 +227,11 @@ vector<pair<string, Slot>> CSVReader::get_turma_timetable(string turma) const {
     return ret;
 }
 
+/**
+ * Checks if a given UC is balanced
+ * @param uc UC to check
+ * @return true if balanced, false otherwise
+ */
 bool CSVReader::is_balanced(string uc) const {
     UCTurma target = UCTurma(uc, "");
     int min = INT32_MAX;
@@ -222,9 +247,51 @@ bool CSVReader::is_balanced(string uc) const {
     return (max-min) < 4;
 }
 
+/**
+ * Finds number of student by their name
+ * @param name name of student to find
+ * @return number of student
+ */
 unsigned CSVReader::find_student_num_by_name(string name) const {
     for (const Student& student : students) {
         if (student.get_name() == name) return student.get_num();
     }
     return 1;
+}
+
+/**
+ * Obtain pointer to desired UCTurma
+ * @param uc_turma name of UCTurma to look for
+ * @return pointer to uc_turma
+ */
+UCTurma *CSVReader::get_pointer_to_uc_turma(pair<string, string> uc_turma) {
+    int search = binarySearch(uc_turmas, uc_turma);
+    if (search == -1) return nullptr;
+    else return &uc_turmas[search];
+}
+
+void CSVReader::set_students(set<Student> s) {
+    students = s;
+}
+
+/**
+ * Save changes made to uc in processed requests
+ * @param uc uc to alter
+ */
+void CSVReader::save_uc_changes(string uc) {
+    auto it = lower_bound(uc_turmas.begin(), uc_turmas.end(), UCTurma(uc,""));
+    while ((*it).get_uc_turma().first == uc) {
+        (*it).reset_temp_num();
+    }
+}
+
+/**
+ * Discard changes made to uc in processed requests
+ * @param uc uc to restore
+ */
+void CSVReader::discard_uc_changes(string uc) {
+    auto it = lower_bound(uc_turmas.begin(), uc_turmas.end(), UCTurma(uc,""));
+    while ((*it).get_uc_turma().first == uc) {
+        (*it).load_temp_num();
+    }
 }
