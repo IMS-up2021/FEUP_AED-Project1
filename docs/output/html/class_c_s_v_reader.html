@@ -102,12 +102,43 @@ const vector&lt; <a class="el" href="class_u_c_turma.html">UCTurma</a> &gt; &amp
 <tr class="memitem:ad5282145f8ad24bba75519bfbf974d83"><td class="memItemLeft" align="right" valign="top"><a id="ad5282145f8ad24bba75519bfbf974d83" name="ad5282145f8ad24bba75519bfbf974d83"></a>
 const set&lt; <a class="el" href="class_student.html">Student</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getStudents</b> () const</td></tr>
 <tr class="separator:ad5282145f8ad24bba75519bfbf974d83"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acedc5f1a22863467e12a80389bb09b7d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_s_v_reader.html#acedc5f1a22863467e12a80389bb09b7d">save_uc_changes</a> (string uc)</td></tr>
+<tr class="separator:acedc5f1a22863467e12a80389bb09b7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14d11cd16aed99e910c25bccdf8cf42f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_s_v_reader.html#a14d11cd16aed99e910c25bccdf8cf42f">discard_uc_changes</a> (string uc)</td></tr>
+<tr class="separator:a14d11cd16aed99e910c25bccdf8cf42f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adb002f30af057d2e5bf417c99fb90443"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_s_v_reader.html#adb002f30af057d2e5bf417c99fb90443">is_balanced</a> (string uc) const</td></tr>
 <tr class="separator:adb002f30af057d2e5bf417c99fb90443"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a84dce6c7383d5b115c723616c4258300"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_s_v_reader.html#a84dce6c7383d5b115c723616c4258300">find_student_num_by_name</a> (string name) const</td></tr>
 <tr class="separator:a84dce6c7383d5b115c723616c4258300"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d4aea2929ff8c93680684f6c6a35f81"><td class="memItemLeft" align="right" valign="top"><a id="a2d4aea2929ff8c93680684f6c6a35f81" name="a2d4aea2929ff8c93680684f6c6a35f81"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>set_students</b> (set&lt; <a class="el" href="class_student.html">Student</a> &gt; s)</td></tr>
+<tr class="separator:a2d4aea2929ff8c93680684f6c6a35f81"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a14d11cd16aed99e910c25bccdf8cf42f" name="a14d11cd16aed99e910c25bccdf8cf42f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a14d11cd16aed99e910c25bccdf8cf42f">&#9670;&#160;</a></span>discard_uc_changes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CSVReader::discard_uc_changes </td>
+          <td>(</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>uc</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Discard changes made to uc in processed requests </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">uc</td><td>uc to restore </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a84dce6c7383d5b115c723616c4258300" name="a84dce6c7383d5b115c723616c4258300"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a84dce6c7383d5b115c723616c4258300">&#9670;&#160;</a></span>find_student_num_by_name()</h2>
 
@@ -148,7 +179,7 @@ const set&lt; <a class="el" href="class_student.html">Student</a> &gt; &amp;&#16
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Obtain pointer to desired UCTurme </p><dl class="params"><dt>Parameters</dt><dd>
+<p >Obtain pointer to desired <a class="el" href="class_u_c_turma.html">UCTurma</a> </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">uc_turma</td><td>name of <a class="el" href="class_u_c_turma.html">UCTurma</a> to look for </td></tr>
   </table>
@@ -352,6 +383,30 @@ const set&lt; <a class="el" href="class_student.html">Student</a> &gt; &amp;&#16
       </table>
 </div><div class="memdoc">
 <p >Creates the set of students with the info on students_classes.csv </p>
+
+</div>
+</div>
+<a id="acedc5f1a22863467e12a80389bb09b7d" name="acedc5f1a22863467e12a80389bb09b7d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acedc5f1a22863467e12a80389bb09b7d">&#9670;&#160;</a></span>save_uc_changes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CSVReader::save_uc_changes </td>
+          <td>(</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>uc</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Save changes made to uc in processed requests </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">uc</td><td>uc to alter </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

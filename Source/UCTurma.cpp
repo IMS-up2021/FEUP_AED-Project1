@@ -61,6 +61,13 @@ void UCTurma::create_temp_num() {
  * Loads old student_num back in for when request block is invalid
  */
 void UCTurma::load_temp_num() {
-    student_num = temp_num;
+    if (temp_num != -1) student_num = temp_num;
+    temp_num = -1;
+}
+
+/**
+ * Resets temo_num for when request block is valid
+ */
+void UCTurma::reset_temp_num() {
     temp_num = -1;
 }

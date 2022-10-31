@@ -87,9 +87,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aaf05385a58f65c9032675d5edf8bf27d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8a768655b100a5edad36b99653300281"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_request_processer.html#a8a768655b100a5edad36b99653300281">check_for_problems</a> ()</td></tr>
 <tr class="separator:a8a768655b100a5edad36b99653300281"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af7fae7671607b33a670fa858ff893538"><td class="memItemLeft" align="right" valign="top"><a id="af7fae7671607b33a670fa858ff893538" name="af7fae7671607b33a670fa858ff893538"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>save_changes</b> () const</td></tr>
-<tr class="separator:af7fae7671607b33a670fa858ff893538"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a130e7812ea0d3d02201c7d6d1901dd56"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_request_processer.html#a130e7812ea0d3d02201c7d6d1901dd56">save_changes</a> ()</td></tr>
+<tr class="separator:a130e7812ea0d3d02201c7d6d1901dd56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12465643573a97b7b7d00173d3926c4a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_request_processer.html#a12465643573a97b7b7d00173d3926c4a">discard_changes</a> ()</td></tr>
+<tr class="separator:a12465643573a97b7b7d00173d3926c4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="a1e2bdc953f8304b4769ffcb511d42546" name="a1e2bdc953f8304b4769ffcb511d42546"></a>
@@ -130,7 +131,25 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>save_changes</b> () c
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Checks for conflicts. To be called after processing a request block </p><dl class="section return"><dt>Returns</dt><dd>0 if no conflicts, 1 if student timetable superposition, 2 if UC imbalance </dd></dl>
+<p >Checks for conflicts. To be called after processing a request block </p><dl class="section return"><dt>Returns</dt><dd>0 if no conflicts, 1 if student timetable superposition, 2 if UC imbalance (1 has priority over 2) </dd></dl>
+
+</div>
+</div>
+<a id="a12465643573a97b7b7d00173d3926c4a" name="a12465643573a97b7b7d00173d3926c4a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a12465643573a97b7b7d00173d3926c4a">&#9670;&#160;</a></span>discard_changes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RequestProcesser::discard_changes </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Discards changes made in requests processed since last call to <a class="el" href="class_request_processer.html#a130e7812ea0d3d02201c7d6d1901dd56">save_changes()</a> or <a class="el" href="class_request_processer.html#a12465643573a97b7b7d00173d3926c4a">discard_changes()</a> </p>
 
 </div>
 </div>
@@ -149,6 +168,24 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>save_changes</b> () c
       </table>
 </div><div class="memdoc">
 <p >Processes next list of requests in queue </p><dl class="section return"><dt>Returns</dt><dd>0 if success, 1 otherwise </dd></dl>
+
+</div>
+</div>
+<a id="a130e7812ea0d3d02201c7d6d1901dd56" name="a130e7812ea0d3d02201c7d6d1901dd56"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a130e7812ea0d3d02201c7d6d1901dd56">&#9670;&#160;</a></span>save_changes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RequestProcesser::save_changes </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Saves changes made in requests processed since last call to <a class="el" href="class_request_processer.html#a130e7812ea0d3d02201c7d6d1901dd56">save_changes()</a> or <a class="el" href="class_request_processer.html#a12465643573a97b7b7d00173d3926c4a">discard_changes()</a> </p>
 
 </div>
 </div>

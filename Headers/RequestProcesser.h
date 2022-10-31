@@ -22,7 +22,8 @@ public:
     void add_request_list(list<Request> requests);
     int process_next_request_block();
     int check_for_problems();
-    void save_changes() const;
+    void save_changes();
+    void discard_changes();
 };
 
 #endif //AEDOUTRO_REQUESTPROCESSER_H

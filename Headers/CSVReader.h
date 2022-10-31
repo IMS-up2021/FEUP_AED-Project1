@@ -23,8 +23,11 @@ public:
     const vector<UCTurma> &getUcTurmas() const;
     UCTurma* get_pointer_to_uc_turma(pair<string, string> uc_turma);
     const set<Student> &getStudents() const;
+    void save_uc_changes(string uc);
+    void discard_uc_changes(string uc);
     bool is_balanced(string uc) const;
     unsigned find_student_num_by_name(string name) const;
+    void set_students(set<Student> s);
 
 private:
     vector<UCTurma> uc_turmas;

@@ -90,7 +90,7 @@ RequestProcesser::RequestProcesser(CSVReader &reader): database(&reader) {}
 
 /**
  * Checks for conflicts. To be called after processing a request block
- * @return 0 if no conflicts, 1 if student timetable superposition, 2 if UC imbalance
+ * @return 0 if no conflicts, 1 if student timetable superposition, 2 if UC imbalance (1 has priority over 2)
  */
 int RequestProcesser::check_for_problems() {
     for (unsigned num : affected_students) {
@@ -101,4 +101,30 @@ int RequestProcesser::check_for_problems() {
         if (!database->is_balanced(uc)) return 2;
     }
     return 0;
+}
+
+/**
+ * Saves changes made in requests processed since last call to save_changes() or discard_changes()
+ */
+void RequestProcesser::save_changes() {
+    database->set_students(new_students);
+    for (const string& uc : affected_uc) {
+        UCTurma* ptr = database->get_pointer_to_uc_turma(uc);
+        (*ptr).reset_temp_num();
+    }
+    new_students.clear();
+    affected_uc.clear();
+    affected_students.clear();
+}
+
+/**
+ * Discards changes made in requests processed since last call to save_changes() or discard_changes()
+ */
+void RequestProcesser::discard_changes() {
+    for (const string& uc : affected_uc) {
+        database->discard_uc_changes(uc);
+    }
+    new_students.clear();
+    affected_uc.clear();
+    affected_students.clear();
 }

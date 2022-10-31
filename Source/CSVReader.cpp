@@ -260,7 +260,7 @@ unsigned CSVReader::find_student_num_by_name(string name) const {
 }
 
 /**
- * Obtain pointer to desired UCTurme
+ * Obtain pointer to desired UCTurma
  * @param uc_turma name of UCTurma to look for
  * @return pointer to uc_turma
  */
@@ -268,4 +268,30 @@ UCTurma *CSVReader::get_pointer_to_uc_turma(pair<string, string> uc_turma) {
     int search = binarySearch(uc_turmas, uc_turma);
     if (search == -1) return nullptr;
     else return &uc_turmas[search];
+}
+
+void CSVReader::set_students(set<Student> s) {
+    students = s;
+}
+
+/**
+ * Save changes made to uc in processed requests
+ * @param uc uc to alter
+ */
+void CSVReader::save_uc_changes(string uc) {
+    auto it = lower_bound(uc_turmas.begin(), uc_turmas.end(), UCTurma(uc,""));
+    while ((*it).get_uc_turma().first == uc) {
+        (*it).reset_temp_num();
+    }
+}
+
+/**
+ * Discard changes made to uc in processed requests
+ * @param uc uc to restore
+ */
+void CSVReader::discard_uc_changes(string uc) {
+    auto it = lower_bound(uc_turmas.begin(), uc_turmas.end(), UCTurma(uc,""));
+    while ((*it).get_uc_turma().first == uc) {
+        (*it).load_temp_num();
+    }
 }
