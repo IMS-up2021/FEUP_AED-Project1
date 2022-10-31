@@ -114,6 +114,18 @@ bool Interface::ucLessthan(const UCTurma &ucturma1, const UCTurma &ucturma2) {
     }
     return false;
 }
+bool Interface::ucGreaterthan1(const UCTurma* ucturma1, const UCTurma* ucturma2) {
+    if((*ucturma1).get_uc_turma().first.compare((*ucturma2).get_uc_turma().first)<0){
+        return true;
+    }
+    return false;
+}
+bool Interface::ucLessthan1(const UCTurma* ucturma1, const UCTurma* ucturma2) {
+    if((*ucturma1).get_uc_turma().first.compare((*ucturma2).get_uc_turma().first)>0){
+        return true;
+    }
+    return false;
+}
 /**Function that compares 2 UC by their code
  *
  * @param ucturma1
@@ -429,6 +441,8 @@ int Interface::initiate() {
                         }                    }
 
                     cout<<"No total existem "<<uc_count<<"UCs"<<" no "<<"ano "<<year<<endl;
+                    uc_count=0;
+                    return 0;
                 }
 
                 //caso a listagem das unidades curriculares seja por aluno
@@ -444,7 +458,7 @@ int Interface::initiate() {
                     }
                     if (n_c == "0") goto menuAnterior3_uc;
 
-                    //caso listagem de horario do estudante for por nome !! alterar
+
                     if (n_c == "1") {
                         cout << "Introduza o nome do estudante:\n\t0.Voltar" << endl;
                         cin.ignore();
@@ -463,14 +477,19 @@ int Interface::initiate() {
                             cout << "Sintase errada.\nPor favor reintroduzir:" << endl;
                             cin >> order;
                         }
-
-
+                        list<UCTurma*> ucs=database->get_student_timetable(s);
                         if (order == "1") {
-
+                            ucs.sort(ucLessthan1);
                         }
                         if (order == "2") {
-                            //ainda a ser implementada de acordo com ordenacao decrescente
+                            ucs.sort(ucGreaterthan1);
                         }
+                        for(UCTurma* uc:ucs){
+                            cout<<"UC: "<<uc->get_uc_turma().first<<endl;
+                            uc_count++;
+                        }
+                        cout<<"O nr de UCs: "<<uc_count<<endl;
+                        return 0;
                     }
                 }
             }
@@ -685,7 +704,6 @@ int Interface::initiate() {
 
                 //caso listagem de horario do estudante for por nome
                 if(n_c=="1"){
-
                     cout<<"Introduza o nome do estudante:\n\t0.Voltar"<<endl;
                     cin.ignore();
                     getline(cin,student);
@@ -714,7 +732,6 @@ int Interface::initiate() {
                         cout<<"\n";
                     }
                     return 0;
-
                 }
 
                 //caso listagem do horario do estudante for por codigo

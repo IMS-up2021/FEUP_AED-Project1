@@ -22,6 +22,8 @@ private:
     static bool slotsLessthan1(const pair<pair<string,string>,Slot> &aula1, const pair<pair<string,string>,Slot> &aula2);
     static bool ucLessthan(const UCTurma &ucturma1, const UCTurma &ucturma2);
     static bool ucGreaterthan(const UCTurma &ucturma1, const UCTurma &ucturma2);
+    static bool ucLessthan1(const UCTurma* ucturma1, const UCTurma* ucturma2);
+    static bool ucGreaterthan1(const UCTurma* ucturma1, const UCTurma* ucturma2);
     static bool stringGreaterthan(const string s1,const string s2);
 
 

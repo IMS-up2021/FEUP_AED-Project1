@@ -95,3 +95,7 @@ void Student::add_uc_turma_pointer(UCTurma *uc_turma) const {
     uc_turmas.push_back(uc_turma);
 }
 
+const list<UCTurma *> &Student::getUcTurmas() const {
+    return uc_turmas;
+}
+

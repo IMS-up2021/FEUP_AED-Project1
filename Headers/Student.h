@@ -21,6 +21,8 @@ public:
     string get_name() const;
     unsigned get_num() const;
 
+    const list<UCTurma *> &getUcTurmas() const;
+
 private:
     mutable list<UCTurma*> uc_turmas;
     string name;
