@@ -49,6 +49,7 @@ bool Slot::operator>(Slot other ) const {
 
 /**
  * Turns the slot's week day into a number (0 for Monday, 1 for Tuesday, etc)
+ * Complexity: O(1)
  * @return day number
  */
 int Slot::get_day_num() const {
