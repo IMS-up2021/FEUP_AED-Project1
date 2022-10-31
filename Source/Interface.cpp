@@ -173,6 +173,7 @@ int Interface::initiate() {
                 if (mode == "1") {
                     cout << "Do ano:\n0.Para voltar" << endl;
                     cin >> year;
+
                     if (year == "0") goto menuAnterior3;;
                     while (!is_in(year, 1, 3)) {
                         cout << "Sintase errada.\nPor favor, reintroduzir:" << endl;
@@ -185,14 +186,28 @@ int Interface::initiate() {
                         cout << "Sintase errada.\nPor favor reintroduzir:" << endl;
                         cin >> order;
                     }
+
+                    //Problem!!!!!!!
+                    vector<UCTurma> turmas = database->getUcTurmas();
+                    int turma_count=0;
                     if (year == "1") {
-                        cout << "ainda a ser implementado" << endl;
+                        vector<UCTurma> partialTurmas;
+                        for(UCTurma turma:turmas) {
+                            if(turma.get_uc_turma().second[0]==1) partialTurmas.push_back(turma);
+                        }
                         if (order == "1") {
-                            //ainda a ser implementada de acordo com ordenacao crescente
+                            std::sort(partialTurmas.begin(),partialTurmas.end(), turmasLessthan);
                         }
                         if (order == "2") {
-                            //ainda a ser implementada de acordo com ordenacao decrescente
+                            std::sort(partialTurmas.begin(),partialTurmas.end(), turmasGreaterthan);
                         }
+                        for(UCTurma turma:partialTurmas){
+                            cout<<"Turma: "<<turma.get_uc_turma().second<<endl;
+                            turma_count++;
+                        }
+                        cout<<"\n";
+                        cout<<"O numero de alunos no 1 ano: "<<turma_count<<endl;
+                        return 0;
                     }
                     if (year == "2") {
                         cout << "ainda a ser implementada" << endl;
@@ -271,7 +286,7 @@ int Interface::initiate() {
                     class_count++;
                 }
                 cout<<"\n";
-                cout<<"No total existem "<<class_count<<" turmas"<<endl;
+                cout<<"No total existem "<<class_count<<" turmas."<<"\n"<<endl;
                 return 0;
             }
         }
@@ -398,7 +413,7 @@ int Interface::initiate() {
                     uc_count++;
                 }
                 cout<<"\n";
-                cout<<"No total existem "<<uc_count<<" unidades curriculares."<<endl;
+                cout<<"No total existem "<<uc_count<<" unidades curriculares."<<"\n"<<endl;
                 return 0;
             }
         }
@@ -536,7 +551,7 @@ int Interface::initiate() {
 
             //listagem de alunos total
             if(type=="2"){
-                cout << "Todas os alunos sao listados\n\t1.Para Continuar\n\t0.Para voltar" << endl;
+                cout << "Todas os alunos serao listados\n\t1.Para Continuar\n\t0.Para voltar" << endl;
                 cin >> mode;
                 while (!is_in(mode,0,1)) {
                     cout << "Sintase errada.\nPor favor reintroduzir:" << endl;

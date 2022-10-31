@@ -11,7 +11,7 @@ int main() {
 
     while(true){
         bool terminated;
-        terminated=interface.listShow();
+        terminated=interface.initiate();
         if(terminated) break;
     }
     return 0;
