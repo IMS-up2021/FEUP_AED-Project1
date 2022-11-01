@@ -105,17 +105,19 @@ $(function() {
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_c_s_v_reader.html#a14d11cd16aed99e910c25bccdf8cf42f">discard_uc_changes</a>(<span class="keywordtype">string</span> uc);</div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="class_c_s_v_reader.html#adb002f30af057d2e5bf417c99fb90443">is_balanced</a>(<span class="keywordtype">string</span> uc) <span class="keyword">const</span>;</div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keywordtype">unsigned</span> <a class="code hl_function" href="class_c_s_v_reader.html#a84dce6c7383d5b115c723616c4258300">find_student_num_by_name</a>(<span class="keywordtype">string</span> name) <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keywordtype">void</span> set_students(set&lt;Student&gt; s);</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    vector&lt;UCTurma&gt; uc_turmas;</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    set&lt;Student&gt; students;</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>};</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="preprocessor">#endif </span><span class="comment">//UNTITLED1_CSVREADER_H</span></div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <a class="code hl_class" href="class_student.html">Student</a> <a class="code hl_function" href="class_c_s_v_reader.html#a30f545e2a60e416954251ce797b3e92b">get_student_by_num</a>(<span class="keywordtype">unsigned</span> num) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keywordtype">void</span> set_students(set&lt;Student&gt; s);</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    vector&lt;UCTurma&gt; uc_turmas;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    set&lt;Student&gt; students;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>};</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="preprocessor">#endif </span><span class="comment">//UNTITLED1_CSVREADER_H</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
 <div class="ttc" id="aclass_c_s_v_reader_html"><div class="ttname"><a href="class_c_s_v_reader.html">CSVReader</a></div><div class="ttdef"><b>Definition:</b> CSVReader.h:13</div></div>
-<div class="ttc" id="aclass_c_s_v_reader_html_a14d11cd16aed99e910c25bccdf8cf42f"><div class="ttname"><a href="class_c_s_v_reader.html#a14d11cd16aed99e910c25bccdf8cf42f">CSVReader::discard_uc_changes</a></div><div class="ttdeci">void discard_uc_changes(string uc)</div><div class="ttdef"><b>Definition:</b> CSVReader.cpp:306</div></div>
+<div class="ttc" id="aclass_c_s_v_reader_html_a14d11cd16aed99e910c25bccdf8cf42f"><div class="ttname"><a href="class_c_s_v_reader.html#a14d11cd16aed99e910c25bccdf8cf42f">CSVReader::discard_uc_changes</a></div><div class="ttdeci">void discard_uc_changes(string uc)</div><div class="ttdef"><b>Definition:</b> CSVReader.cpp:307</div></div>
+<div class="ttc" id="aclass_c_s_v_reader_html_a30f545e2a60e416954251ce797b3e92b"><div class="ttname"><a href="class_c_s_v_reader.html#a30f545e2a60e416954251ce797b3e92b">CSVReader::get_student_by_num</a></div><div class="ttdeci">Student get_student_by_num(unsigned num) const</div><div class="ttdef"><b>Definition:</b> CSVReader.cpp:320</div></div>
 <div class="ttc" id="aclass_c_s_v_reader_html_a53d0250ed4d6d8126c13390d841adf73"><div class="ttname"><a href="class_c_s_v_reader.html#a53d0250ed4d6d8126c13390d841adf73">CSVReader::read_students_classes</a></div><div class="ttdeci">int read_students_classes()</div><div class="ttdef"><b>Definition:</b> CSVReader.cpp:118</div></div>
 <div class="ttc" id="aclass_c_s_v_reader_html_a5e5a34b6acc7f301a451c9da465f0ad5"><div class="ttname"><a href="class_c_s_v_reader.html#a5e5a34b6acc7f301a451c9da465f0ad5">CSVReader::get_studentnum_per_uc</a></div><div class="ttdeci">int get_studentnum_per_uc(string uc) const</div><div class="ttdef"><b>Definition:</b> CSVReader.cpp:212</div></div>
 <div class="ttc" id="aclass_c_s_v_reader_html_a6828bb6be790a8ebbddb4ea66770a3a8"><div class="ttname"><a href="class_c_s_v_reader.html#a6828bb6be790a8ebbddb4ea66770a3a8">CSVReader::get_student_timetable</a></div><div class="ttdeci">list&lt; UCTurma * &gt; get_student_timetable(unsigned num) const</div><div class="ttdef"><b>Definition:</b> CSVReader.cpp:174</div></div>
@@ -128,7 +130,8 @@ $(function() {
 <div class="ttc" id="aclass_c_s_v_reader_html_ae68758438c5e2376bdddc6724b0b65ee"><div class="ttname"><a href="class_c_s_v_reader.html#ae68758438c5e2376bdddc6724b0b65ee">CSVReader::get_turma_timetable</a></div><div class="ttdeci">vector&lt; pair&lt; string, Slot &gt; &gt; get_turma_timetable(string turma) const</div><div class="ttdef"><b>Definition:</b> CSVReader.cpp:229</div></div>
 <div class="ttc" id="aclass_c_s_v_reader_html_aecde9144d7eb2f7c981050e5f42735fb"><div class="ttname"><a href="class_c_s_v_reader.html#aecde9144d7eb2f7c981050e5f42735fb">CSVReader::get_uc_timetable</a></div><div class="ttdeci">vector&lt; pair&lt; string, Slot &gt; &gt; get_uc_timetable(string uc) const</div><div class="ttdef"><b>Definition:</b> CSVReader.cpp:195</div></div>
 <div class="ttc" id="aclass_c_s_v_reader_html_aff4c4689b5978566da865c5b6fe07c0d"><div class="ttname"><a href="class_c_s_v_reader.html#aff4c4689b5978566da865c5b6fe07c0d">CSVReader::populate</a></div><div class="ttdeci">bool populate()</div><div class="ttdef"><b>Definition:</b> CSVReader.cpp:160</div></div>
-<div class="ttc" id="aclass_u_c_turma_html"><div class="ttname"><a href="class_u_c_turma.html">UCTurma</a></div><div class="ttdef"><b>Definition:</b> UCTurma.h:13</div></div>
+<div class="ttc" id="aclass_student_html"><div class="ttname"><a href="class_student.html">Student</a></div><div class="ttdef"><b>Definition:</b> Student.h:10</div></div>
+<div class="ttc" id="aclass_u_c_turma_html"><div class="ttname"><a href="class_u_c_turma.html">UCTurma</a></div><div class="ttdef"><b>Definition:</b> UCTurma.h:15</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

@@ -43,7 +43,7 @@ bool Student::timetable_has_conflict() const {
             slots.push_back(slot);
         }
     }
-    if (slots.size() == 0) return true;
+    if (slots.size() == 0) return false;
     sort(slots.begin(), slots.end());
     float end = (slots[0].get_end());
     string day = slots[0].getDay();
@@ -87,12 +87,15 @@ void Student::set_timetable(list<UCTurma *> l) const{
 }
 
 /**
- * Adds UCTurma to Student via pointer \n
+ * Adds UCTurma to Student via pointer, doesn't increment UCTurma's student_num \n
  * Complexity: O(1)
  * @param uc_turma pointer to add
  */
 void Student::add_uc_turma_pointer(UCTurma *uc_turma) const {
     uc_turmas.push_back(uc_turma);
-    (*uc_turma).add_remove_student(true);
+}
+
+const list<UCTurma *> &Student::getUcTurmas() const {
+    return uc_turmas;
 }
 

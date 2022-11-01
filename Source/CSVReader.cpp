@@ -295,6 +295,7 @@ void CSVReader::save_uc_changes(string uc) {
     auto it = lower_bound(uc_turmas.begin(), uc_turmas.end(), UCTurma(uc,""));
     while ((*it).get_uc_turma().first == uc) {
         (*it).reset_temp_num();
+        it++;
     }
 }
 
@@ -307,5 +308,18 @@ void CSVReader::discard_uc_changes(string uc) {
     auto it = lower_bound(uc_turmas.begin(), uc_turmas.end(), UCTurma(uc,""));
     while ((*it).get_uc_turma().first == uc) {
         (*it).load_temp_num();
+        it++;
     }
+}
+
+/**
+ * Get Student by their number
+ * Complexity: O(log(n)) (n = size of students BST)
+ * @param num number to find
+ * @return empty student if not found, desired Student otherwise
+ */
+Student CSVReader::get_student_by_num(unsigned int num) const {
+    auto it = students.find(Student(num));
+    if (it == students.end()) return Student();
+    else return (*it);
 }

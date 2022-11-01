@@ -110,6 +110,8 @@ const set&lt; <a class="el" href="class_student.html">Student</a> &gt; &amp;&#16
 <tr class="separator:adb002f30af057d2e5bf417c99fb90443"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a84dce6c7383d5b115c723616c4258300"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_s_v_reader.html#a84dce6c7383d5b115c723616c4258300">find_student_num_by_name</a> (string name) const</td></tr>
 <tr class="separator:a84dce6c7383d5b115c723616c4258300"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30f545e2a60e416954251ce797b3e92b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_student.html">Student</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_s_v_reader.html#a30f545e2a60e416954251ce797b3e92b">get_student_by_num</a> (unsigned num) const</td></tr>
+<tr class="separator:a30f545e2a60e416954251ce797b3e92b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2d4aea2929ff8c93680684f6c6a35f81"><td class="memItemLeft" align="right" valign="top"><a id="a2d4aea2929ff8c93680684f6c6a35f81" name="a2d4aea2929ff8c93680684f6c6a35f81"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>set_students</b> (set&lt; <a class="el" href="class_student.html">Student</a> &gt; s)</td></tr>
 <tr class="separator:a2d4aea2929ff8c93680684f6c6a35f81"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -189,6 +191,31 @@ Complexity: O(log(n)) (n = size of uc_turmas vector) </p><dl class="params"><dt>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>pointer to uc_turma </dd></dl>
+
+</div>
+</div>
+<a id="a30f545e2a60e416954251ce797b3e92b" name="a30f545e2a60e416954251ce797b3e92b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a30f545e2a60e416954251ce797b3e92b">&#9670;&#160;</a></span>get_student_by_num()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_student.html">Student</a> CSVReader::get_student_by_num </td>
+          <td>(</td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>num</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Get <a class="el" href="class_student.html">Student</a> by their number </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">num</td><td>number to find </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>empty student if not found, desired <a class="el" href="class_student.html">Student</a> otherwise </dd></dl>
 
 </div>
 </div>

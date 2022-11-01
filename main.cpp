@@ -14,7 +14,9 @@ int main() {
     list<Request> reqs;
     reqs.emplace_back("remove",202020047,"","1LEIC07");
     processer.add_request_list(reqs);
-    processer.process_next_request_block();
+    int doot = processer.process_next_request_block();
+    int doot2 = processer.check_for_problems();
+    processer.save_changes();
 
     while(true){
         bool terminated;

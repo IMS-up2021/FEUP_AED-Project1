@@ -27,6 +27,7 @@ public:
     void discard_uc_changes(string uc);
     bool is_balanced(string uc) const;
     unsigned find_student_num_by_name(string name) const;
+    Student get_student_by_num(unsigned num) const;
     void set_students(set<Student> s);
 
 private:

@@ -32,11 +32,12 @@ list<Slot> UCTurma::get_slots() const {
  * Increments or decrements the UCTurma's student number \n
  * Complexity: O(1)
  * @param b true if increment, false if decrement
- * @return 1 if failure (decrement when student_num is 0), 0 otherwise
+ * @return 1 if failure (decrement when student_num is 0, increment when student_num is TURMA_CAP), 0 otherwise
  */
 int UCTurma::add_remove_student(bool b) {
-    if (b) {student_num++; return 0;}
-    else if (student_num == 0) return 1;
+    if (student_num == 0 && !b) return 1;
+    else if (student_num == TURMA_CAP && b) return 1;
+    else if (b) {student_num++; return 0;}
     else {
         student_num--;
         return 0;
@@ -70,7 +71,7 @@ void UCTurma::load_temp_num() {
 }
 
 /**
- * Resets temo_num for when request block is valid \n 
+ * Resets temp_num for when request block is valid \n
  * Complexity: O(1)
  */
 void UCTurma::reset_temp_num() {

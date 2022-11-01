@@ -40,7 +40,8 @@ int RequestProcesser::process_next_request_block() {
                 if ((*s_it)->get_uc_turma().second == uc_turma.second) {
                     affected_uc.insert((*s_it)->get_uc_turma().first);
                     (*s_it)->create_temp_num();
-                    (*s_it)->add_remove_student(false);
+                    int i = (*s_it)->add_remove_student(false);
+                    if (i == 1) return 1;
                     s_it = l.erase(s_it);
                 }
                 else s_it++;
@@ -54,7 +55,8 @@ int RequestProcesser::process_next_request_block() {
                 if ((*s_it)->get_uc_turma().first == uc_turma.first) {
                     affected_uc.insert(uc_turma.first);
                     (*s_it)->create_temp_num();
-                    (*s_it)->add_remove_student(false);
+                    int i = (*s_it)->add_remove_student(false);
+                    if (i == 1) return 1;
                     l.erase(s_it);
                     (*it).set_timetable(l);
                     break;
@@ -68,6 +70,8 @@ int RequestProcesser::process_next_request_block() {
                 affected_uc.insert(uc_turma.first);
                 (*search).create_temp_num();
                 (*it).add_uc_turma_pointer(search);
+                int i = (*search).add_remove_student(true);
+                if (i == 1) return 1;
             }
             else {
                 list<UCTurma*> l = (*it).get_timetable();
@@ -76,7 +80,8 @@ int RequestProcesser::process_next_request_block() {
                     if ((*s_it)->get_uc_turma() == uc_turma) {
                         affected_uc.insert(uc_turma.first);
                         (*s_it)->create_temp_num();
-                        (*s_it)->add_remove_student(false);
+                        int i = (*s_it)->add_remove_student(false);
+                        if (i == 1) return 1;
                         l.erase(s_it);
                         (*it).set_timetable(l);
                         break;
