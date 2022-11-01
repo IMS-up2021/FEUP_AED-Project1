@@ -954,25 +954,44 @@ int Interface::initiate() {
 
     else if(userInput=="2"){
         menuAlteracoes0: string identity;
-        cout << "Introduza o nome ou numero de estudante para efetuar alteracoes sobre este:" << endl;
+        cout << "Introduza o numero de estudante para efetuar alteracoes sobre este: \n\t0.Para voltar" << endl;
         cin >> identity;
-        goto menuAlteracoes;
-
-        menuAlteracoes:string criteria, option;
+        //verificar se existe o aluno na base de dados;
+        while(!is_number(identity)) {
+            cout<<"Codigo invalido,reintroduzir:"<<endl;
+            cin>>identity;
+        }
+        Student target = Student(stoi(identity));
+        auto it = database->getStudents().find(target);
+        if (identity == "0") goto MenuPrincipal;
+        while(it==database->getStudents().end()){
+            cout<<"Codigo de estudante nao existente, reintroduzir:"<<endl;
+            cin>>identity;
+            while(!is_number(identity)) {
+                cout<<"Codigo invalido,reintroduzir:"<<endl;
+                cin>>identity;
+            }
+            target=Student(stoi(identity));
+            it=database->getStudents().find(target);
+            if (identity == "0") goto MenuPrincipal;
+        }
+        string criteria, option;
         string uc,turma,student;
-        cout<< "Introduza o numero do criterio de alteracoes:\n\t1.Adicionar UCTurma\n\t2.Remover UCTurma\n\t3.Remover todas UCTurmas - turma\n\t4.Remover todas UCTurmas - UC\n\t0.Voltar"<<endl;
+        cout<< "Introduza o numero do criterio de alteracoes:\n\t1.Adicionar UC ou Turma\n\t2.Remover UC ou Turma\n\t3.Remover todas UCs relacionadas com uma turma\n\t4.Remover todas Turmas relacionadas com UC\n\t0.Voltar"<<endl;
         cin >> criteria;
         while (!is_in(criteria, 0, 4)) {
             cout << "Sintaxe errada.\nPor favor, reintroduzir:" << endl;
             cin >> criteria;
         }
-        if (criteria == "0") goto MenuPrincipal;
+        if (criteria == "0") goto menuAlteracoes0;
 
         //adicionar uma UCTurma em especifico a um estudante
         if (criteria == "1") {
+            list<string> req;
             menuAdicionar1:cout << "Introduza UCTurma que pretende adicionar: " << endl;
             cin >> option;
-            //adicionar à lista de pedidos
+            req.push_back(option);
+
             //receber resposta do processer (if statement - save or discard changes)
 
         }
