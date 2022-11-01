@@ -123,7 +123,7 @@ int CSVReader::read_students_classes() {
     unsigned curr = 0;
     Student curr_student;
     getline(in, line);
-    if (line != "﻿StudentCode,StudentName,UcCode,ClassCode") return 1;
+    if (line != "StudentCode,StudentName,UcCode,ClassCode" && line != "﻿StudentCode,StudentName,UcCode,ClassCode") return 1;
     while (getline(in, line)) {
         istringstream iss(line);
         getline(iss, s_num, ',');
@@ -322,4 +322,25 @@ Student CSVReader::get_student_by_num(unsigned int num) const {
     auto it = students.find(Student(num));
     if (it == students.end()) return Student();
     else return (*it);
+}
+
+/**
+ * Saves current student database to students_classes.csv
+ * Complexity: O(nk) (n = number of students, k = number of UCTurma per student)
+ */
+void CSVReader::write_students_to_file() const {
+    ofstream ofs;
+    ofs.open("Input/students_classes.csv");
+    ofs << "StudentCode,StudentName,UcCode,ClassCode" << '\n';
+    unsigned num;
+    string name;
+    pair<string,string> code_uc_turma;
+    for (const Student& student : students) {
+        num = student.get_num();
+        name = student.get_name();
+        for (UCTurma* uc_turma : student.getUcTurmas()) {
+            code_uc_turma = uc_turma->get_uc_turma();
+            ofs << num << ',' << name << ',' << code_uc_turma.first << ',' << code_uc_turma.second << '\n';
+        }
+    }
 }

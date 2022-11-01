@@ -22,7 +22,7 @@ void Student::add_uc_turma(UCTurma &uc_turma) const{
 }
 
 bool Student::operator<(Student other) const {
-    return this->num > other.num;
+    return this->num < other.num;
 }
 
 list<UCTurma*> Student::get_timetable() const {

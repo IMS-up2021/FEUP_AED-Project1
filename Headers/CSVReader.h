@@ -29,6 +29,7 @@ public:
     unsigned find_student_num_by_name(string name) const;
     Student get_student_by_num(unsigned num) const;
     void set_students(set<Student> s);
+    void write_students_to_file() const;
 
 private:
     vector<UCTurma> uc_turmas;
