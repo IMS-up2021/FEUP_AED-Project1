@@ -34,12 +34,7 @@ bool Interface::slotsLessthan(const pair<string , Slot> &aula1, const pair<strin
     }
     return false;
 }
-bool Interface::slotsGreaterthan(const pair<std::string, Slot> &aula1, const pair<std::string, Slot> &aula2) {
-    if(aula1.second>aula2.second){
-        return true;
-    }
-    return false;
-}
+
 /**Function that compares 2 classes by time(used for pair<pair<string,string>,class>
  *
  * @param aula1
@@ -58,25 +53,6 @@ bool Interface::set_compareLessthan_student(const Student &s1,const Student &s2)
     return (s1.get_name()<s2.get_name());
 }
 
-bool Interface::pair_stringLessthan(const pair<std::string, Slot> &aula1, const pair<std::string, Slot> &aula2) {
-    if(aula1.first<aula2.first ){
-        return true;
-    }
-    return false;
-}
-bool Interface::pair_stringGreaterthan(const pair<std::string, Slot> &aula1, const pair<std::string, Slot> &aula2) {
-    if(aula1.first>aula2.first ){
-
-        return true;
-    }
-    return false;
-}
-/** Function that compares 2 classes by time and classCode
- *
- * @param aula1
- * @param aula2
- * @return t/f
- */
 
 /**Checks if a string is a number
  *
@@ -94,42 +70,21 @@ bool Interface::is_number(std::string n) const {
     }
     return nr;
 }
-/** Function that compares 2 classes by their code;
- *
- * @param class1
- * @param class2
- * @return Boolean value t/f
- */
-bool Interface::turmasLessthan(const UCTurma &ucturma1, const UCTurma &ucturma2) {
-    if(ucturma1.get_uc_turma().second.compare(ucturma2.get_uc_turma().second)<0){
-        return true;
-    }
-    return false;
-}
+
 /**Compares 2 classes by their code
  *
  * @param ucturma1
  * @param ucturma2
  * @return t/f
  */
-bool Interface::turmasGreaterthan(const UCTurma &ucturma1, const UCTurma &ucturma2) {
-    if(ucturma1.get_uc_turma().second.compare(ucturma2.get_uc_turma().second)>0){
-        return true;
-    }
-    return false;
-}
+
 /**Compare 2 UC by their code
  *
  * @param ucturma1
  * @param ucturma2
  * @return t/f
  */
-bool Interface::ucLessthan(const UCTurma &ucturma1, const UCTurma &ucturma2) {
-    if(ucturma1.get_uc_turma().first.compare(ucturma2.get_uc_turma().first)<0){
-        return true;
-    }
-    return false;
-}
+
 bool Interface::ucGreaterthan1(const UCTurma* ucturma1, const UCTurma* ucturma2) {
     if((*ucturma1).get_uc_turma().first.compare((*ucturma2).get_uc_turma().first)>0){
         return true;
@@ -142,29 +97,9 @@ bool Interface::ucLessthan1(const UCTurma* ucturma1, const UCTurma* ucturma2) {
     }
     return false;
 }
-/**Function that compares 2 UC by their code
- *
- * @param ucturma1
- * @param ucturma2
- * @return t/f
- */
-bool Interface::ucGreaterthan(const UCTurma &ucturma1, const UCTurma &ucturma2) {
-    if(ucturma1.get_uc_turma().first.compare(ucturma2.get_uc_turma().first)>0){
-        return true;
-    }
-    return false;
-}
 
-/** Compares 2 strings
- *
- * @param s1
- * @param s2
- * @return t/f
- */
-bool Interface::stringGreaterthan(const std::string s1, const std::string s2) {
-    if (s1 > s2) return true;
-    return false;
-}
+
+
 
 /** Lists according to input introduced by user
  *
@@ -258,7 +193,7 @@ int Interface::initiate() {
                             turma_count++;
                         }
                         cout<<"\n";
-                        cout<<"O numero de turmas no 1 ano: "<<turma_count<<endl;
+                        cout<<"O numero de turmas no 1 ano: "<<turma_count<<"\n"<<endl;
                         return 0;
                     }
                     if (year == "2") {
@@ -282,7 +217,7 @@ int Interface::initiate() {
                             cout<<"Turma: "<<*it<<endl;
                         }
                         cout<<"\n";
-                        cout<<"O numero de turmas no 2 ano: "<<turma_count<<endl;
+                        cout<<"O numero de turmas no 2 ano: "<<turma_count<<"\n"<<endl;
                         return 0;
                     }
                     if (year == "3") {
@@ -306,7 +241,7 @@ int Interface::initiate() {
                             cout<<"Turma: "<<*it<<endl;
                         }
                         cout<<"\n";
-                        cout<<"O numero de turmas no 1 ano: "<<turma_count<<endl;
+                        cout<<"O numero de turmas no 1 ano: "<<turma_count<<"\n"<<endl;
                         return 0;
                     }
                 }
@@ -356,7 +291,9 @@ int Interface::initiate() {
                         turma_count++;
                         cout << "Turma: " << *it << endl;
                     }
+                    cout<<"\n"<<endl;
                     cout<<"No total existem "<<turma_count<<" turmas em: " <<uc<<"\n"<<endl;
+                    return 0;
                 }
             }
 
@@ -483,7 +420,7 @@ int Interface::initiate() {
                         uc_count++;
                         cout << "UC: " << *it << endl;
                     }
-
+                    cout<<"\n"<<endl;
                     cout<<"No total existem "<<uc_count<<" UCs"<<" no "<<"ano "<<year<<"\n"<<endl;
                     uc_count=0;
                     return 0;
@@ -530,7 +467,8 @@ int Interface::initiate() {
                             cout<<"UC: "<<uc->get_uc_turma().first<<endl;
                             uc_count++;
                         }
-                        cout<<"O nr de UCs: "<<uc_count<<endl;
+                        cout<<"\n"<<endl;
+                        cout<<"O nr de UCs: "<<uc_count<<"\n"<<endl;
                         return 0;
                     }
                 }
@@ -1009,7 +947,6 @@ int Interface::initiate() {
                     cout<<"\n";
                 }
                 return 0;
-
             }
         }
     }
