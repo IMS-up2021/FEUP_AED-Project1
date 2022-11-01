@@ -661,9 +661,79 @@ int Interface::initiate() {
         }
     }
 
-    //ainda por implementar!!!!
+
     else if(userInput=="2"){
-        //alteracoes do horario
+        menuAlteracoes0: string identity;
+        cout << "Introduza o nome ou numero de estudante para efetuar alteracoes sobre este:" << endl;
+        cin >> identity;
+        goto menuAlteracoes;
+
+        menuAlteracoes:string criteria, option;
+        string uc,turma,student;
+        cout<< "Introduza o numero do criterio de alteracoes:\n\t1.Adicionar UCTurma\n\t2.Remover UCTurma\n\t3.Remover todas UCTurmas - turma\n\t4.Remover todas UCTurmas - UC\n\t0.Voltar"<<endl;
+        cin >> criteria;
+        while (!is_in(criteria, 0, 4)) {
+            cout << "Sintaxe errada.\nPor favor, reintroduzir:" << endl;
+            cin >> criteria;
+        }
+        if (criteria == "0") goto MenuPrincipal;
+
+        //adicionar uma UCTurma em especifico a um estudante
+        if (criteria == "1") {
+            menuAdicionar1:cout << "Introduza UCTurma que pretende adicionar: " << endl;
+            cin >> option;
+            //adicionar à lista de pedidos
+            //receber resposta do processer (if statement - save or discard changes)
+
+        }
+
+        //remover uma UCTurma em especifico de um estudante
+        if (criteria == "2") {
+            menuAdicionar2:
+            cout << "Introduza UCTurma que pretende remover: " << endl;
+            cin >> option;
+            //adicionar à lista de pedidos
+            //receber resposta do processer (if statement - save or discard changes)
+        }
+
+        //remover todas as UCTurmas com uma certa turma de um estudante (type é "remove", uc fica em branco)
+        if (criteria == "3") {
+            menuAdicionar3:
+            cout << "Introduza UCTurma com uma certa turma que pretende remover: " << endl;
+            cin >> option;
+            //adicionar à lista de pedidos
+            //receber resposta do processer (if statement - save or discard changes)
+        }
+
+        //remover todas as UCTurmas com uma certa UC de um estudante(type é "remove", turma fica em branco)
+        if (criteria == "4") {
+            menuAdicionar4:
+            cout << "Introduza UCTurma com uma certa UC que pretende remover: " << endl;
+            cin >> option;
+            //adicionar à lista de pedidos
+            //receber resposta do processer (if statement - save or discard changes)
+        }
+
+
+
+
+
+
+
+        //crias uma lista de pedidos e adicionas à fila com o método cujo nome nao me lembro mas facilmente encontras no header
+
+
+        //quando for para processar, para cada bloco fazes
+        //process_next_block()
+        //check_for_conflict()
+        //save_changes() ou discard_changes dependendo do resultado anterior
+        //o process next block() retorna 1 se o pedido falha, 0 se há sucesso
+        //o check_for_conflict() retorna 0 se sucesso, 1 se houver conflito entre TP/TP, TP/PL ou PL/PL num dos estudantes afetados
+        //nesse caso fazes discard_changes()
+        //o check_for_conflict() retorna 2 se houver desequilibrio de turmas (e nenhuma sobreposição de aulas invalida nos alunos)
+        //como ja ha UCs que vêm desequilibradas no ficheiro, para esse caso podes fazer algo do genero
+        //"Este pedido vai causar um desequilibrio que poderia já estar presente antes das modificações. Pretende continuar?"
+        //e depois chamar save_changes() ou discard_changes() dependendo do resultado
 
     }
 
@@ -671,4 +741,4 @@ int Interface::initiate() {
 
 
 
-Interface::Interface(CSVReader &reader): database(&reader) {}
+Interface::Interface(CSVReader &reader, RequestProcesser* request): database(&reader), request(request) {}

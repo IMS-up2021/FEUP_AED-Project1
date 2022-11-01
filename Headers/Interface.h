@@ -8,12 +8,14 @@
 #include <string>
 #include <list>
 #include"CSVReader.h"
+#include "RequestProcesser.h"
 
 using namespace std;
 class Interface {
 private:
     queue<string> processes;
     CSVReader* database;
+    RequestProcesser* request;
     bool is_in(string choice,int lim_start,int lim_end) const;
     static bool slotsLessthan(const pair<string,Slot> &aula1,const pair<string ,Slot> &aula2);
     static bool turmasLessthan(const UCTurma ucturma1, const UCTurma ucturma2);
@@ -29,7 +31,7 @@ private:
 public:
     void addProcessToQueue(string process);//adds a process to the queue with the name p_name
     int initiate();//executes the listing
-    Interface(CSVReader& reader);
+    Interface(CSVReader& reader, RequestProcesser* request);
 
 };
 
