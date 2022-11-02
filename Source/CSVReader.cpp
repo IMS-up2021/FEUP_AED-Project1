@@ -265,7 +265,7 @@ unsigned CSVReader::find_student_num_by_name(string name) const {
  * @param uc_turma name of UCTurma to look for
  * @return pointer to uc_turma
  */
-UCTurma *CSVReader::get_pointer_to_uc_turma(pair<string, string> uc_turma) {
+UCTurma *CSVReader::get_pointer_to_uc_turma(const pair<string, string>& uc_turma) {
     int search = binarySearch(uc_turmas, uc_turma);
     if (search == -1) return nullptr;
     else return &uc_turmas[search];
@@ -333,4 +333,10 @@ void CSVReader::write_students_to_file() const {
             ofs << num << ',' << name << ',' << code_uc_turma.first << ',' << code_uc_turma.second << '\n';
         }
     }
+}
+
+bool CSVReader::is_uc_turma_student_num_good(const pair<string, string> &uc_turma) {
+    int search = binarySearch(uc_turmas, uc_turma);
+    if (search == -1) return true;
+    return uc_turmas[search].student_num_good();
 }

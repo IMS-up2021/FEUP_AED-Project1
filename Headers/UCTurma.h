@@ -25,11 +25,12 @@ public:
     pair<string,string> get_uc_turma() const;
     void add_slot(Slot slot);
     list<Slot> get_slots() const;
-    int add_remove_student(bool b);
+    void add_remove_student(bool b);
     int get_student_num() const;
     void create_temp_num();
     void load_temp_num();
     void reset_temp_num();
+    bool student_num_good() const;
 };
 
 #endif //UNTITLED1_UCTURMA_H

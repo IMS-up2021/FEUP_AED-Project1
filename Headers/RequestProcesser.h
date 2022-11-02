@@ -17,6 +17,7 @@ private:
     set<string> affected_uc;
     set<unsigned> affected_students;
     set<Student> new_students;
+    set<pair<string,string>> affected_uc_turma;
 public:
     RequestProcesser(CSVReader& reader);
     void add_request_list(list<Request> requests);
