@@ -201,3 +201,7 @@ int RequestProcesser::read_requests_from_file() {
     }
     return 0;
 }
+
+bool RequestProcesser::queue_empty() const {
+    return request_blocks.empty();
+}

@@ -26,6 +26,7 @@ public:
     void discard_changes();
     void write_requests_to_file();
     int read_requests_from_file();
+    bool queue_empty() const;
 };
 
 #endif //AEDOUTRO_REQUESTPROCESSER_H
