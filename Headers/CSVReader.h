@@ -21,7 +21,7 @@ public:
     vector<pair<string,Slot>> get_turma_timetable(string turma) const;
     int get_studentnum_per_uc(string uc) const;
     const vector<UCTurma> &getUcTurmas() const;
-    UCTurma* get_pointer_to_uc_turma(pair<string, string> uc_turma);
+    UCTurma* get_pointer_to_uc_turma(const pair<string, string>& uc_turma);
     const set<Student> &getStudents() const;
     void save_uc_changes(string uc);
     void discard_uc_changes(string uc);
@@ -30,6 +30,7 @@ public:
     Student get_student_by_num(unsigned num) const;
     void set_students(set<Student> s);
     void write_students_to_file() const;
+    bool is_uc_turma_student_num_good(const pair<string,string>& uc_turma);
 
 private:
     vector<UCTurma> uc_turmas;
