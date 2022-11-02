@@ -9,6 +9,7 @@
 #include <list>
 #include"CSVReader.h"
 #include "RequestProcesser.h"
+#include "StudentPtr.h"
 
 using namespace std;
 class Interface {
@@ -18,13 +19,10 @@ private:
     RequestProcesser* request;
     bool is_in(string choice,int lim_start,int lim_end) const;
     static bool slotsLessthan(const pair<string,Slot> &aula1,const pair<string ,Slot> &aula2);
-
     static bool slotsLessthan1(const pair<pair<string,string>,Slot> &aula1, const pair<pair<string,string>,Slot> &aula2);
-
     static bool ucLessthan1(const UCTurma* ucturma1, const UCTurma* ucturma2);
     static bool ucGreaterthan1(const UCTurma* ucturma1, const UCTurma* ucturma2);
-
-    static bool set_compareLessthan_student(const Student &s1,const Student &s2);
+    static bool set_compareLessthan_student(const Student* s1,const Student* s2);
 
 
 
