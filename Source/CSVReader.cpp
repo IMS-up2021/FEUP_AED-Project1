@@ -8,19 +8,8 @@
 #include <vector>
 #include <algorithm>
 #include "../Headers/CSVReader.h"
-#include "../Headers/UCTurma.h"
 
 using namespace std;
-
-/**
- * Checks if file exists
- * @param name Name of file to test
- * @return true if file exists, false otherwise
- */
-bool exists_test0 (const std::string& name) {
-    ifstream f(name.c_str());
-    return f.good();
-}
 
 /**
  * Loads values from classes_per_uc.csv into a vector of UCTurma objects \n
@@ -282,6 +271,7 @@ UCTurma *CSVReader::get_pointer_to_uc_turma(pair<string, string> uc_turma) {
     else return &uc_turmas[search];
 }
 
+
 void CSVReader::set_students(set<Student> s) {
     students = s;
 }
@@ -320,7 +310,7 @@ void CSVReader::discard_uc_changes(string uc) {
  */
 Student CSVReader::get_student_by_num(unsigned int num) const {
     auto it = students.find(Student(num));
-    if (it == students.end()) return Student();
+    if (it == students.end()) return Student(0);
     else return (*it);
 }
 

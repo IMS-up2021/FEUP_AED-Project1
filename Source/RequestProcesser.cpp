@@ -4,6 +4,8 @@
 
 #include "../Headers/RequestProcesser.h"
 #include <algorithm>
+#include <fstream>
+#include <sstream>
 
 /**
  * Adds list of requests to queue \n
@@ -136,4 +138,66 @@ void RequestProcesser::discard_changes() {
     new_students.clear();
     affected_uc.clear();
     affected_students.clear();
+}
+
+/**
+ * Saves unprocessed requests to unprocessed_requests.csv
+ * Complexity: O(nk) (n = size of queue, k = number of requests per block)
+ */
+void RequestProcesser::write_requests_to_file() {
+    ofstream ofs;
+    list<Request> curr;
+    pair<string, string> curr_uc_turma;
+    ofs.open("Input/unprocessed_requests.csv");
+    ofs << "RequestType,TargetStudent,UC,Turma\n";
+    while (!request_blocks.empty()) {
+        curr = request_blocks.front();
+        request_blocks.pop();
+        ofs << "Block\n";
+        for (const Request& request : curr) {
+            curr_uc_turma = request.get_uc_turma();
+            ofs << request.get_type() << ',' << request.get_target_student() << ',' << ((curr_uc_turma.first == "")? "null" : curr_uc_turma.first) << ',' << ((curr_uc_turma.second == "")? "null" : curr_uc_turma.second) << '\n';
+        }
+    }
+}
+
+/**
+ * Read unprocessed requests from unprocessed_requests.csv
+ * Complexity: O(nk) (n = number of blocks, k = number of requests per block)
+ * @return
+ */
+int RequestProcesser::read_requests_from_file() {
+    ifstream ifs;
+    ifs.open("Input/unprocessed_requests.csv");
+    if (!ifs.is_open()) return 1;
+    string line;
+    string type, uc, turma, target_s;
+    unsigned target_student;
+    getline(ifs, line);
+    list<Request> curr;
+    if (line != "RequestType,TargetStudent,UC,Turma") return 1;
+    while (getline(ifs, line)) {
+        if (line == "Block") {
+            if (!curr.empty()) {
+                request_blocks.push(curr);
+                curr.clear();
+            }
+            continue;
+        }
+        else {
+            istringstream iss(line);
+            getline(iss, type, ',');
+            getline(iss, target_s, ',');
+            getline(iss, uc, ',');
+            getline(iss, turma, ',');
+            if (uc == "null") uc = "";
+            if (turma == "null") turma = "";
+            curr.emplace_back(type, stoi(target_s), uc, turma);
+        }
+    }
+    if (!curr.empty()) {
+        request_blocks.push(curr);
+        curr.clear();
+    }
+    return 0;
 }

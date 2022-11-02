@@ -24,6 +24,8 @@ public:
     int check_for_problems();
     void save_changes();
     void discard_changes();
+    void write_requests_to_file();
+    int read_requests_from_file();
 };
 
 #endif //AEDOUTRO_REQUESTPROCESSER_H
