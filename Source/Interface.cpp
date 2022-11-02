@@ -8,6 +8,7 @@
 #include <set>
 #include <algorithm>
 #include<unordered_set>
+
 using namespace std;
 /** Function that makes sure the input is within range
  *
@@ -554,13 +555,13 @@ int Interface::initiate() {
                         cin >> order;
                     }
                     set<Student> students = database->getStudents();
-                    set<Student*, decltype(&set_compareLessthan_student)> res(&set_compareLessthan_student);
+                    set<Student*, decltype(set_compareLessthan_student)*> res(set_compareLessthan_student);
                     if (year == "1") {
                         for (Student s: students) {
                             for (UCTurma* turma: s.getUcTurmas()) {
-                                Student* s_pointer= &s;
+                                Student* s_p= new Student(s);
                                 if (turma->get_uc_turma().second.substr(0, 1) == "1") {
-                                    res.insert(s_pointer);
+                                    res.insert(s_p);
                                     break;
                                 }
                             }
@@ -568,6 +569,7 @@ int Interface::initiate() {
                         if (order == "1") {
                             for (Student* s: res) {
                                 cout << "Aluno: " << s->get_name() << "\t\tCodigo: " << s->get_num() << endl;
+                                delete s;
                                 student_count++;
                             }
                         }
@@ -575,53 +577,62 @@ int Interface::initiate() {
                             auto it = res.end();
                             for (it--; it != res.begin(); it--) {
                                 cout << "ALuno: " << (*it)->get_name() << "\t\tCodigo: " << (*it)->get_num() << endl;
+                                delete (*it);
                                 student_count++;
                             }
                             cout << "ALuno: " << (*it)->get_name() << "\t\tCodigo" << (*it)->get_num() << endl;
+                            delete(*it);
                             student_count++;
                         }
                         cout << "\n";
-                        cout << "Total de alunos no 1 ano: " << student_count << "\n" << endl;
+                        cout << "Total de alunos que tem aulas em turmas do 1 ano: " << student_count << "\n" << endl;
                     }
                     if (year == "2") {
-                        for (Student s: students) {
-                            for (UCTurma *turma: s.getUcTurmas()) {
-                                Student* s_pointer=&s;
-                                if (turma->get_uc_turma().second.substr(0, 1) == "2") {
-                                    res.insert(s_pointer);
+                            for (Student s: students) {
+                                for (UCTurma* turma: s.getUcTurmas()) {
+                                    Student* s_p= new Student(s);
+                                    if (turma->get_uc_turma().second.substr(0, 1) == "2") {
+                                        res.insert(s_p);
+                                        break;
+                                    }
                                 }
                             }
-                        }
-                        if (order == "1") {
-                            for (Student* s: res) {
-                                cout << "Aluno: " << s->get_name() << "\t\tCodigo: " << s->get_num() << endl;
+                            if (order == "1") {
+                                for (Student* s: res) {
+                                    cout << "Aluno: " << s->get_name() << "\t\tCodigo: " << s->get_num() << endl;
+                                    delete s;
+                                    student_count++;
+                                }
+                            }
+                            if (order == "2") {
+                                auto it = res.end();
+                                for (it--; it != res.begin(); it--) {
+                                    cout << "ALuno: " << (*it)->get_name() << "\t\tCodigo: " << (*it)->get_num() << endl;
+                                    delete (*it);
+                                    student_count++;
+                                }
+                                cout << "ALuno: " << (*it)->get_name() << "\t\tCodigo" << (*it)->get_num() << endl;
+                                delete(*it);
                                 student_count++;
                             }
-                        }
-                        if (order == "2") {
-                            auto it = res.end();
-                            for (it--; it != res.begin(); it--) {
-                                cout << "ALuno: " << (*it)->get_name() << "\t\tCodigo: " << (*it)->get_num() << endl;
-                                student_count++;
-                            }
-                            cout << "ALuno: " << (*it)->get_name() << "\t\tCodigo" << (*it)->get_num() << endl;
-                            student_count++;
-                        }
-                        cout << "\n";
-                        cout << "Total de alunos no 2 ano: " << student_count << "\n" << endl;
+                            cout << "\n";
+                            cout << "Total de alunos que tem aulas em turmas do 2 ano: " << student_count << "\n" << endl;
                     }
+
                     if (year == "3") {
                         for (Student s: students) {
-                            for (UCTurma *turma: s.getUcTurmas()) {
-                                Student* s_pointer=&s;
+                            for (UCTurma* turma: s.getUcTurmas()) {
+                                Student* s_p= new Student(s);
                                 if (turma->get_uc_turma().second.substr(0, 1) == "3") {
-                                    res.insert(s_pointer);
+                                    res.insert(s_p);
+                                    break;
                                 }
                             }
                         }
                         if (order == "1") {
                             for (Student* s: res) {
                                 cout << "Aluno: " << s->get_name() << "\t\tCodigo: " << s->get_num() << endl;
+                                delete s;
                                 student_count++;
                             }
                         }
@@ -629,13 +640,15 @@ int Interface::initiate() {
                             auto it = res.end();
                             for (it--; it != res.begin(); it--) {
                                 cout << "ALuno: " << (*it)->get_name() << "\t\tCodigo: " << (*it)->get_num() << endl;
+                                delete (*it);
                                 student_count++;
                             }
                             cout << "ALuno: " << (*it)->get_name() << "\t\tCodigo" << (*it)->get_num() << endl;
+                            delete(*it);
                             student_count++;
                         }
                         cout << "\n";
-                        cout << "Total de alunos no 3 ano: " << student_count << "\n" << endl;
+                        cout << "Total de alunos no que tem aulas em turmas do 3 ano: " << student_count << "\n" << endl;
                     }
                     return 0;
                 }
@@ -669,12 +682,17 @@ int Interface::initiate() {
                     for (Student s: database->getStudents()) {
                         //verificar se o aluno tem a UC
                         for (UCTurma *ucturma: s.getUcTurmas()) {
-                            if (ucturma->get_uc_turma().first == uc) students.insert(&s);
+                            if (ucturma->get_uc_turma().first == uc) {
+                                Student* s_p= new Student(s);
+                                students.insert(s_p);
+                                break;
+                            }
                         }
                     }
                     if (order == "1") {
                         for (Student* s: students) {
                             cout << "Aluno: " << s->get_name() << "\t\tCodigo: " << s->get_num() << endl;
+                            delete s;
                             student_count++;
                         }
                     }
@@ -682,9 +700,11 @@ int Interface::initiate() {
                         auto it = students.end();
                         for (it--; it != students.begin(); it--) {
                             cout << "ALuno: " << (*it)->get_name() << "\t\tCodigo: " << (*it)->get_num() << endl;
+                            delete (*it);
                             student_count++;
                         }
                         cout << "ALuno: " << (*it)->get_name() << "\t\tCodigo: " << (*it)->get_num() << endl;
+                        delete (*it);
                         student_count++;
                     }
                     cout << "\n";
@@ -722,15 +742,19 @@ int Interface::initiate() {
                     }
                     set<Student*, decltype(&set_compareLessthan_student)> students(&set_compareLessthan_student);
                     for (Student s: database->getStudents()) {
-                        //verificar se o aluno tem a UC
-
+                        //verificar se o aluno tem a turma
                         for (UCTurma *ucturma: s.getUcTurmas()) {
-                            if (ucturma->get_uc_turma().second == turma) students.insert(&s);
+                            if (ucturma->get_uc_turma().second == turma) {
+                                Student* s_p=new Student(s);
+                                students.insert(s_p);
+                                break;
+                            }
                         }
                     }
                     if (order == "1") {
                         for (Student* s: students) {
                             cout << "Aluno: " << s->get_name() << "\t\tCodigo: " << s->get_num() << endl;
+                            delete s;
                             aluno_count++;
                         }
                     }
@@ -738,9 +762,11 @@ int Interface::initiate() {
                         auto it = students.end();
                         for (it--; it != students.begin(); it--) {
                             cout << "ALuno: " << (*it)->get_name() << "\t\tCodigo: " << (*it)->get_num() << endl;
+                            delete(*it);
                             aluno_count++;
                         }
                         cout << "ALuno: " << (*it)->get_name() << "\t\tCodigo: " << (*it)->get_num() << endl;
+                        delete(*it);
                         aluno_count++;
                     }
                     cout << "\n";
@@ -770,22 +796,25 @@ int Interface::initiate() {
                 set<Student> temp=database->getStudents();
                 set<Student*, decltype(&set_compareLessthan_student)> students(&set_compareLessthan_student);
                 for(Student aluno:temp) {
-                    Student* s_pointer= &aluno;
-                    students.insert(s_pointer);
+                    Student* s_p= new Student(aluno);
+                    students.insert(s_p);
                 }
                 if (order == "1") {
                     for (Student* s: students) {
-                        cout << "Aluno: " << s->get_name() << "Codigo: " << s->get_num() << endl;
+                        cout << "Aluno: " << s->get_name() << " Codigo: " << s->get_num() << endl;
+                        delete s;
                         student_count++;
                     }
                 }
                 if (order == "2") {
                     auto it = students.end();
                     for (it--; it != students.begin(); it--) {
-                        cout << "Aluno: " << (*it)->get_name() << "Codigo: " << (*it)->get_num() << endl;
+                        cout << "Aluno: " << (*it)->get_name() << " Codigo: " << (*it)->get_num() << endl;
+                        delete (*it);
                         student_count++;
                     }
-                    cout << "Aluno: " << (*it)->get_name() << "Codigo: " << (*it)->get_num() << endl;
+                    cout << "Aluno: " << (*it)->get_name() << " Codigo: " << (*it)->get_num() << endl;
+                    delete(*it);
                     student_count++;
                 }
                 cout << "\n";

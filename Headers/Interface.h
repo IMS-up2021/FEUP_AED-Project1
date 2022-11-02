@@ -9,6 +9,7 @@
 #include <list>
 #include"CSVReader.h"
 #include "RequestProcesser.h"
+#include "StudentPtr.h"
 
 using namespace std;
 class Interface {
