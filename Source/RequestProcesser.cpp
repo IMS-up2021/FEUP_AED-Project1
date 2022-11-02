@@ -63,6 +63,7 @@ int RequestProcesser::process_next_request_block() {
                     (*it).set_timetable(l);
                     break;
                 }
+                else s_it++;
             }
         }
         else {
