@@ -112,11 +112,11 @@ bool Interface::ucLessthan1(const UCTurma* ucturma1, const UCTurma* ucturma2) {
  */
 int Interface::initiate() {
     MenuPrincipal:string userInput;
-    cout<<"Introduza o numero do comando:\n\t1.Listagem\n\t2.Alteracoes\n\t0.Sair do programa"<<endl;
+    cout<<"Introduza o numero do comando:\n\t1.Listagem\n\t2.Alteracoes\n\t3.Carregar estado do programa da ultima utilizacao\n\t0.Sair do programa"<<endl;
     cin>>userInput;
     //Limitar range de opcoes
     if (userInput == "0") return 1;
-    while(!is_in(userInput, 1, 2)) {
+    while(!is_in(userInput, 1, 3)) {
         cout << "Sintaxe errada.\nPor favor, reintroduzir:" << endl;
         cin>>userInput;
     }
@@ -1138,178 +1138,198 @@ int Interface::initiate() {
         }
     }
 
-
     else if(userInput=="2"){
-        menuAlteracoes0: string identity;
-        cout << "Introduza o numero de estudante para efetuar alteracoes sobre este: \n\t0.Para voltar" << endl;
-        cin >> identity;
-
-        //verificar se existe o aluno na base de dados;
-        while(!is_number(identity)) {
-            cout<<"Codigo invalido,reintroduzir:"<<endl;
-            cin>>identity;
+        menuAlteracoes0: string criteria, option,y_n,operation;
+        string identity, uc,turma,student;
+        cout<<"Introduzir o numero da opcao:\n\t1.Iniciar bloco de pedidos\n\t2.Processar um bloco de pedido\n\t3.Processar todos os blocos de pedidos\n\t4.Guardar alteracoes para proxima utilizacao do programa\n\t0.Voltar"<<endl;
+        cin>>operation;
+        while(!is_in(operation,0,4)){
+            cout<<"Sintase errada, por favor reintroduzir:"<<endl;
+            cin>>operation;
         }
-        Student target = Student(stoi(identity));
-        auto it = database->getStudents().find(target);
-        if (identity == "0") goto MenuPrincipal;
-        while(it==database->getStudents().end()){
-            cout<<"Codigo de estudante nao existente, reintroduzir:"<<endl;
-            cin>>identity;
+        if(operation=="0"){
+            goto MenuPrincipal;
+        }
+
+        if(operation=="1"){
+            cout << "Introduza o numero de estudante para efetuar alteracoes sobre este: \n\t0.Para voltar" << endl;
+            cin >> identity;
+
+            //verificar se existe o aluno na base de dados;
             while(!is_number(identity)) {
                 cout<<"Codigo invalido,reintroduzir:"<<endl;
                 cin>>identity;
             }
-            target=Student(stoi(identity));
-            it=database->getStudents().find(target);
+            Student target = Student(stoi(identity));
+            auto it = database->getStudents().find(target);
             if (identity == "0") goto MenuPrincipal;
-        }
+            while(it==database->getStudents().end()){
+                cout<<"Codigo de estudante nao existente, reintroduzir:"<<endl;
+                cin>>identity;
+                while(!is_number(identity)) {
+                    cout<<"Codigo invalido,reintroduzir:"<<endl;
+                    cin>>identity;
+                }
+                target=Student(stoi(identity));
+                it=database->getStudents().find(target);
+                if (identity == "0") goto MenuPrincipal;
+            }
 
-        maisAlteracoesMesmoAluno:string criteria, option,y_n;
-        string uc,turma,student;
-        cout<< "Introduza o numero do criterio de alteracoes:\n\t1.Adicionar aluno a turma para determinada UC\n\t2.Remover aluno de uma turma para determinada UC\n\t3.Remover todas UCs relacionadas com uma turma do aluno\n\t4.Remover todas Turmas relacionadas com UC do aluno\n\t0.Voltar"<<endl;
-        cin >> criteria;
-        while (!is_in(criteria, 0, 4)) {
-            cout << "Sintaxe errada.\nPor favor, reintroduzir:" << endl;
+            maisAlteracoesMesmoAluno:
+            cout<< "Introduza o numero do criterio de alteracoes:\n\t1.Adicionar aluno a turma para determinada UC\n\t2.Remover aluno de uma turma para determinada UC\n\t3.Remover todas UCs relacionadas com uma turma do aluno\n\t4.Remover todas Turmas relacionadas com UC do aluno\n\t0.Voltar"<<endl;
             cin >> criteria;
-        }
-        if (criteria == "0") goto menuAlteracoes0;
-
-
-        //adicionar uma UCTurma em especifico a um estudante
-        if (criteria == "1") {
-
-            cout << "Introduza: " << endl;
-            cout<<"UC: "<<endl;
-            cin >> uc;
-            cout<<"Turma: "<<endl;
-            cin>>turma;
-            Request request= Request("add",stoi(identity),uc,turma);
-            processes.push_back(request);
-        }
-
-        //remover uma UCTurma em especifico de um estudante
-        if (criteria == "2") {
-            cout << "Introduza: " << endl;
-            cout<<"UC: "<<endl;
-            cin >> uc;
-            cout<<"Turma: "<<endl;
-            cin>>turma;
-            Request request= Request("remove",stoi(identity),uc,turma);
-            processes.push_back(request);
-
-        }
-
-        //remover todas as UCTurmas com uma certa turma de um estudante (type é "remove", uc fica em branco)
-        if (criteria == "3") {
-            cout << "Introduza a turma para que o aluno deixe de estar em todas as UC relacionados com essa turma: " << endl;
-            cout<<"Turma: "<<endl;
-            cin>>turma;
-            
-            //Checks if turma is in database
-            bool not_found = true;
-            vector<UCTurma> target_list = database->getUcTurmas();
-            for (UCTurma target: target_list) {
-                if (target.get_uc_turma().second == turma) not_found = false;
+            while (!is_in(criteria, 0, 4)) {
+                cout << "Sintaxe errada.\nPor favor, reintroduzir:" << endl;
+                cin >> criteria;
             }
-            while (not_found) {
-                cout << "numero de turma nao existente,reintroduzir:" << endl;
-                cin >> turma;
-                for (UCTurma target: target_list) {
-                    if (target.get_uc_turma().second == turma) not_found = false;
-                }
-            }
-            Request request= Request("remove",stoi(identity),"",turma);
-            processes.push_back(request);
-        }
+            if (criteria == "0") goto menuAlteracoes0;
 
-        //remover todas as UCTurmas com uma certa UC de um estudante(type é "remove", turma fica em branco)
-        if (criteria == "4") {
-            cout << "Introduza a UC para que o aluno deixe de estar em todas as turmas relacionados com ela: " << endl;
-            cin >> uc;
-            //Checks if turma is in database
-            bool not_found = true;
-            vector<UCTurma> target_list = database->getUcTurmas();
-            for (UCTurma target: target_list) {
-                if (target.get_uc_turma().first == uc) not_found = false;
-            }
-            while (not_found) {
-                cout << "numero de UC nao existente,reintroduzir:" << endl;
+
+            //adicionar uma UCTurma em especifico a um estudante
+            if (criteria == "1") {
+
+                cout << "Introduza: " << endl;
+                cout<<"UC: "<<endl;
                 cin >> uc;
-                for (UCTurma target: target_list) {
-                    if (target.get_uc_turma().first == uc) not_found = false;
-                }
+                cout<<"Turma: "<<endl;
+                cin>>turma;
+                Request request= Request("add",stoi(identity),uc,turma);
+                processes.push_back(request);
             }
-            Request request= Request("remove",stoi(identity),uc,"");
-            processes.push_back(request);
 
-        }
-        cout<<"Mais alteracoes?\n\t1.Sim\n\t2.Nao"<<endl;
-        cin>>option;
-        while (!is_in(option, 1, 2)) {
-            cout << "Sintaxe errada.\nPor favor, reintroduzir:" << endl;
-            cin >> option;
-        }
-        if(option=="1"){
-            cout<<" Do mesmo aluno?\n\t 1.Sim\n\t2.Nao"<<endl;
-            cin>>y_n;
+            //remover uma UCTurma em especifico de um estudante
+            if (criteria == "2") {
+                cout << "Introduza: " << endl;
+                cout<<"UC: "<<endl;
+                cin >> uc;
+                cout<<"Turma: "<<endl;
+                cin>>turma;
+                Request request= Request("remove",stoi(identity),uc,turma);
+                processes.push_back(request);
+
+            }
+
+            //remover todas as UCTurmas com uma certa turma de um estudante (type é "remove", uc fica em branco)
+            if (criteria == "3") {
+                cout << "Introduza a turma para que o aluno deixe de estar em todas as UC relacionados com essa turma: " << endl;
+                cout<<"Turma: "<<endl;
+                cin>>turma;
+                Request request= Request("remove",stoi(identity),"",turma);
+                processes.push_back(request);
+            }
+
+            //remover todas as UCTurmas com uma certa UC de um estudante(type é "remove", turma fica em branco)
+            if (criteria == "4") {
+                cout << "Introduza a UC para que o aluno deixe de estar em todas as turmas relacionados com ela: " << endl;
+                cin >> uc;
+                Request request= Request("remove",stoi(identity),uc,"");
+                processes.push_back(request);
+            }
+
+            cout<<"Mais alteracoes?\n\t1.Sim\n\t2.Nao"<<endl;
+            cin>>option;
             while (!is_in(option, 1, 2)) {
                 cout << "Sintaxe errada.\nPor favor, reintroduzir:" << endl;
-                cin >> y_n;
+                cin >> option;
             }
-            if(y_n=="1"){
-                goto maisAlteracoesMesmoAluno;
-            }
-            else{
-                goto menuAlteracoes0;
-            }
-
-        }
-        else if(option=="2") {
-            requestProcesser->add_request_list(processes);
-            int cont = requestProcesser->process_next_request_block();
-            if(cont==0){
-                cont= requestProcesser->check_for_problems();
-                if(cont==0){
-                    requestProcesser->save_changes();
-                    list<Request> empty_list;
-                    processes= empty_list;
+            if(option=="1"){
+                cout<<" Do mesmo aluno?\n\t 1.Sim\n\t2.Nao"<<endl;
+                cin>>y_n;
+                while (!is_in(option, 1, 2)) {
+                    cout << "Sintaxe errada.\nPor favor, reintroduzir:" << endl;
+                    cin >> y_n;
                 }
-                else if(cont==1) {
-                    cout<<"Operacao invalida: Sobreposicao de horarios."<<endl;
-                    requestProcesser->discard_changes();
-                    list<Request> empty_list;
-                    processes= empty_list;
+                if(y_n=="1"){
                     goto maisAlteracoesMesmoAluno;
                 }
-                else if(cont==2) {
-                    cout<<"A operacao que realizar vai resultar num estado de desiquilibro de turmas, quer continuar?\n\t1.Sim\n\t2.Nao"<<endl;
+                else{
+                    goto menuAlteracoes0;
+                }
+            }
+            else if(option=="2") {
+                requestProcesser->add_request_list(processes);
+                processes.clear();
+                goto menuAlteracoes0;
+            }
+            return 0;
+        }
+
+        //caso user pretenda processar um bloco de pedidos
+        else if(operation=="2"){
+            int process_path=requestProcesser->process_next_request_block();
+            if(process_path==0){
+                int conflicts=requestProcesser->check_for_problems();
+                if(conflicts==0){
+                    cout<<"O ultimo bloco de pedidos sera processado: "<<endl;
+                    requestProcesser->save_changes();
+
+                }
+                else if(conflicts==1){
+                cout<<"Error, sobreposicao de horario ou UC-Turma incorreto,alteracoes nao foram feitas"<<endl;
+                requestProcesser->discard_changes();
+                }
+                else if (conflicts==2){
+                    cout<<"Este bloco de pedidos ira causar um desequilibrio de turmas e UCs, pretende continuar?: \n\t1.Sim\n\t2.Nao"<<endl;
                     cin>>y_n;
-                    while(!is_in(y_n,1,2)){
-                        cout << "Sintaxe errada.\nPor favor, reintroduzir:" << endl;
-                        cin >> y_n;
-                    }
                     if(y_n=="1"){
+                        cout<<"O ultimo bloco de pedidos sera processado com o desequilibrio"<<endl;
                         requestProcesser->save_changes();
-                        list<Request> empty_list;
-                        processes= empty_list;
                     }
-                    else{
+                    else if(y_n=="2"){
+                        cout<<"O ultimo bloco de pedidos nao sera processado, alteracoes nao foram feitas"<<endl;
                         requestProcesser->discard_changes();
-                        list<Request> empty_list;
-                        processes= empty_list;
-                        goto maisAlteracoesMesmoAluno;
                     }
                 }
             }
-            else {
-                cout<<"Operacao invalida,UC ou turma nao existentente"<<endl;
+            if(process_path==1){
+                cout<<"Error, UC-Turma incorreto,alteracoes nao foram feitas"<<endl;
                 requestProcesser->discard_changes();
-                list<Request> empty_list;
-                processes= empty_list;
-                goto maisAlteracoesMesmoAluno;
+            }
+            processes.clear();
+        }
+
+
+        if(operation=="3"){
+            while(!requestProcesser->queue_empty()){
+                int block_count=1;
+                int process_path=requestProcesser->process_next_request_block();
+                if(process_path==0){
+                    int conflicts=requestProcesser->check_for_problems();
+                    if(conflicts==0){
+                        cout<<"O ultimo bloco de pedidos sera processado: "<<endl;
+                        requestProcesser->save_changes();
+
+                    }
+                    else if(conflicts==1){
+                        cout<<"Error, sobreposicao de horario ou UC-Turma incorreto no bloco "<<block_count<<",alteracoes nao foram feitas para esse bloco de pedidos"<<endl;
+                        requestProcesser->discard_changes();
+                    }
+                    else if (conflicts==2){
+                        cout<<"O bloco de pedidos "<<block_count<<" ira causar um desequilibrio de turmas e UCs, pretende continuar?: \n\t1.Sim\n\t2.Nao"<<endl;
+                        cin>>y_n;
+                        if(y_n=="1"){
+                            cout<<"O ultimo bloco de pedidos sera processado com o desequilibrio"<<endl;
+                            requestProcesser->save_changes();
+                        }
+                        else if(y_n=="2"){
+                            cout<<"O bloco de pedidos "<<block_count<<" nao sera processado, alteracoes nao foram feitas para esse bloco de pedidos"<<endl;
+                            requestProcesser->discard_changes();
+                        }
+                    }
+                }
+                if(process_path==1){
+                    cout<<"Error, UC-Turma incorreto no bloco de pedidos "<<block_count<<",alteracoes nao foram feitas nela para esse bloco de pedidos"<<endl;
+                    requestProcesser->discard_changes();
+                }
+                block_count++;
             }
         }
-        return 0;
+        if(operation=="4"){
+            cout<<"As alteracoes serao guardadas"<<endl;
+            requestProcesser->write_requests_to_file();
+        }
+
+
 
 
         //crias uma lista de pedidos e adicionas à fila com o método cujo nome nao me lembro mas facilmente encontras no header
