@@ -8,6 +8,12 @@
 #include <algorithm>
 
 using namespace std;
+/**Constructor for Interface
+ *
+ * @param CSVReader reader
+ * @param Request request
+ */
+Interface::Interface(CSVReader &reader, RequestProcesser* request): database(&reader), requestProcesser(request) {}
 /** Function that makes sure the input is within range
  *
  * @param choice user's input
@@ -51,6 +57,13 @@ bool Interface::slotsLessthan1(const pair<pair<std::string, std::string>, Slot> 
     }
     return false;
 }
+
+/**Compare function for set of student pointers
+ *
+ * @param Student* s1
+ * @param Student* s2
+ * @return t/f
+ */
 bool Interface::set_compareLessthan_student(const Student* s1,const Student* s2){
     return (s1->get_name()<s2->get_name());
 }
@@ -73,12 +86,6 @@ bool Interface::is_number(std::string n) const {
     return nr;
 }
 
-/**Compares 2 classes by their code
- *
- * @param ucturma1
- * @param ucturma2
- * @return t/f
- */
 
 /**Compare 2 UC by their code
  *
@@ -86,13 +93,19 @@ bool Interface::is_number(std::string n) const {
  * @param ucturma2
  * @return t/f
  */
-
 bool Interface::ucGreaterthan1(const UCTurma* ucturma1, const UCTurma* ucturma2) {
     if((*ucturma1).get_uc_turma().first.compare((*ucturma2).get_uc_turma().first)>0){
         return true;
     }
     return false;
 }
+
+/**Compare 2 UC by their code
+ *
+ * @param ucturma1
+ * @param ucturma2
+ * @return t/f
+ */
 bool Interface::ucLessthan1(const UCTurma* ucturma1, const UCTurma* ucturma2) {
     if((*ucturma1).get_uc_turma().first.compare((*ucturma2).get_uc_turma().first)<0){
         return true;
@@ -172,11 +185,10 @@ int Interface::initiate() {
                         cout << "Sintase errada.\nPor favor reintroduzir:" << endl;
                         cin >> order;
                     }
-                    vector<UCTurma> turmas = database->getUcTurmas();
                     int turma_count=0;
                     if (year == "1") {
                         set<string> partialTurmas;
-                        for(UCTurma turma:turmas) {
+                        for(UCTurma turma:database->getUcTurmas()) {
                             if(turma.get_uc_turma().second.substr(0,1)=="1") partialTurmas.insert(turma.get_uc_turma().second);
                         }
                         if (order == "1") {
@@ -200,7 +212,7 @@ int Interface::initiate() {
                     }
                     if (year == "2") {
                         set<string> partialTurmas;
-                        for(UCTurma turma:turmas) {
+                        for(UCTurma turma:database->getUcTurmas()) {
                             if(turma.get_uc_turma().second.substr(0,1)=="2") partialTurmas.insert(turma.get_uc_turma().second);
                         }
                         if (order == "1") {
@@ -223,7 +235,7 @@ int Interface::initiate() {
                     }
                     if (year == "3") {
                         set<string> partialTurmas;
-                        for(UCTurma turma:turmas) {
+                        for(UCTurma turma:database->getUcTurmas()) {
                             if(turma.get_uc_turma().second.substr(0,1)=="3") partialTurmas.insert(turma.get_uc_turma().second);
                         }
                         if (order == "1") {
@@ -410,7 +422,6 @@ int Interface::initiate() {
                 cout << "Todas as turmas serao listadas:\n\t1.Para Continuar\n\t0.Para voltar" << endl;
                 cin >> mode;
                 int class_count=0;
-                vector<UCTurma> UCTurmas=database->getUcTurmas();
                 set<string> turmas;
                 while (!is_in(mode, 0, 1)) {
                     cout << "Sintase errada.\nPor favor reintroduzir:" << endl;
@@ -424,7 +435,7 @@ int Interface::initiate() {
                     cin >> order;
                 }
 
-                for(UCTurma t:UCTurmas){
+                for(UCTurma t:database->getUcTurmas()){
                     turmas.insert(t.get_uc_turma().second);
                 }
                 if(order=="1"){
@@ -489,24 +500,23 @@ int Interface::initiate() {
                         cout << "Sintase errada.\nPor favor reintroduzir:" << endl;
                         cin >> order;
                     }
-                    vector<UCTurma> UCTurmas = database->getUcTurmas();
                     set<string> partialUCs;
                     if (year == "1") {
-                        for (UCTurma ucturma: UCTurmas) {
+                        for (UCTurma ucturma: database->getUcTurmas()) {
                             if (ucturma.get_uc_turma().second.substr(0, 1) == "1") {
                                 partialUCs.insert(ucturma.get_uc_turma().first);
                             }
                         }
                     }
                     if (year == "2") {
-                        for (UCTurma ucturma: UCTurmas) {
+                        for (UCTurma ucturma: database->getUcTurmas()) {
                             if (ucturma.get_uc_turma().second.substr(0, 1) == "2") {
                                 partialUCs.insert(ucturma.get_uc_turma().first);
                             }
                         }
                     }
                     if (year == "3") {
-                        for (UCTurma ucturma: UCTurmas) {
+                        for (UCTurma ucturma:database->getUcTurmas()) {
                             if (ucturma.get_uc_turma().second.substr(0, 1) == "3") {
                                 partialUCs.insert(ucturma.get_uc_turma().first);
                             }
@@ -631,7 +641,6 @@ int Interface::initiate() {
                 cout << "Criterio de ordenacao:\n\t1.Crescente\n\t2.Decrescente\n\t0.Para voltar" << endl;
                 cin >> order;
                 int uc_count=0;
-                vector<UCTurma> UCTurmas=database->getUcTurmas();
                 set<string> UCs;
                 while (!is_in(order, 0, 2)) {
                     cout << "Sintase errada.\nPor favor reintroduzir:" << endl;
@@ -639,7 +648,7 @@ int Interface::initiate() {
                 }
                 if(order=="0") goto menuAnterior2_UC;
 
-                for(UCTurma uc:UCTurmas){
+                for(UCTurma uc:database->getUcTurmas()){
                     UCs.insert(uc.get_uc_turma().first);
                 }
                 if (order == "1") {
@@ -816,7 +825,6 @@ int Interface::initiate() {
                     //verificar se existe UC na base de dados
                     if (uc == "0") goto menuAnterior3_Students;
                     UCTurma target = UCTurma(uc, "");
-
                     auto it = lower_bound( database->getUcTurmas().begin(),  database->getUcTurmas().end(), target);
                     while (it ==  database->getUcTurmas().end()) {
                         cout << "Codigo da UC invalido, reintroduzir:" << endl;
@@ -874,7 +882,6 @@ int Interface::initiate() {
                     cout << "Introduzir o codigo da turma(ex:1LEIC01):\n\t0.Para voltar" << endl;
                     cin >> turma;
                     bool not_found = true;
-
                     //finds if turma is in database
                     if (turma == "0") goto menuAnterior3_Students;
                     for (UCTurma target:  database->getUcTurmas()) {
@@ -1022,6 +1029,7 @@ int Interface::initiate() {
             }
         }
 
+
         //listagem do horario
         else if (criteria == "4") {
             menuAnterior1_horario:cout<< "Introduza o numero modo de listagem:\n\t1.Por aluno\n\t2.Por turma\n\t3.Por unidade curricular\n\t0.Voltar"<<endl;
@@ -1089,9 +1097,7 @@ int Interface::initiate() {
                         cout<<"Codigo invalido,reintroduzir:"<<endl;
                         cin>>student;
                     }
-                    //Student target = Student(stoi(student));
                     Student search = database->get_student_by_num(stoi(student));
-                    //auto it = database->getStudents().find(target);
                     if (student == "0") goto menuAnterior3_horario;
                     while(search.get_num() == 0){
                         cout<<"Codigo de estudante nao existente, reintroduzir:"<<endl;
@@ -1101,8 +1107,6 @@ int Interface::initiate() {
                             cin>>student;
                         }
                         search = database->get_student_by_num(stoi(student));
-                        //target=Student(stoi(student));
-                        //it=database->getStudents().find(target);
                         if (student == "0") goto menuAnterior3_horario;
                     }
 
@@ -1161,7 +1165,7 @@ int Interface::initiate() {
 
             //Listagem do horario por UC
             if(mode=="3"){
-                menuAnterior2_horario:cout << "Introduza o codigo da UC:\n\t0.Para voltar" << endl;
+                cout << "Introduza o codigo da UC:\n\t0.Para voltar" << endl;
                 cin >> uc;
                 UCTurma target= UCTurma(uc,"");
                 auto it = lower_bound(database->getUcTurmas().begin(),database->getUcTurmas().end(),target);
@@ -1187,6 +1191,8 @@ int Interface::initiate() {
         }
     }
 
+
+    //Menu das alteracoes
     else if(userInput=="2"){
         menuAlteracoes0: string criteria, option,y_n,operation;
         string identity, uc,turma,student;
@@ -1200,6 +1206,8 @@ int Interface::initiate() {
             goto MenuPrincipal;
         }
 
+
+        //caso Iniciar bloco de pedidos
         if(operation=="1"){
             menuAlteracoes_aluno:cout << "Introduza o numero de estudante para efetuar alteracoes sobre este: \n\t0.Para voltar" << endl;
             cin >> identity;
@@ -1309,7 +1317,6 @@ int Interface::initiate() {
                 if(conflicts==0){
                     cout<<"O ultimo bloco de pedidos sera processado: "<<endl;
                     requestProcesser->save_changes();
-
                 }
                 else if(conflicts==1){
                 cout<<"Error, sobreposicao de horario ou UC-Turma incorreto,alteracoes nao foram feitas"<<endl;
@@ -1333,8 +1340,11 @@ int Interface::initiate() {
                 requestProcesser->discard_changes();
             }
             cout<<"\n"<<endl;
+            return 0;
         }
 
+
+        //caso user queira processar todos os blocos de pedidos
         if(operation=="3"){
             if(requestProcesser->queue_empty()){
                 cout<<"Ainda nao ha processos para executar,a voltar..."<<"\n"<<endl;
@@ -1378,22 +1388,23 @@ int Interface::initiate() {
         return 0;
     }
 
+
     //if user chooses to load state from previous execution
     if(userInput=="3"){
         requestProcesser->read_requests_from_file();
         cout<<"O estado da execucao anterior do programa foi carregado"<<"\n"<<endl;
+        return 0;
     }
+
 
     //if user chooses to save the current program state
     if(userInput=="4"){
         requestProcesser->write_requests_to_file();
         database->write_students_to_file();
         cout<<"O estado do programa foi guardado para uma proxima utilizacao"<<"\n"<<endl;
+        return 0;
     }
     return 0;
-
 }
 
 
-
-Interface::Interface(CSVReader &reader, RequestProcesser* request): database(&reader), requestProcesser(request) {}
