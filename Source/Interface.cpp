@@ -255,14 +255,13 @@ int Interface::initiate() {
                     cin >> uc;
                     if(uc=="0") goto menuAnterior3;
                     UCTurma target= UCTurma(uc,"");
-                    vector<UCTurma> target_list= database->getUcTurmas();
-                    auto it = lower_bound(target_list.begin(),target_list.end(),target);
-                    while(it==target_list.end()){
+                    auto it = lower_bound( database->getUcTurmas().begin(), database->getUcTurmas().end(),target);
+                    while(it== database->getUcTurmas().end()){
                         cout<<"Codigo da UC invalido, reintroduzir:"<<endl;
                         cin>>uc;
                         if(uc=="0") goto menuAnterior3;
                         target= UCTurma(uc,"");
-                        it = lower_bound(target_list.begin(),target_list.end(),target);
+                        it = lower_bound( database->getUcTurmas().begin(), database->getUcTurmas().end(),target);
 
                     }
                     //returns timetable for uc
@@ -292,7 +291,7 @@ int Interface::initiate() {
                         turma_count++;
                         cout << "Turma: " << *it << endl;
                     }
-                    cout<<"\n"<<endl;
+                    cout<<"\n";
                     cout<<"No total existem "<<turma_count<<" turmas em: " <<uc<<"\n"<<endl;
                     return 0;
                 }
@@ -681,9 +680,11 @@ int Interface::initiate() {
             //listagem dos alunos parcial
             if (type == "1") {
                 menuAnterior3_Students:
-                cout << "Introduza modo de listagem:\n\t1.Por ano\n\t2.Por UC\n\t3.Por turma\n\t0.Voltar" << endl;
+                cout
+                        << "Introduza modo de listagem:\n\t1.Por ano\n\t2.Por UC\n\t3.Por turma\n\t4.Com mais de n UCs\n\t0.Voltar"
+                        << endl;
                 cin >> mode;
-                while (!is_in(mode, 0, 3)) {
+                while (!is_in(mode, 0, 4)) {
                     cout << "Sintase errada.\nPor favor, reintroduzir:" << endl;
                     cin >> mode;
                 }
@@ -707,11 +708,11 @@ int Interface::initiate() {
                         cout << "Sintase errada.\nPor favor reintroduzir:" << endl;
                         cin >> order;
                     }
-                    set<Student*, decltype(set_compareLessthan_student)*> res(set_compareLessthan_student);
+                    set<Student *, decltype(set_compareLessthan_student) *> res(set_compareLessthan_student);
                     if (year == "1") {
                         for (Student s: database->getStudents()) {
-                            for (UCTurma* turma: s.getUcTurmas()) {
-                                Student* s_p= new Student(s);
+                            for (UCTurma *turma: s.getUcTurmas()) {
+                                Student *s_p = new Student(s);
                                 if (turma->get_uc_turma().second.substr(0, 1) == "1") {
                                     res.insert(s_p);
                                     break;
@@ -719,7 +720,7 @@ int Interface::initiate() {
                             }
                         }
                         if (order == "1") {
-                            for (Student* s: res) {
+                            for (Student *s: res) {
                                 cout << "Aluno: " << s->get_name() << "   Codigo: " << s->get_num() << endl;
                                 delete s;
                                 student_count++;
@@ -733,56 +734,24 @@ int Interface::initiate() {
                                 student_count++;
                             }
                             cout << "Aluno: " << (*it)->get_name() << "   Codigo" << (*it)->get_num() << endl;
-                            delete(*it);
+                            delete (*it);
                             student_count++;
                         }
                         cout << "\n";
                         cout << "Total de alunos que tem aulas em turmas do 1 ano: " << student_count << "\n" << endl;
                     }
                     if (year == "2") {
-                            for (Student s: database->getStudents()) {
-                                for (UCTurma* turma: s.getUcTurmas()) {
-                                    Student* s_p= new Student(s);
-                                    if (turma->get_uc_turma().second.substr(0, 1) == "2") {
-                                        res.insert(s_p);
-                                        break;
-                                    }
-                                }
-                            }
-                            if (order == "1") {
-                                for (Student* s: res) {
-                                    cout << "Aluno: " << s->get_name() << "   Codigo: " << s->get_num() << endl;
-                                    delete s;
-                                    student_count++;
-                                }
-                            }
-                            if (order == "2") {
-                                auto it = res.end();
-                                for (it--; it != res.begin(); it--) {
-                                    cout << "Aluno: " << (*it)->get_name() << "   Codigo: " << (*it)->get_num() << endl;
-                                    delete (*it);
-                                    student_count++;
-                                }
-                                cout << "Aluno: " << (*it)->get_name() << "   Codigo" << (*it)->get_num() << endl;
-                                delete(*it);
-                                student_count++;
-                            }
-                            cout << "\n";
-                            cout << "Total de alunos que tem aulas em turmas do 2 ano: " << student_count << "\n" << endl;
-                    }
-
-                    if (year == "3") {
                         for (Student s: database->getStudents()) {
-                            for (UCTurma* turma: s.getUcTurmas()) {
-                                Student* s_p= new Student(s);
-                                if (turma->get_uc_turma().second.substr(0, 1) == "3") {
+                            for (UCTurma *turma: s.getUcTurmas()) {
+                                Student *s_p = new Student(s);
+                                if (turma->get_uc_turma().second.substr(0, 1) == "2") {
                                     res.insert(s_p);
                                     break;
                                 }
                             }
                         }
                         if (order == "1") {
-                            for (Student* s: res) {
+                            for (Student *s: res) {
                                 cout << "Aluno: " << s->get_name() << "   Codigo: " << s->get_num() << endl;
                                 delete s;
                                 student_count++;
@@ -796,11 +765,44 @@ int Interface::initiate() {
                                 student_count++;
                             }
                             cout << "Aluno: " << (*it)->get_name() << "   Codigo" << (*it)->get_num() << endl;
-                            delete(*it);
+                            delete (*it);
                             student_count++;
                         }
                         cout << "\n";
-                        cout << "Total de alunos no que tem aulas em turmas do 3 ano: " << student_count << "\n" << endl;
+                        cout << "Total de alunos que tem aulas em turmas do 2 ano: " << student_count << "\n" << endl;
+                    }
+
+                    if (year == "3") {
+                        for (Student s: database->getStudents()) {
+                            for (UCTurma *turma: s.getUcTurmas()) {
+                                Student *s_p = new Student(s);
+                                if (turma->get_uc_turma().second.substr(0, 1) == "3") {
+                                    res.insert(s_p);
+                                    break;
+                                }
+                            }
+                        }
+                        if (order == "1") {
+                            for (Student *s: res) {
+                                cout << "Aluno: " << s->get_name() << "   Codigo: " << s->get_num() << endl;
+                                delete s;
+                                student_count++;
+                            }
+                        }
+                        if (order == "2") {
+                            auto it = res.end();
+                            for (it--; it != res.begin(); it--) {
+                                cout << "Aluno: " << (*it)->get_name() << "   Codigo: " << (*it)->get_num() << endl;
+                                delete (*it);
+                                student_count++;
+                            }
+                            cout << "Aluno: " << (*it)->get_name() << "   Codigo" << (*it)->get_num() << endl;
+                            delete (*it);
+                            student_count++;
+                        }
+                        cout << "\n";
+                        cout << "Total de alunos no que tem aulas em turmas do 3 ano: " << student_count << "\n"
+                             << endl;
                     }
                     return 0;
                 }
@@ -811,16 +813,16 @@ int Interface::initiate() {
                     int student_count = 0;
                     cout << "Introduzir o codigo da unidade curricular:\n\t0.Para voltar" << endl;
                     cin >> uc;
-                    //gerificar se existe UC na base de dados
+                    //verificar se existe UC na base de dados
                     if (uc == "0") goto menuAnterior3_Students;
                     UCTurma target = UCTurma(uc, "");
-                    vector<UCTurma> target_list = database->getUcTurmas();
-                    auto it = lower_bound(target_list.begin(), target_list.end(), target);
-                    while (it == target_list.end()) {
+
+                    auto it = lower_bound( database->getUcTurmas().begin(),  database->getUcTurmas().end(), target);
+                    while (it ==  database->getUcTurmas().end()) {
                         cout << "Codigo da UC invalido, reintroduzir:" << endl;
                         cin >> uc;
                         target = UCTurma(uc, "");
-                        it = lower_bound(target_list.begin(), target_list.end(), target);
+                        it = lower_bound( database->getUcTurmas().begin(),  database->getUcTurmas().end(), target);
                         if (uc == "0") goto menuAnterior3_Students;
                     }
 
@@ -830,19 +832,19 @@ int Interface::initiate() {
                         cout << "Sintase errada.\nPor favor reintroduzir:" << endl;
                         cin >> order;
                     }
-                    set<Student*, decltype(set_compareLessthan_student)*> students(set_compareLessthan_student);
+                    set<Student *, decltype(set_compareLessthan_student) *> students(set_compareLessthan_student);
                     for (Student s: database->getStudents()) {
                         //verificar se o aluno tem a UC
                         for (UCTurma *ucturma: s.getUcTurmas()) {
                             if (ucturma->get_uc_turma().first == uc) {
-                                Student* s_p= new Student(s);
+                                Student *s_p = new Student(s);
                                 students.insert(s_p);
                                 break;
                             }
                         }
                     }
                     if (order == "1") {
-                        for (Student* s: students) {
+                        for (Student *s: students) {
                             cout << "Aluno: " << s->get_name() << "   Codigo: " << s->get_num() << endl;
                             delete s;
                             student_count++;
@@ -872,16 +874,16 @@ int Interface::initiate() {
                     cout << "Introduzir o codigo da turma(ex:1LEIC01):\n\t0.Para voltar" << endl;
                     cin >> turma;
                     bool not_found = true;
-                    vector<UCTurma> target_list = database->getUcTurmas();
+
                     //finds if turma is in database
                     if (turma == "0") goto menuAnterior3_Students;
-                    for (UCTurma target: target_list) {
+                    for (UCTurma target:  database->getUcTurmas()) {
                         if (target.get_uc_turma().second == turma) not_found = false;
                     }
                     while (not_found) {
                         cout << "numero de turma nao existente,reintroduzir:" << endl;
                         cin >> turma;
-                        for (UCTurma target: target_list) {
+                        for (UCTurma target:  database->getUcTurmas()) {
                             if (target.get_uc_turma().second == turma) not_found = false;
                         }
                         if (turma == "0") goto menuAnterior3_Students;
@@ -892,19 +894,19 @@ int Interface::initiate() {
                         cout << "Sintase errada.\nPor favor reintroduzir:" << endl;
                         cin >> order;
                     }
-                    set<Student*, decltype(&set_compareLessthan_student)> students(&set_compareLessthan_student);
+                    set<Student *, decltype(&set_compareLessthan_student)> students(&set_compareLessthan_student);
                     for (Student s: database->getStudents()) {
                         //verificar se o aluno tem a turma
                         for (UCTurma *ucturma: s.getUcTurmas()) {
                             if (ucturma->get_uc_turma().second == turma) {
-                                Student* s_p=new Student(s);
+                                Student *s_p = new Student(s);
                                 students.insert(s_p);
                                 break;
                             }
                         }
                     }
                     if (order == "1") {
-                        for (Student* s: students) {
+                        for (Student *s: students) {
                             cout << "Aluno: " << s->get_name() << "   Codigo: " << s->get_num() << endl;
                             delete s;
                             aluno_count++;
@@ -914,16 +916,62 @@ int Interface::initiate() {
                         auto it = students.end();
                         for (it--; it != students.begin(); it--) {
                             cout << "Aluno: " << (*it)->get_name() << "   Codigo: " << (*it)->get_num() << endl;
-                            delete(*it);
+                            delete (*it);
                             aluno_count++;
                         }
                         cout << "Aluno: " << (*it)->get_name() << "   Codigo: " << (*it)->get_num() << endl;
-                        delete(*it);
+                        delete (*it);
                         aluno_count++;
                     }
                     cout << "\n";
                     cout << "No total esta turma tem: " << aluno_count << " alunos" << "\n"
                          << endl;
+                    return 0;
+                }
+
+                //caso listagem de alunos seja por mais de n UCs
+                if (mode == "4") {
+                    cout << "Introduza o nr de ucs:\n\t0.Voltar" << endl;
+                    cin >> uc;
+                    if (uc == "0") goto menuAnterior3_Students;
+                    while (!is_number(uc)) {
+                        cout << "Sintase errada, reintroduzir" << endl;
+                        cin >> uc;
+                        if (uc == "0") goto menuAnterior3_Students;
+                    }
+                    cout << "Introduza criterio de ordenacao:\n\t1.Crescente\n\t2.Decrescente " << endl;
+                    cin >> order;
+                    while (!is_in(order, 1, 2)) {
+                        cout << "Sintase errada, reintroduzir: " << endl;
+                        cin >> order;
+                    }
+
+                    //Coloca estudantes com mais de n nr de ucs num set ordenado
+                    set<pair<string, unsigned int>> ordered_students;
+                    int student_count = 0;
+                    for (Student student: database->getStudents()) {
+                        if (student.get_number_of_uc() >= stoi(uc)) {
+                            ordered_students.insert({student.get_name(), student.get_num()});
+                        }
+                    }
+                    if (order == "1") {
+                        for (pair<string, unsigned int> s: ordered_students) {
+                            cout << "Aluno: " << s.first << "   Codigo: " << s.second << endl;
+                            student_count++;
+                        }
+                    }
+                    if (order == "2") {
+                        auto it = ordered_students.end();
+                        for (it--; it != ordered_students.begin(); it--) {
+                            cout << "Aluno: " << it->first << "   Codigo: " << it->second << endl;
+
+                            student_count++;
+                        }
+                        cout << "Aluno: " << it->first << "   Codigo: " << it->second << endl;
+                        student_count++;
+                    }
+                    cout << "\n";
+                    cout << "No total sao: " << student_count << " alunos" << "\n" << endl;
                     return 0;
                 }
             }
@@ -945,13 +993,13 @@ int Interface::initiate() {
                     cout << "Sintase errada.\nPor favor reintroduzir:" << endl;
                     cin >> order;
                 }
-                set<Student*, decltype(&set_compareLessthan_student)> students(&set_compareLessthan_student);
-                for(Student aluno:database->getStudents()) {
-                    Student* s_p= new Student(aluno);
+                set<Student *, decltype(&set_compareLessthan_student)> students(&set_compareLessthan_student);
+                for (Student aluno: database->getStudents()) {
+                    Student *s_p = new Student(aluno);
                     students.insert(s_p);
                 }
                 if (order == "1") {
-                    for (Student* s: students) {
+                    for (Student *s: students) {
                         cout << "Aluno: " << s->get_name() << "   Codigo: " << s->get_num() << endl;
                         delete s;
                         student_count++;
@@ -965,7 +1013,7 @@ int Interface::initiate() {
                         student_count++;
                     }
                     cout << "Aluno: " << (*it)->get_name() << "   Codigo: " << (*it)->get_num() << endl;
-                    delete(*it);
+                    delete (*it);
                     student_count++;
                 }
                 cout << "\n";
@@ -1086,14 +1134,14 @@ int Interface::initiate() {
                 cin>>turma;
                 //finds if turma is in database
                 bool not_found=true;
-                vector<UCTurma>target_list=database->getUcTurmas();
-                for(UCTurma target:target_list){
+
+                for(UCTurma target:database->getUcTurmas()){
                     if(target.get_uc_turma().second==turma) not_found=false;
                 }
                 while(not_found){
                     cout<<"numero de turma nao existente,reintroduzir:"<<endl;
                     cin>>turma;
-                    for(UCTurma target:target_list){
+                    for(UCTurma target:database->getUcTurmas()){
                         if(target.get_uc_turma().second==turma) not_found=false;
                     }
                     if(turma=="0") goto menuAnterior1_horario;
@@ -1116,13 +1164,12 @@ int Interface::initiate() {
                 menuAnterior2_horario:cout << "Introduza o codigo da UC:\n\t0.Para voltar" << endl;
                 cin >> uc;
                 UCTurma target= UCTurma(uc,"");
-                vector<UCTurma> target_list= database->getUcTurmas();
-                auto it = lower_bound(target_list.begin(),target_list.end(),target);
-                while(it==target_list.end()){
+                auto it = lower_bound(database->getUcTurmas().begin(),database->getUcTurmas().end(),target);
+                while(it==database->getUcTurmas().end()){
                     cout<<"Codigo da UC invalido, reintroduzir:"<<endl;
                     cin>>uc;
                     target= UCTurma(uc,"");
-                    it = lower_bound(target_list.begin(),target_list.end(),target);
+                    it = lower_bound(database->getUcTurmas().begin(),database->getUcTurmas().end(),target);
                 }
                 if(uc=="0") goto menuAnterior1_horario;
 
