@@ -14,7 +14,6 @@ class RequestProcesser {
 private:
     queue<list<Request>> request_blocks;
     CSVReader* database;
-    set<string> affected_uc;
     set<Student> new_students;
     set<pair<string,string>> affected_uc_turma;
 public:
