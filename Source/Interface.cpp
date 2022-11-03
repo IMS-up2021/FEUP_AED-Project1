@@ -359,18 +359,20 @@ int Interface::initiate() {
                             cout<<"Codigo invalido,reintroduzir:"<<endl;
                             cin>>student;
                         }
-                        Student target = Student(stoi(student));
-                        auto it = database->getStudents().find(target);
+                        //Student target = Student(stoi(student));
+                        Student search = database->get_student_by_num(stoi(student));
+                        //auto it = database->getStudents().find(target);
                         if (student == "0") goto menuAnterior3;
-                        while(it==database->getStudents().end()){
+                        while(search.get_num() == 0){
                             cout<<"Codigo de estudante nao existente, reintroduzir:"<<endl;
                             cin>>student;
                             while(!is_number(student)) {
                                 cout<<"Codigo invalido,reintroduzir:"<<endl;
                                 cin>>student;
                             }
-                            target=Student(stoi(student));
-                            it=database->getStudents().find(target);
+                            //target=Student(stoi(student));
+                            //it=database->getStudents().find(target);
+                            search = database->get_student_by_num(stoi(student));
                             if (student == "0") goto menuAnterior3;
                         }
 
@@ -587,18 +589,20 @@ int Interface::initiate() {
                             cout<<"Codigo invalido,reintroduzir:"<<endl;
                             cin>>student;
                         }
-                        Student target = Student(stoi(student));
-                        auto it = database->getStudents().find(target);
+                        //Student target = Student(stoi(student));
+                        Student search = database->get_student_by_num(stoi(student));
+                        //auto it = database->getStudents().find(target);
                         if (student == "0") goto menuAnterior4_uc;
-                        while(it==database->getStudents().end()){
+                        while(search.get_num() == 0){
                             cout<<"Codigo de estudante nao existente, reintroduzir:"<<endl;
                             cin>>student;
                             while(!is_number(student)) {
                                 cout<<"Codigo invalido,reintroduzir:"<<endl;
                                 cin>>student;
                             }
-                            target=Student(stoi(student));
-                            it=database->getStudents().find(target);
+                            //target=Student(stoi(student));
+                            search = database->get_student_by_num(stoi(student));
+                            //it=database->getStudents().find(target);
                             if (student == "0") goto menuAnterior4_uc;
                         }
 
@@ -705,10 +709,9 @@ int Interface::initiate() {
                         cout << "Sintase errada.\nPor favor reintroduzir:" << endl;
                         cin >> order;
                     }
-                    set<Student> students = database->getStudents();
                     set<Student*, decltype(set_compareLessthan_student)*> res(set_compareLessthan_student);
                     if (year == "1") {
-                        for (Student s: students) {
+                        for (Student s: database->getStudents()) {
                             for (UCTurma* turma: s.getUcTurmas()) {
                                 Student* s_p= new Student(s);
                                 if (turma->get_uc_turma().second.substr(0, 1) == "1") {
@@ -739,7 +742,7 @@ int Interface::initiate() {
                         cout << "Total de alunos que tem aulas em turmas do 1 ano: " << student_count << "\n" << endl;
                     }
                     if (year == "2") {
-                            for (Student s: students) {
+                            for (Student s: database->getStudents()) {
                                 for (UCTurma* turma: s.getUcTurmas()) {
                                     Student* s_p= new Student(s);
                                     if (turma->get_uc_turma().second.substr(0, 1) == "2") {
@@ -771,7 +774,7 @@ int Interface::initiate() {
                     }
 
                     if (year == "3") {
-                        for (Student s: students) {
+                        for (Student s: database->getStudents()) {
                             for (UCTurma* turma: s.getUcTurmas()) {
                                 Student* s_p= new Student(s);
                                 if (turma->get_uc_turma().second.substr(0, 1) == "3") {
@@ -944,9 +947,8 @@ int Interface::initiate() {
                     cout << "Sintase errada.\nPor favor reintroduzir:" << endl;
                     cin >> order;
                 }
-                set<Student> temp=database->getStudents();
                 set<Student*, decltype(&set_compareLessthan_student)> students(&set_compareLessthan_student);
-                for(Student aluno:temp) {
+                for(Student aluno:database->getStudents()) {
                     Student* s_p= new Student(aluno);
                     students.insert(s_p);
                 }
@@ -1041,18 +1043,20 @@ int Interface::initiate() {
                         cout<<"Codigo invalido,reintroduzir:"<<endl;
                         cin>>student;
                     }
-                    Student target = Student(stoi(student));
-                    auto it = database->getStudents().find(target);
+                    //Student target = Student(stoi(student));
+                    Student search = database->get_student_by_num(stoi(student));
+                    //auto it = database->getStudents().find(target);
                     if (student == "0") goto menuAnterior3_horario;
-                    while(it==database->getStudents().end()){
+                    while(search.get_num() == 0){
                         cout<<"Codigo de estudante nao existente, reintroduzir:"<<endl;
                         cin>>student;
                         while(!is_number(student)) {
                             cout<<"Codigo invalido,reintroduzir:"<<endl;
                             cin>>student;
                         }
-                        target=Student(stoi(student));
-                        it=database->getStudents().find(target);
+                        search = database->get_student_by_num(stoi(student));
+                        //target=Student(stoi(student));
+                        //it=database->getStudents().find(target);
                         if (student == "0") goto menuAnterior3_horario;
                     }
 
@@ -1156,22 +1160,16 @@ int Interface::initiate() {
             cin >> identity;
 
             //verificar se existe o aluno na base de dados;
-            while(!is_number(identity)) {
-                cout<<"Codigo invalido,reintroduzir:"<<endl;
-                cin>>identity;
-            }
-            Student target = Student(stoi(identity));
-            auto it = database->getStudents().find(target);
+            Student search = database->get_student_by_num(stoi(identity));
             if (identity == "0") goto MenuPrincipal;
-            while(it==database->getStudents().end()){
-                cout<<"Codigo de estudante nao existente, reintroduzir:"<<endl;
-                cin>>identity;
-                while(!is_number(identity)) {
-                    cout<<"Codigo invalido,reintroduzir:"<<endl;
-                    cin>>identity;
+            while(search.get_num() == 0) {
+                cout << "Codigo de estudante nao existente, reintroduzir:" << endl;
+                cin >> identity;
+                while (!is_number(identity)) {
+                    cout << "Codigo invalido,reintroduzir:" << endl;
+                    cin >> identity;
                 }
-                target=Student(stoi(identity));
-                it=database->getStudents().find(target);
+                search = database->get_student_by_num(stoi(identity));
                 if (identity == "0") goto MenuPrincipal;
             }
 
