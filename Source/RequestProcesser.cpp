@@ -40,7 +40,6 @@ int RequestProcesser::process_next_request_block() {
             auto s_it = l.begin();
             while (s_it != l.end()) {
                 if ((*s_it)->get_uc_turma().second == uc_turma.second) {
-                    affected_uc.insert((*s_it)->get_uc_turma().first);
                     affected_uc_turma.emplace((*s_it)->get_uc_turma().first, (*s_it)->get_uc_turma().second);
                     (*s_it)->create_temp_num();
                     (*s_it)->add_remove_student(false);
@@ -56,7 +55,6 @@ int RequestProcesser::process_next_request_block() {
             while (s_it != l.end()) {
                 if ((*s_it)->get_uc_turma().first == uc_turma.first) {
                     affected_uc_turma.emplace((*s_it)->get_uc_turma().first, (*s_it)->get_uc_turma().second);
-                    affected_uc.insert(uc_turma.first);
                     (*s_it)->create_temp_num();
                     (*s_it)->add_remove_student(false);
                     l.erase(s_it);
@@ -70,7 +68,6 @@ int RequestProcesser::process_next_request_block() {
             if (b) {
                 UCTurma* search = database->get_pointer_to_uc_turma(uc_turma);
                 if (search == nullptr) return 1;
-                affected_uc.insert(uc_turma.first);
                 affected_uc_turma.insert(uc_turma);
                 (*search).create_temp_num();
                 (*it.first).add_uc_turma_pointer(search);
@@ -81,7 +78,6 @@ int RequestProcesser::process_next_request_block() {
                 auto s_it = l.begin();
                 while (s_it != l.end()) {
                     if ((*s_it)->get_uc_turma() == uc_turma) {
-                        affected_uc.insert(uc_turma.first);
                         affected_uc_turma.insert(uc_turma);
                         (*s_it)->create_temp_num();
                         (*s_it)->add_remove_student(false);
@@ -107,13 +103,16 @@ int RequestProcesser::check_for_problems() {
     for (const Student& student : new_students) {
         if (student.timetable_has_conflict()) return 1;
     }
-    for (pair<string,string> uc_turma : affected_uc_turma) {
+    string curr_uc;
+    int ret = 0;
+    for (const pair<string,string>& uc_turma : affected_uc_turma) {
+        if (curr_uc.empty() || curr_uc != uc_turma.first) {
+            if (!database->is_balanced(uc_turma.first)) ret = 2;
+            curr_uc = uc_turma.first;
+        }
         if (!database->is_uc_turma_student_num_good(uc_turma)) return 1;
     }
-    for (string uc : affected_uc) {
-        if (!database->is_balanced(uc)) return 2;
-    }
-    return 0;
+    return ret;
 }
 
 /**
@@ -124,11 +123,14 @@ void RequestProcesser::save_changes() {
     for (Student student : new_students) {
         database->insert_student(student);
     }
-    for (const string& uc : affected_uc) {
-        database->save_uc_changes(uc);
+    string curr_uc;
+    for (const pair<string,string>& uc_turma : affected_uc_turma) {
+        if (curr_uc.empty() || curr_uc != uc_turma.first) {
+            database->save_uc_changes(uc_turma.first);
+            curr_uc = uc_turma.first;
+        }
     }
     new_students.clear();
-    affected_uc.clear();
     affected_uc_turma.clear();
 }
 
@@ -137,11 +139,14 @@ void RequestProcesser::save_changes() {
  * Complexity: O(nk) (n = size of affected_uc, k = number of turmas per UC)
  */
 void RequestProcesser::discard_changes() {
-    for (const string& uc : affected_uc) {
-        database->discard_uc_changes(uc);
+    string curr_uc;
+    for (const pair<string,string>& uc_turma : affected_uc_turma) {
+        if (curr_uc.empty() || curr_uc != uc_turma.first) {
+            database->discard_uc_changes(uc_turma.first);
+            curr_uc = uc_turma.first;
+        }
     }
     new_students.clear();
-    affected_uc.clear();
     affected_uc_turma.clear();
 }
 
