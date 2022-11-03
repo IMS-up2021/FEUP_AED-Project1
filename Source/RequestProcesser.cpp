@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <fstream>
 #include <sstream>
+#include <filesystem>
 
 /**
  * Adds list of requests to queue \n
@@ -203,6 +204,8 @@ int RequestProcesser::read_requests_from_file() {
         request_blocks.push(curr);
         curr.clear();
     }
+    ifs.close();
+    filesystem::remove("Input/unprocessed_requests.csv");
     return 0;
 }
 
