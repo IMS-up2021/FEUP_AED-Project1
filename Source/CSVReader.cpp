@@ -340,3 +340,9 @@ bool CSVReader::is_uc_turma_student_num_good(const pair<string, string> &uc_turm
     if (search == -1) return true;
     return uc_turmas[search].student_num_good();
 }
+
+void CSVReader::insert_student(Student student) {
+    auto it = students.find(student);
+    students.erase(it);
+    students.insert(student);
+}

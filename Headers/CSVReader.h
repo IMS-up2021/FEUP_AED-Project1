@@ -28,7 +28,7 @@ public:
     bool is_balanced(string uc) const;
     unsigned find_student_num_by_name(string name) const;
     Student get_student_by_num(unsigned num) const;
-    void set_students(set<Student> s);
+    void insert_student(Student student);
     void write_students_to_file() const;
     bool is_uc_turma_student_num_good(const pair<string,string>& uc_turma);
 

@@ -4,6 +4,7 @@
 
 #include <vector>
 #include <algorithm>
+#include <set>
 #include "../Headers/Student.h"
 
 Student::Student(string name, unsigned num): name(name), num(num) {}
@@ -30,15 +31,18 @@ list<UCTurma*> Student::get_timetable() const {
 }
 
 /**
- * Check if the Student has an invalid superposition (TP with PL, TP with TP, PL with PL) \n
+ * Check if the Student has an invalid superposition (TP with PL, TP with TP, PL with PL) and if they have multiple turmas for one UC \n
  * Complexity: O(nklog(nk)) (n = number of UCTurmas in student, k = number of slots per UCTurma)
  * @return true if conflict, false otherwise
  */
 bool Student::timetable_has_conflict() const {
     vector<Slot> slots;
+    set<string> uc;
     bool has_tp = false;
     bool has_pl = false;
     for (UCTurma* uc_turma : uc_turmas) {
+        auto it = uc.insert(uc_turma->get_uc_turma().first);
+        if (!it.second) return true;
         for (const Slot& slot : uc_turma->get_slots()) {
             slots.push_back(slot);
         }

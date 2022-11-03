@@ -22,7 +22,6 @@ void RequestProcesser::add_request_list(list<Request> requests) {
  * @return 0 if success, 1 otherwise
  */
 int RequestProcesser::process_next_request_block() {
-    new_students = database->getStudents();
     list<Request> block = request_blocks.front();
     request_blocks.pop();
     for (const Request& request : block) {
@@ -32,11 +31,11 @@ int RequestProcesser::process_next_request_block() {
         else b = false;
         unsigned target_student = request.get_target_student();
         pair<string, string> uc_turma = request.get_uc_turma();
-        auto it = new_students.find(Student(target_student));
-        if (it == new_students.end()) return 1;
-        affected_students.insert((*it).get_num());
+        Student student_search = database->get_student_by_num(target_student);
+        if (student_search.get_num() == 0) return 1;
+        auto it = new_students.insert(student_search);
         if (uc_turma.first.empty()) {
-            list<UCTurma*> l = (*it).get_timetable();
+            list<UCTurma*> l = (*it.first).get_timetable();
             auto s_it = l.begin();
             while (s_it != l.end()) {
                 if ((*s_it)->get_uc_turma().second == uc_turma.second) {
@@ -48,10 +47,10 @@ int RequestProcesser::process_next_request_block() {
                 }
                 else s_it++;
             }
-            (*it).set_timetable(l);
+            (*it.first).set_timetable(l);
         }
         else if (uc_turma.second.empty()) {
-            list<UCTurma*> l = (*it).get_timetable();
+            list<UCTurma*> l = (*it.first).get_timetable();
             auto s_it = l.begin();
             while (s_it != l.end()) {
                 if ((*s_it)->get_uc_turma().first == uc_turma.first) {
@@ -60,7 +59,7 @@ int RequestProcesser::process_next_request_block() {
                     (*s_it)->create_temp_num();
                     (*s_it)->add_remove_student(false);
                     l.erase(s_it);
-                    (*it).set_timetable(l);
+                    (*it.first).set_timetable(l);
                     break;
                 }
                 else s_it++;
@@ -73,11 +72,11 @@ int RequestProcesser::process_next_request_block() {
                 affected_uc.insert(uc_turma.first);
                 affected_uc_turma.insert(uc_turma);
                 (*search).create_temp_num();
-                (*it).add_uc_turma_pointer(search);
+                (*it.first).add_uc_turma_pointer(search);
                 (*search).add_remove_student(true);
             }
             else {
-                list<UCTurma*> l = (*it).get_timetable();
+                list<UCTurma*> l = (*it.first).get_timetable();
                 auto s_it = l.begin();
                 while (s_it != l.end()) {
                     if ((*s_it)->get_uc_turma() == uc_turma) {
@@ -86,7 +85,7 @@ int RequestProcesser::process_next_request_block() {
                         (*s_it)->create_temp_num();
                         (*s_it)->add_remove_student(false);
                         l.erase(s_it);
-                        (*it).set_timetable(l);
+                        (*it.first).set_timetable(l);
                         break;
                     }
                 }
@@ -104,9 +103,8 @@ RequestProcesser::RequestProcesser(CSVReader &reader): database(&reader) {}
  * @return 0 if no conflicts, 1 if student timetable superposition or invalid UCTurma student_number, 2 if UC imbalance (1 has priority over 2)
  */
 int RequestProcesser::check_for_problems() {
-    for (unsigned num : affected_students) {
-        auto it = new_students.find(Student(num));
-        if ((*it).timetable_has_conflict()) return 1;
+    for (const Student& student : new_students) {
+        if (student.timetable_has_conflict()) return 1;
     }
     for (pair<string,string> uc_turma : affected_uc_turma) {
         if (!database->is_uc_turma_student_num_good(uc_turma)) return 1;
@@ -122,13 +120,15 @@ int RequestProcesser::check_for_problems() {
  * Complexity: O(nk) (n = size of affected_uc, k = number of turmas per UC)
  */
 void RequestProcesser::save_changes() {
-    database->set_students(new_students);
+    for (Student student : new_students) {
+        database->insert_student(student);
+    }
     for (const string& uc : affected_uc) {
         database->save_uc_changes(uc);
     }
     new_students.clear();
     affected_uc.clear();
-    affected_students.clear();
+    affected_uc_turma.clear();
 }
 
 /**
@@ -141,7 +141,6 @@ void RequestProcesser::discard_changes() {
     }
     new_students.clear();
     affected_uc.clear();
-    affected_students.clear();
     affected_uc_turma.clear();
 }
 
