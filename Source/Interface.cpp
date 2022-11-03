@@ -4,10 +4,8 @@
 
 #include "../Headers/Interface.h"
 #include <iostream>
-#include <iomanip>
 #include <set>
 #include <algorithm>
-#include<unordered_set>
 
 using namespace std;
 /** Function that makes sure the input is within range
@@ -722,7 +720,7 @@ int Interface::initiate() {
                         }
                         if (order == "1") {
                             for (Student* s: res) {
-                                cout << "Aluno: " << s->get_name() << "\t\tCodigo: " << s->get_num() << endl;
+                                cout << "Aluno: " << s->get_name() << "   Codigo: " << s->get_num() << endl;
                                 delete s;
                                 student_count++;
                             }
@@ -730,11 +728,11 @@ int Interface::initiate() {
                         if (order == "2") {
                             auto it = res.end();
                             for (it--; it != res.begin(); it--) {
-                                cout << "ALuno: " << (*it)->get_name() << "\t\tCodigo: " << (*it)->get_num() << endl;
+                                cout << "Aluno: " << (*it)->get_name() << "   Codigo" << (*it)->get_num() << endl;
                                 delete (*it);
                                 student_count++;
                             }
-                            cout << "ALuno: " << (*it)->get_name() << "\t\tCodigo" << (*it)->get_num() << endl;
+                            cout << "Aluno: " << (*it)->get_name() << "   Codigo" << (*it)->get_num() << endl;
                             delete(*it);
                             student_count++;
                         }
@@ -753,7 +751,7 @@ int Interface::initiate() {
                             }
                             if (order == "1") {
                                 for (Student* s: res) {
-                                    cout << "Aluno: " << s->get_name() << "\t\tCodigo: " << s->get_num() << endl;
+                                    cout << "Aluno: " << s->get_name() << "   Codigo: " << s->get_num() << endl;
                                     delete s;
                                     student_count++;
                                 }
@@ -761,11 +759,11 @@ int Interface::initiate() {
                             if (order == "2") {
                                 auto it = res.end();
                                 for (it--; it != res.begin(); it--) {
-                                    cout << "ALuno: " << (*it)->get_name() << "\t\tCodigo: " << (*it)->get_num() << endl;
+                                    cout << "Aluno: " << (*it)->get_name() << "   Codigo: " << (*it)->get_num() << endl;
                                     delete (*it);
                                     student_count++;
                                 }
-                                cout << "ALuno: " << (*it)->get_name() << "\t\tCodigo" << (*it)->get_num() << endl;
+                                cout << "Aluno: " << (*it)->get_name() << "   Codigo" << (*it)->get_num() << endl;
                                 delete(*it);
                                 student_count++;
                             }
@@ -785,7 +783,7 @@ int Interface::initiate() {
                         }
                         if (order == "1") {
                             for (Student* s: res) {
-                                cout << "Aluno: " << s->get_name() << "\t\tCodigo: " << s->get_num() << endl;
+                                cout << "Aluno: " << s->get_name() << "   Codigo: " << s->get_num() << endl;
                                 delete s;
                                 student_count++;
                             }
@@ -793,11 +791,11 @@ int Interface::initiate() {
                         if (order == "2") {
                             auto it = res.end();
                             for (it--; it != res.begin(); it--) {
-                                cout << "ALuno: " << (*it)->get_name() << "\t\tCodigo: " << (*it)->get_num() << endl;
+                                cout << "Aluno: " << (*it)->get_name() << "   Codigo: " << (*it)->get_num() << endl;
                                 delete (*it);
                                 student_count++;
                             }
-                            cout << "ALuno: " << (*it)->get_name() << "\t\tCodigo" << (*it)->get_num() << endl;
+                            cout << "Aluno: " << (*it)->get_name() << "   Codigo" << (*it)->get_num() << endl;
                             delete(*it);
                             student_count++;
                         }
@@ -845,7 +843,7 @@ int Interface::initiate() {
                     }
                     if (order == "1") {
                         for (Student* s: students) {
-                            cout << "Aluno: " << s->get_name() << "\t\tCodigo: " << s->get_num() << endl;
+                            cout << "Aluno: " << s->get_name() << "   Codigo: " << s->get_num() << endl;
                             delete s;
                             student_count++;
                         }
@@ -853,11 +851,11 @@ int Interface::initiate() {
                     if (order == "2") {
                         auto it = students.end();
                         for (it--; it != students.begin(); it--) {
-                            cout << "ALuno: " << (*it)->get_name() << "\t\tCodigo: " << (*it)->get_num() << endl;
+                            cout << "Aluno: " << (*it)->get_name() << "   Codigo: " << (*it)->get_num() << endl;
                             delete (*it);
                             student_count++;
                         }
-                        cout << "ALuno: " << (*it)->get_name() << "\t\tCodigo: " << (*it)->get_num() << endl;
+                        cout << "Aluno: " << (*it)->get_name() << "   Codigo: " << (*it)->get_num() << endl;
                         delete (*it);
                         student_count++;
                     }
@@ -907,7 +905,7 @@ int Interface::initiate() {
                     }
                     if (order == "1") {
                         for (Student* s: students) {
-                            cout << "Aluno: " << s->get_name() << "\t\tCodigo: " << s->get_num() << endl;
+                            cout << "Aluno: " << s->get_name() << "   Codigo: " << s->get_num() << endl;
                             delete s;
                             aluno_count++;
                         }
@@ -915,11 +913,11 @@ int Interface::initiate() {
                     if (order == "2") {
                         auto it = students.end();
                         for (it--; it != students.begin(); it--) {
-                            cout << "ALuno: " << (*it)->get_name() << "\t\tCodigo: " << (*it)->get_num() << endl;
+                            cout << "Aluno: " << (*it)->get_name() << "   Codigo: " << (*it)->get_num() << endl;
                             delete(*it);
                             aluno_count++;
                         }
-                        cout << "ALuno: " << (*it)->get_name() << "\t\tCodigo: " << (*it)->get_num() << endl;
+                        cout << "Aluno: " << (*it)->get_name() << "   Codigo: " << (*it)->get_num() << endl;
                         delete(*it);
                         aluno_count++;
                     }
@@ -954,7 +952,7 @@ int Interface::initiate() {
                 }
                 if (order == "1") {
                     for (Student* s: students) {
-                        cout << "Aluno: " << s->get_name() << " Codigo: " << s->get_num() << endl;
+                        cout << "Aluno: " << s->get_name() << "   Codigo: " << s->get_num() << endl;
                         delete s;
                         student_count++;
                     }
@@ -962,11 +960,11 @@ int Interface::initiate() {
                 if (order == "2") {
                     auto it = students.end();
                     for (it--; it != students.begin(); it--) {
-                        cout << "Aluno: " << (*it)->get_name() << " Codigo: " << (*it)->get_num() << endl;
+                        cout << "Aluno: " << (*it)->get_name() << "   Codigo: " << (*it)->get_num() << endl;
                         delete (*it);
                         student_count++;
                     }
-                    cout << "Aluno: " << (*it)->get_name() << " Codigo: " << (*it)->get_num() << endl;
+                    cout << "Aluno: " << (*it)->get_name() << "   Codigo: " << (*it)->get_num() << endl;
                     delete(*it);
                     student_count++;
                 }
@@ -1254,6 +1252,10 @@ int Interface::initiate() {
 
         //caso user pretenda processar um bloco de pedidos
         else if(operation=="2"){
+            if(requestProcesser->queue_empty()){
+                cout<<"Ainda nao ha processos para executar, a voltar..."<<"\n"<<endl;
+                return 0;
+            }
             int process_path=requestProcesser->process_next_request_block();
             if(process_path==0){
                 int conflicts=requestProcesser->check_for_problems();
@@ -1283,9 +1285,14 @@ int Interface::initiate() {
                 cout<<"Error, UC-Turma incorreto,alteracoes nao foram feitas"<<endl;
                 requestProcesser->discard_changes();
             }
+            cout<<"\n"<<endl;
         }
 
         if(operation=="3"){
+            if(requestProcesser->queue_empty()){
+                cout<<"Ainda nao ha processos para executar,a voltar..."<<"\n"<<endl;
+                return 0;
+            }
             while(!requestProcesser->queue_empty()){
                 int block_count=1;
                 int process_path=requestProcesser->process_next_request_block();
@@ -1320,20 +1327,21 @@ int Interface::initiate() {
                 block_count++;
             }
         }
+        cout<<"\n";
         return 0;
     }
 
     //if user chooses to load state from previous execution
     if(userInput=="3"){
         requestProcesser->read_requests_from_file();
-        cout<<"O estado da execucao anterior do programa foi carregado"<<endl;
+        cout<<"O estado da execucao anterior do programa foi carregado"<<"\n"<<endl;
     }
 
     //if user chooses to save the current program state
     if(userInput=="4"){
         requestProcesser->write_requests_to_file();
         database->write_students_to_file();
-        cout<<"O estado do programa foi guardado para uma proxima utilizacao"<<endl;
+        cout<<"O estado do programa foi guardado para uma proxima utilizacao"<<"\n"<<endl;
     }
     return 0;
 
