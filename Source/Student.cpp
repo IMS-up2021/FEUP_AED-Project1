@@ -7,11 +7,26 @@
 #include <set>
 #include "../Headers/Student.h"
 
+/**
+ * Construct Student \n
+ * Complexity: O(1)
+ * @param name name of student
+ * @param num number of student
+ */
 Student::Student(string name, unsigned num): name(name), num(num) {}
 
+/**
+ * Construct empty Student \n
+ * Complexity: O(1)
+ */
 Student::Student() {}
 
+/**
+ * Construct Student only with number
+ * @param num number of student
+ */
 Student::Student(unsigned num): num(num) {}
+
 /**
  * Adds UCTurma to Student via reference \n
  * Complexity: O(1)
@@ -22,17 +37,28 @@ void Student::add_uc_turma(UCTurma &uc_turma) const{
     uc_turma.add_remove_student(true);
 }
 
+/**
+ * Compares two students by number \n
+ * Complexity: O(1)
+ * @param other Student to compare to
+ * @return true if this<other, false otherwise
+ */
 bool Student::operator<(Student other) const {
     return this->num < other.num;
 }
 
+/**
+ * Get list of student UCTurma pointers \n
+ * Complexity: O(n) (n = size of list)
+ * @return UCTurma pointer list
+ */
 list<UCTurma*> Student::get_timetable() const {
     return uc_turmas;
 }
 
 /**
  * Check if the Student has an invalid superposition (TP with PL, TP with TP, PL with PL) and if they have multiple turmas for one UC \n
- * Complexity: O(nklog(nk)) (n = number of UCTurmas in student, k = number of slots per UCTurma)
+ * Complexity: O(nlog(m) + nklog(nk)) (n = number of UCTurmas in student, k = number of slots per UCTurma, m = size of local uc set)
  * @return true if conflict, false otherwise
  */
 bool Student::timetable_has_conflict() const {
@@ -78,14 +104,29 @@ bool Student::timetable_has_conflict() const {
     return false;
 }
 
+/**
+ * Get name of student \n
+ * Complexity: O(1)
+ * @return name of student
+ */
 string Student::get_name() const {
     return name;
 }
 
+/**
+ * Get number of student \n
+ * Complexity: O(1)
+ * @return number of student
+ */
 unsigned Student::get_num() const {
     return num;
 }
 
+/**
+ * Sets student UCTurmas to l \n
+ * Complexity: O(n) (n = size of l)
+ * @param l new list of UCTurma*
+ */
 void Student::set_timetable(list<UCTurma *> l) const{
     uc_turmas = l;
 }
@@ -99,10 +140,20 @@ void Student::add_uc_turma_pointer(UCTurma *uc_turma) const {
     uc_turmas.push_back(uc_turma);
 }
 
+/**
+ * Return const reference to student UCTurmas \n
+ * Complexity: O(1)
+ * @return
+ */
 const list<UCTurma *> &Student::getUcTurmas() const {
     return uc_turmas;
 }
 
+/**
+ * Return student's number of UCs \n
+ * Complexity: O(1)
+ * @return
+ */
 unsigned Student::get_number_of_uc() const {
     return uc_turmas.size();
 }

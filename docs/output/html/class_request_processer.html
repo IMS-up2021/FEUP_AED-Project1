@@ -78,8 +78,7 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:af5277d62e7e6aba6dc1798ec9d2d277e"><td class="memItemLeft" align="right" valign="top"><a id="af5277d62e7e6aba6dc1798ec9d2d277e" name="af5277d62e7e6aba6dc1798ec9d2d277e"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>RequestProcesser</b> (<a class="el" href="class_c_s_v_reader.html">CSVReader</a> &amp;reader)</td></tr>
+<tr class="memitem:af5277d62e7e6aba6dc1798ec9d2d277e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_request_processer.html#af5277d62e7e6aba6dc1798ec9d2d277e">RequestProcesser</a> (<a class="el" href="class_c_s_v_reader.html">CSVReader</a> &amp;reader)</td></tr>
 <tr class="separator:af5277d62e7e6aba6dc1798ec9d2d277e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1e2bdc953f8304b4769ffcb511d42546"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_request_processer.html#a1e2bdc953f8304b4769ffcb511d42546">add_request_list</a> (list&lt; <a class="el" href="class_request.html">Request</a> &gt; requests)</td></tr>
 <tr class="separator:a1e2bdc953f8304b4769ffcb511d42546"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -91,7 +90,39 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a130e7812ea0d3d02201c7d6d1901dd56"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a12465643573a97b7b7d00173d3926c4a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_request_processer.html#a12465643573a97b7b7d00173d3926c4a">discard_changes</a> ()</td></tr>
 <tr class="separator:a12465643573a97b7b7d00173d3926c4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98e83938f6e23297ad2e032135ab7df9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_request_processer.html#a98e83938f6e23297ad2e032135ab7df9">write_requests_to_file</a> ()</td></tr>
+<tr class="separator:a98e83938f6e23297ad2e032135ab7df9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2fb0506be36eeeb16d7fff9105183bd2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_request_processer.html#a2fb0506be36eeeb16d7fff9105183bd2">read_requests_from_file</a> ()</td></tr>
+<tr class="separator:a2fb0506be36eeeb16d7fff9105183bd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e8461413eb90fc7516e1b29229ddbc5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_request_processer.html#a5e8461413eb90fc7516e1b29229ddbc5">queue_empty</a> () const</td></tr>
+<tr class="separator:a5e8461413eb90fc7516e1b29229ddbc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="af5277d62e7e6aba6dc1798ec9d2d277e" name="af5277d62e7e6aba6dc1798ec9d2d277e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af5277d62e7e6aba6dc1798ec9d2d277e">&#9670;&#160;</a></span>RequestProcesser()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">RequestProcesser::RequestProcesser </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_c_s_v_reader.html">CSVReader</a> &amp;&#160;</td>
+          <td class="paramname"><em>reader</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Construct <a class="el" href="class_request_processer.html">RequestProcesser</a> <br  />
+Complexity: O(1) </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">reader</td><td><a class="el" href="class_c_s_v_reader.html">CSVReader</a> to draw data from </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="a1e2bdc953f8304b4769ffcb511d42546" name="a1e2bdc953f8304b4769ffcb511d42546"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1e2bdc953f8304b4769ffcb511d42546">&#9670;&#160;</a></span>add_request_list()</h2>
@@ -133,7 +164,8 @@ Complexity: O(1) </p><dl class="params"><dt>Parameters</dt><dd>
       </table>
 </div><div class="memdoc">
 <p >Checks for conflicts. To be called after processing a request block <br  />
-Complexity: O(mnklog(nk)) (m = size of affected_students, n = number of UCTurmas in student, k = number of slots per <a class="el" href="class_u_c_turma.html">UCTurma</a>) </p><dl class="section return"><dt>Returns</dt><dd>0 if no conflicts, 1 if student timetable superposition, 2 if UC imbalance (1 has priority over 2) </dd></dl>
+Complexity: O(nF1 + m(log(n) + k)) (n = size of new_students, m = size of affected_uc_turma, n = size of uc_turmas vector, k = number of turmas in UC) <br  />
+F1 is complexity of student.timetable_has_conflict(): O(nlog(m) + nklog(nk)) (n = number of UCTurmas in student, k = number of slots per <a class="el" href="class_u_c_turma.html">UCTurma</a>, m = size of local uc set) </p><dl class="section return"><dt>Returns</dt><dd>0 if no conflicts, 1 if student timetable superposition or invalid <a class="el" href="class_u_c_turma.html">UCTurma</a> student_number, 2 if UC imbalance (1 has priority over 2) </dd></dl>
 
 </div>
 </div>
@@ -152,7 +184,7 @@ Complexity: O(mnklog(nk)) (m = size of affected_students, n = number of UCTurmas
       </table>
 </div><div class="memdoc">
 <p >Discards changes made in requests processed since last call to <a class="el" href="class_request_processer.html#a130e7812ea0d3d02201c7d6d1901dd56">save_changes()</a> or <a class="el" href="class_request_processer.html#a12465643573a97b7b7d00173d3926c4a">discard_changes()</a> <br  />
-Complexity: O(nk) (n = size of affected_uc, k = number of turmas per UC) </p>
+Complexity: O(n(log(m) + k) + log(q)) (n = size of affected_uc_turma, m = size of uc_turmas vector, k = number of turmas in UC, q = size of new_students) </p>
 
 </div>
 </div>
@@ -171,7 +203,44 @@ Complexity: O(nk) (n = size of affected_uc, k = number of turmas per UC) </p>
       </table>
 </div><div class="memdoc">
 <p >Processes next list of requests in queue <br  />
-Complexity: O(nlog(m)qlog(p)) (n = numner of requests, m = size of student BST, q = number of UCTurmas in student, p = size of affected_uc) </p><dl class="section return"><dt>Returns</dt><dd>0 if success, 1 otherwise </dd></dl>
+Complexity: O(n(log(p) + log(m)qlog(k))) (n = number of requests, p = size of new_students, m = size of students BST, q = number of UCTurmas in student, k = size of affected_uc_turma) </p><dl class="section return"><dt>Returns</dt><dd>0 if success, 1 otherwise </dd></dl>
+
+</div>
+</div>
+<a id="a5e8461413eb90fc7516e1b29229ddbc5" name="a5e8461413eb90fc7516e1b29229ddbc5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e8461413eb90fc7516e1b29229ddbc5">&#9670;&#160;</a></span>queue_empty()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool RequestProcesser::queue_empty </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Checks if request queue is empty <br  />
+Complexity: O(1) </p><dl class="section return"><dt>Returns</dt><dd>true if empty, false otherwise </dd></dl>
+
+</div>
+</div>
+<a id="a2fb0506be36eeeb16d7fff9105183bd2" name="a2fb0506be36eeeb16d7fff9105183bd2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2fb0506be36eeeb16d7fff9105183bd2">&#9670;&#160;</a></span>read_requests_from_file()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int RequestProcesser::read_requests_from_file </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Read unprocessed requests from unprocessed_requests.csv Complexity: O(nk) (n = number of blocks, k = number of requests per block) </p><dl class="section return"><dt>Returns</dt><dd></dd></dl>
 
 </div>
 </div>
@@ -190,7 +259,25 @@ Complexity: O(nlog(m)qlog(p)) (n = numner of requests, m = size of student BST, 
       </table>
 </div><div class="memdoc">
 <p >Saves changes made in requests processed since last call to <a class="el" href="class_request_processer.html#a130e7812ea0d3d02201c7d6d1901dd56">save_changes()</a> or <a class="el" href="class_request_processer.html#a12465643573a97b7b7d00173d3926c4a">discard_changes()</a> <br  />
-Complexity: O(nk) (n = size of affected_uc, k = number of turmas per UC) </p>
+Complexity: O(qlog(p) n(log(m) + k) + log(q)) (n = size of affected_uc_turma, m = size of uc_turmas vector, k = number of turmas in UC, q = size of new_students, p = size of students BST) </p>
+
+</div>
+</div>
+<a id="a98e83938f6e23297ad2e032135ab7df9" name="a98e83938f6e23297ad2e032135ab7df9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a98e83938f6e23297ad2e032135ab7df9">&#9670;&#160;</a></span>write_requests_to_file()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RequestProcesser::write_requests_to_file </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Saves unprocessed requests to unprocessed_requests.csv Complexity: O(nk) (n = size of queue, k = number of requests per block) </p>
 
 </div>
 </div>

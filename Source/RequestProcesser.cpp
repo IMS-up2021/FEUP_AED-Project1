@@ -19,7 +19,7 @@ void RequestProcesser::add_request_list(list<Request> requests) {
 
 /**
  * Processes next list of requests in queue \n
- * Complexity: O(nlog(m)qlog(p)) (n = numner of requests, m = size of student BST, q = number of UCTurmas in student, p = size of affected_uc)
+ * Complexity: O(n(log(p) + log(m)qlog(k))) (n = number of requests, p = size of new_students, m = size of students BST, q = number of UCTurmas in student, k = size of affected_uc_turma)
  * @return 0 if success, 1 otherwise
  */
 int RequestProcesser::process_next_request_block() {
@@ -92,11 +92,17 @@ int RequestProcesser::process_next_request_block() {
     return 0;
 }
 
+/**
+ * Construct RequestProcesser \n
+ * Complexity: O(1)
+ * @param reader CSVReader to draw data from
+ */
 RequestProcesser::RequestProcesser(CSVReader &reader): database(&reader) {}
 
 /**
  * Checks for conflicts. To be called after processing a request block \n
- * Complexity: O(mnklog(nk)) (m = size of affected_students, n = number of UCTurmas in student, k = number of slots per UCTurma)
+ * Complexity: O(nF1 + m(log(n) + k)) (n = size of new_students, m = size of affected_uc_turma, n = size of uc_turmas vector, k = number of turmas in UC) \n
+ * F1 is complexity of student.timetable_has_conflict(): O(nlog(m) + nklog(nk)) (n = number of UCTurmas in student, k = number of slots per UCTurma, m = size of local uc set)
  * @return 0 if no conflicts, 1 if student timetable superposition or invalid UCTurma student_number, 2 if UC imbalance (1 has priority over 2)
  */
 int RequestProcesser::check_for_problems() {
@@ -117,10 +123,10 @@ int RequestProcesser::check_for_problems() {
 
 /**
  * Saves changes made in requests processed since last call to save_changes() or discard_changes() \n
- * Complexity: O(nk) (n = size of affected_uc, k = number of turmas per UC)
+ * Complexity: O(qlog(p) n(log(m) + k) + log(q)) (n = size of affected_uc_turma, m = size of uc_turmas vector, k = number of turmas in UC, q = size of new_students, p = size of students BST)
  */
 void RequestProcesser::save_changes() {
-    for (Student student : new_students) {
+    for (const Student& student : new_students) {
         database->insert_student(student);
     }
     string curr_uc;
@@ -136,7 +142,7 @@ void RequestProcesser::save_changes() {
 
 /**
  * Discards changes made in requests processed since last call to save_changes() or discard_changes() \n
- * Complexity: O(nk) (n = size of affected_uc, k = number of turmas per UC)
+ * Complexity: O(n(log(m) + k) + log(q)) (n = size of affected_uc_turma, m = size of uc_turmas vector, k = number of turmas in UC, q = size of new_students)
  */
 void RequestProcesser::discard_changes() {
     string curr_uc;
@@ -214,6 +220,11 @@ int RequestProcesser::read_requests_from_file() {
     return 0;
 }
 
+/**
+ * Checks if request queue is empty \n
+ * Complexity: O(1)
+ * @return true if empty, false otherwise
+ */
 bool RequestProcesser::queue_empty() const {
     return request_blocks.empty();
 }

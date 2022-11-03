@@ -20,7 +20,7 @@ private:
     int temp_num;
 public:
     UCTurma(string uc, string turma);
-    UCTurma(pair<string, string> uc_turma);
+    UCTurma(const pair<string, string>& uc_turma);
     bool operator<(UCTurma other) const;
     pair<string,string> get_uc_turma() const;
     void add_slot(Slot slot);

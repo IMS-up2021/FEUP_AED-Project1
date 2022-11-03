@@ -167,7 +167,7 @@ bool CSVReader::populate() {
 
 /**
  * Get student's timetable \n
- * Complexity: O(log(n)) (n = size of students BST)
+ * Complexity: O(log(n) + k) (n = size of students BST, k = size of student timetable)
  * @param num number of student
  * @return UCTurmas student is in
  */
@@ -178,10 +178,20 @@ list<UCTurma*> CSVReader::get_student_timetable(unsigned num) const {
     return timetable;
 }
 
+/**
+ * Return const reference to uc_turmas vector
+ * Complexity: O(1)
+ * @return uc_turmas vector
+ */
 const vector<UCTurma> &CSVReader::getUcTurmas() const {
     return uc_turmas;
 }
 
+/**
+ * Return const reference to students set
+ * Complexity: O(1)
+ * @return students set
+ */
 const set<Student> &CSVReader::getStudents() const {
     return students;
 }
@@ -309,7 +319,7 @@ void CSVReader::discard_uc_changes(string uc) {
 }
 
 /**
- * Get Student by their number
+ * Get Student by their number \n
  * Complexity: O(log(n)) (n = size of students BST)
  * @param num number to find
  * @return empty student if not found, desired Student otherwise
@@ -321,7 +331,7 @@ Student CSVReader::get_student_by_num(unsigned int num) const {
 }
 
 /**
- * Saves current student database to students_classes.csv
+ * Saves current student database to students_classes.csv \n
  * Complexity: O(nk) (n = number of students, k = number of UCTurma per student)
  */
 void CSVReader::write_students_to_file() const {
@@ -344,12 +354,23 @@ void CSVReader::write_students_to_file() const {
     }
 }
 
+/**
+ * Checks if a given UCTurma has a valid number of students ( 0 <= num <= cap) \n
+ * Complexity: O(log(n)) (n = size of uc_turmas vector)
+ * @param uc_turma String pair <uc,turma> corresponding to desired UCTurma
+ * @return true if valid number or not found, false if invalid number
+ */
 bool CSVReader::is_uc_turma_student_num_good(const pair<string, string> &uc_turma) {
     int search = binarySearch(uc_turmas, uc_turma);
     if (search == -1) return true;
     return uc_turmas[search].student_num_good();
 }
 
+/**
+ * Inserts student into students set, replacing equivalent student \n
+ * Complexity: O(log(n)) (n = size of students BST)
+ * @param student Student to insert
+ */
 void CSVReader::insert_student(Student student) {
     auto it = students.find(student);
     students.erase(it);
