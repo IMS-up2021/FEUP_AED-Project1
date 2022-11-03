@@ -20,6 +20,7 @@ public:
     bool timetable_has_conflict() const;
     string get_name() const;
     unsigned get_num() const;
+    unsigned get_number_of_uc() const;
 
     const list<UCTurma *> &getUcTurmas() const;
 

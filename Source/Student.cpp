@@ -103,3 +103,7 @@ const list<UCTurma *> &Student::getUcTurmas() const {
     return uc_turmas;
 }
 
+unsigned Student::get_number_of_uc() const {
+    return uc_turmas.size();
+}
+

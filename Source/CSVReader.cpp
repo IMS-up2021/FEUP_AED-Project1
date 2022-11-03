@@ -122,19 +122,30 @@ int CSVReader::read_students_classes() {
         num = stoi(s_num);
         if (curr == 0) {
             curr_student = Student(name, num);
+            if (uc == "NULL" && turma == "NULL") {
+                students.insert(curr_student);
+                continue;
+            }
             int search = binarySearch(uc_turmas, {uc, turma});
+            if (search == -1) return 1;
             curr_student.add_uc_turma(uc_turmas[search]);
             curr = num;
         }
         else if (curr != num) {
             students.insert(curr_student);
             curr_student = Student(name, num);
+            if (uc == "NULL" && turma == "NULL") {
+                students.insert(curr_student);
+                continue;
+            }
             int search = binarySearch(uc_turmas, {uc, turma});
+            if (search == -1) return 1;
             curr_student.add_uc_turma(uc_turmas[search]);
             curr = num;
         }
         else {
             int search = binarySearch(uc_turmas, {uc, turma});
+            if (search == -1) return 1;
             curr_student.add_uc_turma(uc_turmas[search]);
         }
     }
@@ -323,6 +334,9 @@ void CSVReader::write_students_to_file() const {
     for (const Student& student : students) {
         num = student.get_num();
         name = student.get_name();
+        if (student.get_number_of_uc() == 0) {
+            ofs << num << ',' << name << ',' << "NULL" << ',' << "NULL" << '\n';
+        }
         for (UCTurma* uc_turma : student.getUcTurmas()) {
             code_uc_turma = uc_turma->get_uc_turma();
             ofs << num << ',' << name << ',' << code_uc_turma.first << ',' << code_uc_turma.second << '\n';
