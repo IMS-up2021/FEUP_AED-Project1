@@ -1328,9 +1328,11 @@ int Interface::initiate() {
     }
     if(userInput=="4"){
         requestProcesser->write_requests_to_file();
+        database->write_students_to_file();
         cout<<"O estado do programa foi guardado para uma proxima utilizacao"<<endl;
     }
     return 0;
+
 }
 
 
