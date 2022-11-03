@@ -271,11 +271,6 @@ UCTurma *CSVReader::get_pointer_to_uc_turma(const pair<string, string>& uc_turma
     else return &uc_turmas[search];
 }
 
-
-void CSVReader::set_students(set<Student> s) {
-    students = s;
-}
-
 /**
  * Save changes made to uc in processed requests \n
  * Complexity: O(log(n) + k) (n = size of uc_turmas vector, k = number of turmas in UC)
