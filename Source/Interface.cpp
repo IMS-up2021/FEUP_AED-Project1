@@ -112,11 +112,11 @@ bool Interface::ucLessthan1(const UCTurma* ucturma1, const UCTurma* ucturma2) {
  */
 int Interface::initiate() {
     MenuPrincipal:string userInput;
-    cout<<"Introduza o numero do comando:\n\t1.Listagem\n\t2.Alteracoes\n\t3.Carregar estado do programa da ultima utilizacao\n\t0.Sair do programa"<<endl;
+    cout<<"Introduza o numero do comando:\n\t1.Listagem\n\t2.Alteracoes\n\t3.Carregar estado da ultima ultilizacao do programa\n\t4.Guardar estado do programa\n\t0.Sair do programa"<<endl;
     cin>>userInput;
     //Limitar range de opcoes
     if (userInput == "0") return 1;
-    while(!is_in(userInput, 1, 3)) {
+    while(!is_in(userInput, 1, 4)) {
         cout << "Sintaxe errada.\nPor favor, reintroduzir:" << endl;
         cin>>userInput;
     }
@@ -1145,9 +1145,9 @@ int Interface::initiate() {
     else if(userInput=="2"){
         menuAlteracoes0: string criteria, option,y_n,operation;
         string identity, uc,turma,student;
-        cout<<"Introduzir o numero da opcao:\n\t1.Iniciar bloco de pedidos\n\t2.Processar um bloco de pedido\n\t3.Processar todos os blocos de pedidos\n\t4.Guardar alteracoes para proxima utilizacao do programa\n\t0.Voltar"<<endl;
+        cout<<"Introduzir o numero da opcao:\n\t1.Iniciar bloco de pedidos\n\t2.Processar um bloco de pedido\n\t3.Processar todos os blocos de pedidos\n\t0.Voltar"<<endl;
         cin>>operation;
-        while(!is_in(operation,0,4)){
+        while(!is_in(operation,0,3)){
             cout<<"Sintase errada, por favor reintroduzir:"<<endl;
             cin>>operation;
         }
@@ -1156,7 +1156,7 @@ int Interface::initiate() {
         }
 
         if(operation=="1"){
-            cout << "Introduza o numero de estudante para efetuar alteracoes sobre este: \n\t0.Para voltar" << endl;
+            menuAlteracoes_aluno:cout << "Introduza o numero de estudante para efetuar alteracoes sobre este: \n\t0.Para voltar" << endl;
             cin >> identity;
 
             //verificar se existe o aluno na base de dados;
@@ -1223,7 +1223,6 @@ int Interface::initiate() {
                 Request request= Request("remove",stoi(identity),uc,"");
                 processes.push_back(request);
             }
-
             cout<<"Mais alteracoes?\n\t1.Sim\n\t2.Nao"<<endl;
             cin>>option;
             while (!is_in(option, 1, 2)) {
@@ -1241,7 +1240,7 @@ int Interface::initiate() {
                     goto maisAlteracoesMesmoAluno;
                 }
                 else{
-                    goto menuAlteracoes0;
+                    goto menuAlteracoes_aluno;
                 }
             }
             else if(option=="2") {
@@ -1251,6 +1250,7 @@ int Interface::initiate() {
             }
             return 0;
         }
+
 
         //caso user pretenda processar um bloco de pedidos
         else if(operation=="2"){
@@ -1283,9 +1283,7 @@ int Interface::initiate() {
                 cout<<"Error, UC-Turma incorreto,alteracoes nao foram feitas"<<endl;
                 requestProcesser->discard_changes();
             }
-            processes.clear();
         }
-
 
         if(operation=="3"){
             while(!requestProcesser->queue_empty()){
@@ -1322,31 +1320,17 @@ int Interface::initiate() {
                 block_count++;
             }
         }
-        if(operation=="4"){
-            cout<<"As alteracoes serao guardadas"<<endl;
-            requestProcesser->write_requests_to_file();
-        }
-
-
-
-
-        //crias uma lista de pedidos e adicionas à fila com o método cujo nome nao me lembro mas facilmente encontras no header
-
-
-        //quando for para processar, para cada bloco fazes
-        //process_next_block()
-        //check_for_conflict()
-        //save_changes() ou discard_changes dependendo do resultado anterior
-        //o process next block() retorna 1 se o pedido falha, 0 se há sucesso
-        //o check_for_conflict() retorna 0 se sucesso, 1 se houver conflito entre TP/TP, TP/PL ou PL/PL num dos estudantes afetados
-        //nesse caso fazes discard_changes()
-        //o check_for_conflict() retorna 2 se houver desequilibrio de turmas (e nenhuma sobreposição de aulas invalida nos alunos)
-        //como ja ha UCs que vêm desequilibradas no ficheiro, para esse caso podes fazer algo do genero
-        //"Este pedido vai causar um desequilibrio que poderia já estar presente antes das modificações. Pretende continuar?"
-        //e depois chamar save_changes() ou discard_changes() dependendo do resultado
-
+        return 0;
     }
-
+    if(userInput=="3"){
+        requestProcesser->read_requests_from_file();
+        cout<<"O estado da execucao anterior do programa foi carregado"<<endl;
+    }
+    if(userInput=="4"){
+        requestProcesser->write_requests_to_file();
+        cout<<"O estado do programa foi guardado para uma proxima utilizacao"<<endl;
+    }
+    return 0;
 }
 
 
