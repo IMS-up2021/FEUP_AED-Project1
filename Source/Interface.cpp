@@ -1322,10 +1322,14 @@ int Interface::initiate() {
         }
         return 0;
     }
+
+    //if user chooses to load state from previous execution
     if(userInput=="3"){
         requestProcesser->read_requests_from_file();
         cout<<"O estado da execucao anterior do programa foi carregado"<<endl;
     }
+
+    //if user chooses to save the current program state
     if(userInput=="4"){
         requestProcesser->write_requests_to_file();
         database->write_students_to_file();
