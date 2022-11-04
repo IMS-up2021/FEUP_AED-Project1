@@ -1352,8 +1352,8 @@ int Interface::initiate() {
                 cout<<"Ainda nao ha processos para executar,a voltar..."<<"\n"<<endl;
                 return 0;
             }
+            int block_count=1;
             while(!requestProcesser->queue_empty()){
-                int block_count=1;
                 int process_path=requestProcesser->process_next_request_block();
                 if(process_path==0){
                     int conflicts=requestProcesser->check_for_problems();
