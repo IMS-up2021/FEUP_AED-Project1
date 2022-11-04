@@ -1075,6 +1075,7 @@ int Interface::initiate() {
                             timetable.push_back({ucturma->get_uc_turma(), aula});
                         }
                     }
+                    cout << "Horario do estuante: " << s << "\n\n";
                     std::sort(timetable.begin(), timetable.end(), slotsLessthan1);
                     //aula é um par de <UCturma<uc,turma>,Slot>
                     for (pair<pair<string, string>, Slot> aula: timetable) {
@@ -1120,6 +1121,7 @@ int Interface::initiate() {
                     }
                     std::sort(timetable.begin(),timetable.end(), slotsLessthan1);
                     //aula é um par de <UCturma<uc,turma>,Slot>
+                    cout << "Horario do estudante: " << student << "\n\n";
                     for(pair<pair<string,string>,Slot> aula:timetable){
                         cout<<aula.second.getDay()<<endl;
                         cout<<"Aula: "<<aula.first.first<<endl;
