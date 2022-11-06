@@ -8,14 +8,14 @@
 #include <algorithm>
 
 using namespace std;
-/**Constructor for Interface
- *
+/**Constructor for Interface \n
+ * Complexity: O(1)
  * @param CSVReader reader
  * @param Request request
  */
 Interface::Interface(CSVReader &reader, RequestProcesser* request): database(&reader), requestProcesser(request) {}
-/** Function that makes sure the input is within range
- *
+/** Function that makes sure the input is within range \n
+ * Complexity: O(1)
  * @param choice user's input
  * @param lim_start where the range of possible values starts(inclusive)
  * @param lim_end where the range of possible values ends(inclusive)
@@ -30,8 +30,8 @@ bool Interface::is_in(string choice, int lim_start, int lim_end) const{
 
 
 
-/** Function that compares 2 classes in a vector of pair<className,schedule>
- *
+/** Function that compares 2 classes in a vector of pair<className,schedule> \n
+ * Complexity: O(1)
  * @param class1
  * @param class2
  * @return Boolean value t/f
@@ -43,8 +43,8 @@ bool Interface::slotsLessthan(const pair<string , Slot> &aula1, const pair<strin
     return false;
 }
 
-/**Function that compares 2 classes by time(used for pair<pair<string,string>,class>
- *
+/**Function that compares 2 classes by time(used for pair<pair<string,string>,class> \n
+ * Complexity: O(1)
  * @param aula1
  * @param aula2
  * @return t/f
@@ -58,8 +58,8 @@ bool Interface::slotsLessthan1(const pair<pair<std::string, std::string>, Slot> 
     return false;
 }
 
-/**Compare function for set of student pointers
- *
+/**Compare function for set of student pointers \n
+ * Complexity: O(1)
  * @param Student* s1
  * @param Student* s2
  * @return t/f
@@ -69,8 +69,8 @@ bool Interface::set_compareLessthan_student(const Student* s1,const Student* s2)
 }
 
 
-/**Checks if a string is a number
- *
+/**Checks if a string is a number \n
+ * Complexity: O(n) (n = size of string)
  * @param number
  * @return boolean t/f
  */
@@ -87,8 +87,8 @@ bool Interface::is_number(std::string n) const {
 }
 
 
-/**Compare 2 UC by their code
- *
+/**Compare 2 UC by their code \n
+ * Complexity: O(n) (n = size of string) (the complexity for string.compare() isn't listed on cppreference, I am assuming it is O(n) based on other string methods and a stackoverflow page)
  * @param ucturma1
  * @param ucturma2
  * @return t/f
@@ -100,8 +100,8 @@ bool Interface::ucGreaterthan1(const UCTurma* ucturma1, const UCTurma* ucturma2)
     return false;
 }
 
-/**Compare 2 UC by their code
- *
+/**Compare 2 UC by their code \n
+ * Complexity: O(n) (n = size of string) (the complexity for string.compare() isn't listed on cppreference, I am assuming it is O(n) based on other string methods and a stackoverflow page)
  * @param ucturma1
  * @param ucturma2
  * @return t/f
@@ -169,6 +169,7 @@ int Interface::initiate() {
 
 
                 //caso o modo de listagem for por ano de turmas
+                //Complexity: O(n + mlog(m)) (n = times user tries an invalid input, m = number of UCTurmas)
                 if (mode == "1") {
                     cout << "Do ano:\n0.Para voltar" << endl;
                     cin >> year;
@@ -188,11 +189,11 @@ int Interface::initiate() {
                     int turma_count=0;
                     if (year == "1") {
                         set<string> partialTurmas;
-                        for(UCTurma turma:database->getUcTurmas()) {
+                        for(const UCTurma& turma:database->getUcTurmas()) {
                             if(turma.get_uc_turma().second.substr(0,1)=="1") partialTurmas.insert(turma.get_uc_turma().second);
                         }
                         if (order == "1") {
-                            for(string turma:partialTurmas){
+                            for(const string& turma:partialTurmas){
                                 cout<<"Turma: "<<turma<<endl;
                                 turma_count++;
                             }
@@ -261,6 +262,7 @@ int Interface::initiate() {
 
 
                 //caso o modo de listagem for por unidade curricular de turmas
+                //Complexity: O(mlog(n) + n) (m = number of inputs until valid input, n = size of uc_turmas vector)
                 if (mode == "2") {
                     int turma_count=0;
                     cout << "Introduzir o numero da unidade curricular(ex:L.EIC001):\n\t0.Para voltar" << endl;
@@ -276,27 +278,26 @@ int Interface::initiate() {
                         it = lower_bound( database->getUcTurmas().begin(), database->getUcTurmas().end(),target);
 
                     }
-                    //returns timetable for uc
-                    vector<pair<string,Slot>>aulas=database->get_uc_timetable(uc);
+                    vector<string> turmas;
+                    while ((*it).get_uc_turma().first == uc) {
+                        turmas.push_back((*it).get_uc_turma().second);
+                        it++;
+                    }
                     cout << "Criterio de ordenacoo:\n\t1.Crescente\n\t2.Decrescente" << endl;
                     cin >> order;
                     while (!is_in(order, 1, 2)) {
                         cout << "Sintase errada.\nPor favor reintroduzir:" << endl;
                         cin >> order;
                     }
-                    set<string> partialTurmas;
-                    for(pair<string,Slot>turma:aulas){
-                        partialTurmas.insert(turma.first);
-                    }
                     if (order == "1") {
-                        for(string turma:partialTurmas){
+                        for(string turma:turmas){
                             cout<<"Turma: "<<turma<<endl;
                             turma_count++;
                         }
                     }
                     if (order == "2") {
-                        auto it = partialTurmas.end();
-                        for (it--; it != partialTurmas.begin(); it--) {
+                        auto it = turmas.end();
+                        for (it--; it != turmas.begin(); it--) {
                             cout << "Turma: " << *it << endl;
                             turma_count++;
                         }
@@ -418,6 +419,7 @@ int Interface::initiate() {
 
 
             //se o tipo de listagem das turmas for total
+            //Complexity: O(nlog(n)) (n = number of turmas)
             if (type == "2") {
                 cout << "Todas as turmas serao listadas:\n\t1.Para Continuar\n\t0.Para voltar" << endl;
                 cin >> mode;
