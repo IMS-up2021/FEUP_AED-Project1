@@ -88,7 +88,7 @@ bool Interface::is_number(std::string n) const {
 
 
 /**Compare 2 UC by their code \n
- * Complexity: O(n) (n = size of string) (the complexity for string.compare() isn't listed on cppreference, I am assuming it is O(n) based on other string methods and a stackoverflow page)
+ * Complexity: O(1)
  * @param ucturma1
  * @param ucturma2
  * @return t/f
@@ -101,7 +101,7 @@ bool Interface::ucGreaterthan1(const UCTurma* ucturma1, const UCTurma* ucturma2)
 }
 
 /**Compare 2 UC by their code \n
- * Complexity: O(n) (n = size of string) (the complexity for string.compare() isn't listed on cppreference, I am assuming it is O(n) based on other string methods and a stackoverflow page)
+ * Complexity: O(1)
  * @param ucturma1
  * @param ucturma2
  * @return t/f
@@ -487,6 +487,7 @@ int Interface::initiate() {
                 if (mode == "0") goto menuAnterior2_UC;
 
                 //caso o modo de listagem das UCs for por ano
+                //Complexity: O(m + nlog(n)) (m = number of inputs until valid input, n = number of UCTurmas)
                 if (mode == "1") {
                     cout << "Do ano:\n0.Para voltar" << endl;
                     cin >> year;
@@ -504,28 +505,28 @@ int Interface::initiate() {
                     }
                     set<string> partialUCs;
                     if (year == "1") {
-                        for (UCTurma ucturma: database->getUcTurmas()) {
+                        for (const UCTurma& ucturma: database->getUcTurmas()) {
                             if (ucturma.get_uc_turma().second.substr(0, 1) == "1") {
                                 partialUCs.insert(ucturma.get_uc_turma().first);
                             }
                         }
                     }
                     if (year == "2") {
-                        for (UCTurma ucturma: database->getUcTurmas()) {
+                        for (const UCTurma& ucturma: database->getUcTurmas()) {
                             if (ucturma.get_uc_turma().second.substr(0, 1) == "2") {
                                 partialUCs.insert(ucturma.get_uc_turma().first);
                             }
                         }
                     }
                     if (year == "3") {
-                        for (UCTurma ucturma:database->getUcTurmas()) {
+                        for (const UCTurma& ucturma:database->getUcTurmas()) {
                             if (ucturma.get_uc_turma().second.substr(0, 1) == "3") {
                                 partialUCs.insert(ucturma.get_uc_turma().first);
                             }
                         }
                     }
                     if(order=="1"){
-                        for(string uc :partialUCs){
+                        for(const string& uc :partialUCs){
                             cout<<"UC: "<< uc<<endl;
                             uc_count++;
                         }
@@ -557,11 +558,12 @@ int Interface::initiate() {
                     }
                     if (n_c == "0") goto menuAnterior3_uc;
 
+                    //Complexity: O(nm + klog(k)) (n = number of students, m = number of inputs until valid input, k = number of UCTurmas in student)
                     if (n_c == "1") {
                         cout << "Introduza o nome do estudante:\n\t0.Voltar" << endl;
                         cin.ignore();
                         getline(cin, student);
-                        int s = database->find_student_num_by_name(student);
+                        unsigned s = database->find_student_num_by_name(student);
                         if (student == "0") goto menuAnterior4_uc;
                         while (s == 1) {
                             cout << "Nome nao encontrado,reintroduzir:" << endl;
@@ -590,8 +592,9 @@ int Interface::initiate() {
                         cout<<"O nr de UCs: "<<uc_count<<"\n"<<endl;
                         return 0;
                     }
+                    //Complexity: O(log(n)m + klog(k)) (n = number of students, m = number of inputs until valid input, k = number of UCTurmas in student)
                     if(n_c=="2"){
-                        cout << "Introduza o numero do estudante(ex:202201001) ou nome:\n\t0.Para voltar" << endl;
+                        cout << "Introduza o numero do estudante(ex:202201001):\n\t0.Para voltar" << endl;
                         cin >> student;
                         //verificar se existe o aluno na base de dados;
                         while(!is_number(student)) {
@@ -639,22 +642,27 @@ int Interface::initiate() {
                 }
             }
             //caso listagem total das unidades curriculres
+            //Complexity: O(m + n) (m = number of inputs until valid input, n = number of UCTurmas)
             if (type == "2") {
                 cout << "Criterio de ordenacao:\n\t1.Crescente\n\t2.Decrescente\n\t0.Para voltar" << endl;
                 cin >> order;
                 int uc_count=0;
-                set<string> UCs;
+                string curr;
+                vector<string> UCs;
                 while (!is_in(order, 0, 2)) {
                     cout << "Sintase errada.\nPor favor reintroduzir:" << endl;
                     cin >> order;
                 }
                 if(order=="0") goto menuAnterior2_UC;
 
-                for(UCTurma uc:database->getUcTurmas()){
-                    UCs.insert(uc.get_uc_turma().first);
+                for(const UCTurma& uc:database->getUcTurmas()){
+                    if (curr.empty() || curr != uc.get_uc_turma().first) {
+                        curr = uc.get_uc_turma().first;
+                        UCs.push_back(uc.get_uc_turma().first);
+                    }
                 }
                 if (order == "1") {
-                    for(string uc:UCs){
+                    for(const string& uc:UCs){
                         cout<<"UC: "<<uc<<endl;
                         uc_count++;
                     }
