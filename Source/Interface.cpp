@@ -313,7 +313,7 @@ int Interface::initiate() {
                 //caso a listagem de turmas for por aluno
                 if (mode=="3"){
                     string n_c;
-                    int class_count;
+                    int class_count = 0;
                     cout << "\t1.Pelo nome\n\t2.Pelo codigo\n\t0.Voltar" << endl;
                     cin >> n_c;
                     while (!is_in(n_c, 0, 2)) {
@@ -346,7 +346,7 @@ int Interface::initiate() {
                             turmas.insert(turma->get_uc_turma().second);
                         }
                         if(order=="1"){
-                            for(string turma:turmas){
+                            for(const string& turma:turmas){
                                 cout<<"Turma: "<<turma<<endl;
                                 class_count++;
                             }
@@ -987,6 +987,7 @@ int Interface::initiate() {
 
 
             //listagem de alunos total
+            //Complexity: O(m + nlog(n)) (m = number of inputs until valid input, n = number of students)
             if (type == "2") {
                 int student_count = 0;
                 cout << "Todas os alunos serao listados\n\t1.Para Continuar\n\t0.Para voltar" << endl;
@@ -1003,7 +1004,7 @@ int Interface::initiate() {
                     cin >> order;
                 }
                 set<Student *, decltype(&set_compareLessthan_student)> students(&set_compareLessthan_student);
-                for (Student aluno: database->getStudents()) {
+                for (const Student& aluno: database->getStudents()) {
                     Student *s_p = new Student(aluno);
                     students.insert(s_p);
                 }
@@ -1137,19 +1138,20 @@ int Interface::initiate() {
 
 
             //caso modo de listagem por turma
+            //Complexity: O(nm + nk) (n = number of UCTurmas, m = number of inputs until valid input, k = number of slots per UCTurma)
             if(mode=="2"){
                 cout << "Introduza o numero da turma(ex:1LEIC01):\n\t0.Para voltar" << endl;
                 cin>>turma;
                 //finds if turma is in database
                 bool not_found=true;
 
-                for(UCTurma target:database->getUcTurmas()){
+                for(const UCTurma& target:database->getUcTurmas()){
                     if(target.get_uc_turma().second==turma) not_found=false;
                 }
                 while(not_found){
                     cout<<"numero de turma nao existente,reintroduzir:"<<endl;
                     cin>>turma;
-                    for(UCTurma target:database->getUcTurmas()){
+                    for(const UCTurma& target:database->getUcTurmas()){
                         if(target.get_uc_turma().second==turma) not_found=false;
                     }
                     if(turma=="0") goto menuAnterior1_horario;
@@ -1158,7 +1160,7 @@ int Interface::initiate() {
 
                 vector<pair<string,Slot>> timeTable=database->get_turma_timetable(turma);
                 std::sort(timeTable.begin(), timeTable.end(), slotsLessthan);
-                for(pair<string,Slot> aula: timeTable){
+                for(const pair<string,Slot>& aula: timeTable){
                     cout<<aula.second.getDay()<<endl;
                     cout<<"Turma: "<<aula.first<<endl;
                     cout<<"\t"<<"Comeco: "<<aula.second.getStart()<<"h\t"<<"FIm: "<<aula.second.get_end()<<"h\t"<<"Duracao: "<<aula.second.getDuration()<<"h\t"<<"Tipo: "<<aula.second.getType()<<endl;
@@ -1168,6 +1170,7 @@ int Interface::initiate() {
             }
 
             //Listagem do horario por UC
+            //Complexity: O(mlog(n) + kqlog(kq)) (m = number of inputs until valid input, n = number of total UCTurmas, k = number of turmas in UC, q = number of slots per turma)
             if(mode=="3"){
                 cout << "Introduza o codigo da UC:\n\t0.Para voltar" << endl;
                 cin >> uc;
@@ -1181,10 +1184,10 @@ int Interface::initiate() {
                 }
                 if(uc=="0") goto menuAnterior1_horario;
 
-                cout << "Introduza tipo de listagem:\n\t0.Para voltar" << endl;
+                //cout << "Introduza tipo de listagem:\n\t0.Para voltar" << endl;
                 vector<pair<string,Slot>> timetable=database->get_uc_timetable(uc);
                 std::sort(timetable.begin(),timetable.end(),slotsLessthan);
-                for(pair<string,Slot> aula:timetable){
+                for(const pair<string,Slot>& aula:timetable){
                     cout<<aula.second.getDay()<<endl;
                     cout<<"Turma: "<<aula.first<<endl;
                     cout<<"Comeco: "<<aula.second.getStart()<<"h\t"<<"FIm: "<<aula.second.get_end()<<"h\t"<<"Duracao: "<<aula.second.getDuration()<<"h\t"<<"Tipo: "<<aula.second.getType()<<endl;
