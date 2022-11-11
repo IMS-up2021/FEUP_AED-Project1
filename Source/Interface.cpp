@@ -748,11 +748,11 @@ int Interface::initiate() {
                         if (order == "2") {
                             auto it = res.end();
                             for (it--; it != res.begin(); it--) {
-                                cout << "Aluno: " << (*it)->get_name() << "   Codigo" << (*it)->get_num() << endl;
+                                cout << "Aluno: " << (*it)->get_name() << "   Codigo: " << (*it)->get_num() << endl;
                                 delete (*it);
                                 student_count++;
                             }
-                            cout << "Aluno: " << (*it)->get_name() << "   Codigo" << (*it)->get_num() << endl;
+                            cout << "Aluno: " << (*it)->get_name() << "   Codigo: " << (*it)->get_num() << endl;
                             delete (*it);
                             student_count++;
                         }
@@ -783,7 +783,7 @@ int Interface::initiate() {
                                 delete (*it);
                                 student_count++;
                             }
-                            cout << "Aluno: " << (*it)->get_name() << "   Codigo" << (*it)->get_num() << endl;
+                            cout << "Aluno: " << (*it)->get_name() << "   Codigo: " << (*it)->get_num() << endl;
                             delete (*it);
                             student_count++;
                         }
@@ -815,7 +815,7 @@ int Interface::initiate() {
                                 delete (*it);
                                 student_count++;
                             }
-                            cout << "Aluno: " << (*it)->get_name() << "   Codigo" << (*it)->get_num() << endl;
+                            cout << "Aluno: " << (*it)->get_name() << "   Codigo: " << (*it)->get_num() << endl;
                             delete (*it);
                             student_count++;
                         }
